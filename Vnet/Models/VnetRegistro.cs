@@ -24,7 +24,7 @@ namespace Vnet.Models
         public DateTime FechaHoraMov { get; set; }
 
         [Required]
-        public int NroTarjeta { get; set; }
+        public long NroTarjeta { get; set; }
 
        
         public int? Descuento { get; set; }
@@ -37,5 +37,10 @@ namespace Vnet.Models
 
         
         public string Descripcion { get; set; }
+
+
+        
+        public int ComercioId { get; set; }
+        public Comercio Comercio { get; set; }
     }
 }

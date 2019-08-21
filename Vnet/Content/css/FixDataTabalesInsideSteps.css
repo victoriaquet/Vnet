@@ -1,0 +1,60 @@
+﻿
+        /*DATATABLE STYLES*/
+table thead {
+       background: lavender;
+       color: darkblue !important;
+   }
+  .no-sort::after { display: none!important; }
+
+  .no-sort { pointer-events: none!important; cursor: default!important; }
+  .dataTable tbody tr td {
+      padding: 8px 8px !important;
+  }
+  .dataTables_length label .form-group.form-group-sm {
+      margin-top: 0px!important;
+      padding-bottom: 0px!important
+  }
+  .dataTables_filter label .form-group.form-group-sm {
+      margin-top: 0px!important;
+      padding-bottom: 0px!important
+  }
+  .dataTables_wrapper .row .col-sm-6{padding-bottom: 0px!important}
+  .dataTables_wrapper .row .col-sm-12 {
+      padding-top: 0px!important
+  }
+  .puntoverde {
+      width: 10px;
+      display: inline-block;
+      height: 10px;
+      -moz-border-radius: 50%;
+      -webkit-border-radius: 50%;
+      border-radius: 50%;
+      background: #5cb85c;
+  }
+  .puntorojo {
+      width: 10px;
+      height: 10px;
+      display: inline-block;
+      -moz-border-radius: 50%;
+      -webkit-border-radius: 50%;
+      border-radius: 50%;
+      background: red;
+  }
+  /*FIX FOR DATATABLES INSIDE STEPS*/
+  #table_paginate .pagination
+  {display: inline-flex!important;
+      list-style: none!important;}
+  #table_wrapper{padding-top: 5px}
+  .content.clearfix {
+      height: -moz-available !important; /* WebKit-based browsers will ignore this. */
+      height: -webkit-fill-available !important; /* Mozilla-based browsers will ignore this. */
+      height: fill-available !important;
+  }
+  .dataTables_length label{ display: inline-flex !important;float: left!important}
+  .dataTables_filter label{ display: inline-flex !important;float: right!important}
+  @media (max-width: 200px), (max-width: 448px) {
+       .dataTables_filter label div input {
+           width: 100px !important
+       }
+   } 
+  

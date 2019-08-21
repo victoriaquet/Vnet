@@ -1,0 +1,7 @@
+﻿section {
+	overflow: auto;
+}
+
+.spanCheckHidden {
+	display: none!important;
+}

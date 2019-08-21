@@ -123,3 +123,7 @@ C:\Users\Victoria\source\repos\Vnet\Vnet\obj\Debug\Vnet.csproj.GenerateResource.
 C:\Users\Victoria\source\repos\Vnet\Vnet\obj\Debug\Vnet.Migrations.AddingVnetRegistro.resources
 C:\Users\Victoria\source\repos\Vnet\Vnet\obj\Debug\Vnet.Migrations.correccionFloatADecimal.resources
 C:\Users\Victoria\source\repos\Vnet\Vnet\obj\Debug\Vnet.Migrations.sacoRequeried.resources
+C:\Users\Victoria\source\repos\Vnet\Vnet\obj\Debug\Vnet.Migrations.solucionadolong.resources
+C:\Users\Victoria\source\repos\Vnet\Vnet\obj\Debug\Vnet.Migrations.Mucho.resources
+C:\Users\Victoria\source\repos\Vnet\Vnet\obj\Debug\Vnet.Migrations.comercio.resources
+C:\Users\Victoria\source\repos\Vnet\Vnet\obj\Debug\Vnet.Migrations.seedingComercios.resources

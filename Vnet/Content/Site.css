@@ -2,6 +2,24 @@
     padding-top: 50px;
     padding-bottom: 20px;
 }
+@-moz-document url-prefix() {
+    section.body.current {
+        position: initial !important;
+    }
+   
+    
+}
+@supports (animation: calc(0s)) {
+    section.body.current {
+        position: initial !important;
+    }
+  
+}
+@supports (-webkit-appearance:none) {
+    section.body.current {
+        position: absolute !important;
+    }
+}
 
 /* Set padding to keep content from hitting the edges */
 .body-content {
@@ -20,5 +38,218 @@
 input,
 select,
 textarea {
-    max-width: 280px;
+    max-width: 400px;
+}
+
+/*estilos grales*/
+div.content.clearfix{padding: 0px}
+.form-group{margin-top: 10px}
+
+/*clases vista Details*/
+.divdetails{ width: fit-content;    /*border-bottom-style: solid;
+        border-bottom-width: 1px;
+        border-bottom-color: lightgrey;*/
+    margin-left: 20px;}
+.labeldetails {
+    line-height: inherit;width: 25%
+}
+
+/*Márgen top para checkbox de días ofertas en create de suscripciones*/
+.margen-top{
+    margin-top: 5%;
+}
+
+/*Clases para mostrar/ocultar automaticamente cosas onhover*/
+.showme{ 
+    opacity: 0.2;
+}
+.showhim:hover .showme {
+    opacity: 1;
+       
+}
+
+/*Estilo para detiails y summary*/
+details {
+  /*max-width:800px;*/
+  /*margin:20px;*/
+    margin-top: 10px;
+    border-style: dashed;
+    border-width: 1.3px;
+    border-color: #a1b8bd;
+    border-radius: 10px 10px 0px 0px;
+}
+
+section.body.current {
+    width: inherit!important;
+    height: inherit!important;
+    padding-top: 0px!important
+}
+summary {
+  position:relative;
+  background:#cff0f7;    
+  padding:10px;
+  outline:none !important;
+  border-radius: 10px 10px 0px 0px
+}
+
+summary::after {
+  content:'';
+  display:block;
+  position:absolute;
+  bottom:0;
+  left:0;
+  width:0;
+  height:2px;
+  background:#222;
+  transition:width 0.5s ease;
+  transition-delay:0.18s;
+}
+
+details[open] summary::after {
+  width:100%;
+}
+
+/*details p {
+  margin:20px;
+}*/
+
+
+.tddetails{padding: 8px 8px!important}
+.tdddetailslabel {
+    width: 20% !important;
+    font-weight: bold !important;
+}
+.tdddetailstitle {
+    width: 20% !important;
+    font-weight: bold !important;
+    font-style: italic !important;
+    font-size: medium !important;
+    color: grey !important;
+}
+section{overflow: auto}
+
+.resaltar tr:first-child {
+    background-color: ivory
+   }
+.resaltartr {
+    background-color: lavender;
+    font-weight: bold
+}
+
+thead tr th{
+	font-weight: bold !important;
+}
+
+/* css para el dropdown de botones */
+.dropcheck:hover {
+    background: aliceblue!important;
+    font-weight: bold !important;
+}
+.dropcheck{cursor: pointer}
+.dropcheckmenu {
+    position: absolute;
+    transform: translate3d(30px, 40px, 0px);
+    top: 0px;
+    left: 0px;
+    will-change: inherit;
+}
+.dropcheckbutton {
+    border-left-style: double !important;
+    border-left-color: steelblue !important;
+}
+a{cursor: pointer}
+
+.btnadd{margin-top: 0px;
+    margin-left: 10px;
+    margin-bottom: 0px;
+    padding-left: 8px!important;
+    padding-right: 8px!important;
+    z-index: 9999;}
+.nav > li > a{ padding: 2px 15px !important;}
+
+.control-label{color: midnightblue!important}
+
+/*Css para el recuadro de precio de referencia al crear una suscripcion*/
+.precioreferencialabel{ font-size: medium!important;font-weight: bold !important;margin-top: 0px!important}
+.precioreferenciainput {
+    font-size: x-large !important;
+    font-weight: bold !important;
+    min-width: 200px !important;
+}
+.precioreferenciadiv{width: min-content;
+    border-style: groove;
+    border-width: 2px;
+    border-radius: 10px;
+    padding: 5px;
+    border-color: green
+}
+/*style checkbox basico*/
+input[type=checkbox] {
+    cursor: pointer
+}
+input[type=checkbox]
+{
+    /* Double-sized Checkboxes */
+    -ms-transform: scale(2); /* IE */
+    -moz-transform: scale(2); /* FF */
+    -webkit-transform: scale(2); /* Safari and Chrome */
+    -o-transform: scale(2); /* Opera */
+    padding: 10px;
+}
+
+/* Might want to wrap a span around your checkbox text */
+.checkboxtext
+{
+    /* Checkbox text */
+    font-size: 110%;
+    display: inline;
+}
+
+.labelcheckboxdias {
+    margin-top: 5px!important;
+    margin-bottom: 10px!important;
+    font-size: 18px !important;}
+
+.labeltelefonos {
+    margin-top: 2% !important;
+    margin-bottom: 3% !important;
+    color: midnightblue !important;
+    border-bottom-style: dashed;
+    border-bottom-width: 1px;
+}
+
+.card-content {
+	overflow: auto;
+}
+body{background:none}
+
+/*
+            estilos para el gif modal de los ajax
+        */
+/* Start by setting display:none to make this hidden.
+   Then we position it in relation to the viewport window
+   with position:fixed. Width, height, top and left speak
+   for themselves. Background we set to 80% white with
+   our animation centered, and no-repeating */
+.modalLoadingGif {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: rgba( 255, 255, 255, .8 ) url('/Content/Images/ajax-loader.gif') 50% 50% no-repeat;
+}
+
+/* When the body has the loading class, we turn
+   the scrollbar off with overflow:hidden */
+.loading .modalLoadingGif {
+    overflow: hidden;
+}
+
+/* Anytime the body has the loading class, our
+   modal element will be visible */
+.loading .modalLoadingGif {
+    display: block;
 }

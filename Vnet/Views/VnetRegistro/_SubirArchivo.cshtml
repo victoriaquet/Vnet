@@ -1,0 +1,21 @@
+﻿@using (Html.BeginForm("TratarArchivo", "VnetRegistro", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div class="container">
+        <div class="panel panel-primary ">
+
+            <div class="panel-heading">
+                Busca y añade el archivo V-net más reciente
+            </div>
+
+            <div class="form-info  ">
+
+                <input class="form-control-highlight" type="file" name="file" />
+                <br />
+                <input class="button" type="submit" />
+
+            </div>
+
+        </div>
+
+    </div>
+}
