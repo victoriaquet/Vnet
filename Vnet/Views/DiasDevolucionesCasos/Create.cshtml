@@ -1,0 +1,66 @@
+﻿
+@{ Layout = null;}
+<table class="table table-condensed" style="width: 100%">
+    <thead class="text-primary">
+        <tr class="text-center">
+            <th class="text-left" style="width: 25%;font-weight: bold">
+                Fecha
+            </th>
+            <th class="text-left" style="width: 30%;font-weight: bold">
+                Descripción
+            </th>
+            <th class="text-center" style="width: 10%;font-weight: bold">
+                Fecha Modif.
+            </th>
+           
+            <th class="text-center" style="width: 10%;font-weight: bold"></th>
+        </tr>
+    </thead>
+    <tbody id="last">
+    <tr style="background: aliceblue">
+       
+        <td>
+            <div class="form-group">
+                @Html.LabelFor(model => model.DiaDevolucionCaso.Fecha, htmlAttributes: new {@class = "control-label col-md-2"})
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.DiaDevolucionCaso.Fecha, new {htmlAttributes = new {@class = "form-control"}})
+                    @Html.ValidationMessageFor(model => model.DiaDevolucionCaso.Fecha, "", new {@class = "text-danger"})
+                </div>
+            </div>
+        </td>
+        <td>
+            <div class="form-group">
+                @Html.LabelFor(model => model.DiaDevolucionCaso.Observaciones, htmlAttributes: new {@class = "control-label col-md-2"})
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.DiaDevolucionCaso.Observaciones, new {htmlAttributes = new {@class = "form-control"}})
+                    @Html.ValidationMessageFor(model => model.DiaDevolucionCaso.Observaciones, "", new {@class = "text-danger"})
+                </div>
+            </div>
+        </td>
+        <td>
+            <div class="form-group">
+                @Html.LabelFor(model => model.DiaDevolucionCaso.FechaModificacion, htmlAttributes: new {@class = "control-label col-md-2"})
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.DiaDevolucionCaso.FechaModificacion, new {htmlAttributes = new {@class = "form-control"}})
+                    @Html.ValidationMessageFor(model => model.DiaDevolucionCaso.FechaModificacion, "", new {@class = "text-danger"})
+                </div>
+            </div>
+        </td>
+        @{
+            foreach (var item in Model.DiasDevolucionCasos)
+            {
+                <td>@item.Fecha</td>
+                <td>@item.Observaciones</td>
+                <td>@item.FechaModificacion</td>
+            }
+        }
+        <td class="text-center">
+            <button type="button" id="adddiadev" class="btn btn-success btn-sm" value="Agregar"/>
+            <span class="glyphicon glyphicon-plus"></span>
+        </td>
+    </tr>
+        
+    </tbody>
+</table>
+
+

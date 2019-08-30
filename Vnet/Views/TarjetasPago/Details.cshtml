@@ -1,0 +1,96 @@
+﻿@model SNC2017.Models.TarjetaPago
+
+@{
+    ViewBag.Title = "Details";
+}
+
+@{Layout = null;}
+
+<table class="table table-condensed table-hover" style="width: 100%">
+
+    <tbody>
+
+        <tr>
+            <td class="text-left tddetails tdddetailslabel">
+                N° Tarjeta
+            </td>
+            <td class="text-left tddetails">
+                @Model.Numero
+
+            </td>
+        </tr>
+
+        <tr>
+            <td class="text-left tddetails tdddetailslabel">
+                Nombre exacto
+            </td>
+            <td class="text-left tddetails">
+                @Model.NombreExacto
+
+            </td>
+        </tr>
+        <tr>
+            <td class="text-left tddetails tdddetailslabel">
+                Mes venc.
+            </td>
+            <td class="text-left tddetails">
+                @Model.MesVencimiento
+
+            </td>
+        </tr>
+        <tr>
+            <td class="text-left tddetails tdddetailslabel">
+                Año venc.
+            </td>
+            <td class="text-left tddetails">
+                @Model.AñoVencimiento
+            </td>
+        </tr>
+        <tr>
+            <td class="text-left tddetails tdddetailslabel">
+                Cód. Seguridad
+            </td>
+            <td class="text-left tddetails">
+                @Model.CodigoSeguridad
+
+            </td>
+        </tr>
+        <tr>
+            <td class="text-left tddetails tdddetailslabel">
+                TipoPeriodoEfectivo
+            </td>
+            <td class="text-left tddetails">
+                @Model.TipoPeriodoEfectivo
+
+            </td>
+        </tr>
+        <tr>
+            <td class="text-left tddetails tdddetailslabel">
+               Desde
+            </td>
+            <td class="text-left tddetails">
+                @Model.FechaDesde.ToShortDateString()
+
+            </td>
+        </tr>
+        <tr>
+            <td class="text-left tddetails tdddetailslabel">
+                Hasta
+            </td>
+            <td class="text-left tddetails">
+                @Model.FechaHasta
+
+            </td>
+        </tr>
+        <tr>
+            <td class="text-left tddetails tdddetailslabel">
+                Tipo tarjeta
+            </td>
+            <td class="text-left tddetails">
+                @Model.TipoTarjeta
+
+            </td>
+        </tr>
+
+    </tbody>
+</table>

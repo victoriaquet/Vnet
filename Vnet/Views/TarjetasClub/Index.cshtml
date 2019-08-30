@@ -1,0 +1,539 @@
+﻿@using Microsoft.Ajax.Utilities
+@using SNC2017.Models
+@model IEnumerable<SNC2017.Models.TarjetaClub>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<div class="card">
+    <div class="card-header" data-background-color="green" style="display: flex">
+        <h4 class="title">Tarjetas Club</h4>
+
+    </div>
+
+    <div class="card-content">
+
+
+        <div id="example-tabs">
+            <h3>Pendientes</h3>
+            <section style="overflow-y: scroll">
+                <table class="datatablebase table table-condensed table-hover" id="table" style="width: 100%">
+                    <thead class="text-primary">
+                    <tr class="text-center">
+                        <th class="text-left" style="font-weight: bold">
+                            N° Tarjeta
+                        </th>
+                        <th class="text-left" style="font-weight: bold">
+                            Solicitud
+                        </th>
+                        <th class="text-left" style="font-weight: bold">
+                            Apellido y nombre
+                        </th>
+                        <th class="text-left" style="font-weight: bold">
+                            Precio
+                        </th>
+                      
+                        <th></th>
+                        
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach (var item in Model.Where(x=>x.EstadoTarjetaClub==EstadoTarjetaClub.Pendiente))
+                    {
+                      
+                            <tr>
+                                <td class="text-left tddetails">
+                                    @Html.DisplayFor(modelItem => item.Numero)
+                                </td>
+                                <td class="text-left tddetails">
+                                    @item.FechaSolicitud.Value.ToString("yyyy/MM/dd HH:mm")
+                                </td>
+                                <td class="text-left tddetails">
+                                    @Html.DisplayFor(modelItem => item.Apellido), @Html.DisplayFor(modelItem => item.Nombres)
+                                </td>
+                                <td class="text-left tddetails">
+                                    @Html.DisplayFor(modelItem => item.Precio)
+                                </td>
+                                
+                                <td class="text-left tddetails">
+                                    <div class="showme">
+                                        <a href="@Url.Action("Details", "TarjetasClub", new {id = item.IdTarjetaClub})" title="Detalles Tarjeta Club" data-placement="left" data-toggle="tooltip"><span class="glyphicon glyphicon-align-justify"></span></a>
+                                    </div>
+                                </td>
+                            </tr>
+                  
+                       
+                    }
+                    </tbody>
+                </table>
+
+            </section>
+            <h3>A/Impresión</h3>
+            <section style="overflow-y: scroll">
+                <table class="table table-condensed table-hover" style="width: 100%">
+                    <thead class="text-primary">
+                    <tr class="text-center">
+                        <th class="text-left" style="font-weight: bold">
+                            N° Tarjeta
+                        </th>
+                        <th class="text-left" style="font-weight: bold">
+                            Solicitud impresión
+                        </th>
+                        <th class="text-left" style="font-weight: bold">
+                            Apellido y nombre
+                        </th>
+                        <th class="text-left" style="font-weight: bold">
+                            Precio
+                        </th>
+                       
+                        <th></th>
+                        
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                  
+                    @foreach (var item in Model.Where(x => x.EstadoTarjetaClub == EstadoTarjetaClub.DerivadaAImpresion))
+                    {
+
+                        <tr>
+                            <td class="text-left tddetails">
+                                @Html.DisplayFor(modelItem => item.Numero)
+                            </td>
+                            <td class="text-left tddetails">
+                                @item.FechaSolicitudImpresion.Value.ToString("yyyy/MM/dd HH:mm")
+                            </td>
+                            <td class="text-left tddetails">
+                                @Html.DisplayFor(modelItem => item.Apellido), @Html.DisplayFor(modelItem => item.Nombres)
+                            </td>
+                            <td class="text-left tddetails">
+                                @Html.DisplayFor(modelItem => item.Precio)
+                            </td>
+                           
+                            <td class="text-left tddetails">
+                                <div>
+
+                                    <input class="checkbox checktc checktr" value="@item.IdTarjetaClub" style="display: inline-flex" type="checkbox" name="idtc">
+                                         
+                                    &nbsp;
+                                    <a class="dialog-window" href=@Url.Action("Details", "TarjetasClub", new { id = item.IdTarjetaClub }) title="Detalles Tarjeta Club" data-placement="left" data-toggle="tooltip"><span class="glyphicon glyphicon-align-justify"></span></a>
+                                </div>
+                            </td>
+                        </tr>
+
+
+                    }
+                       
+                     
+                          
+                    
+                  
+                    </tbody>
+                </table>
+                <div class="btn-group">
+                    <a class="btn btn-info" onclick="genarctc()">Generar archivo</a>
+                    <a class="btn btn-info dropdown-toggle dropcheckbutton" data-toggle="dropdown" href="#" aria-expanded="false">
+                        <span class="caret"></span>
+                    </a>
+                    <div class="dropdown-menu dropcheckmenu" x-placement="bottom-start">
+                        <li class="dropdown-item dropcheck" id="allchecktc" onclick="allcheck('checktc')">Seleccionar todas</li>
+                        <li class="dropdown-item dropcheck" id="nochecktc" onclick="nocheck('checktc')">Anular selección</li>
+                       
+                    </div>
+                </div>
+            </section>
+            <h3 style="padding-right: 10px">P/Imprimir</h3>
+            <section>
+                <table class="table table-condensed table-hover" style="width: 100%">
+                    <thead class="text-primary">
+                    <tr class="text-center">
+                        <th class="text-left" style="font-weight: bold">
+                            N° Tarjeta
+                        </th>
+                        <th class="text-left" style="font-weight: bold">
+                            Solicitud impresión
+                        </th>
+                        
+                        <th class="text-left" style="font-weight: bold">
+                            Apellido y nombre
+                        </th>
+                        <th class="text-left" style="font-weight: bold">
+                            Precio
+                        </th>
+                       
+                        <th></th>
+                        
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach (var item in Model.Where(x=>x.EstadoTarjetaClub==EstadoTarjetaClub.ListaParaImprimir))
+                    {
+                      
+                        <tr class="showhim">
+                            <td class="text-left tddetails">
+                                @Html.DisplayFor(modelItem => item.Numero)
+                            </td>
+                            <td class="text-left tddetails">
+                                @item.FechaSolicitudImpresion.Value.ToString("yyyy/MM/dd HH:mm")
+                            </td>
+                            <td class="text-left tddetails">
+                                @Html.DisplayFor(modelItem => item.Apellido), @Html.DisplayFor(modelItem => item.Nombres)
+                            </td>
+                            <td class="text-left tddetails">
+                                @Html.DisplayFor(modelItem => item.Precio)
+                            </td>
+                           
+                            <td class="text-left tddetails">
+                                <div class="showme">
+                                    @if (item.EstadoTarjetaClub == EstadoTarjetaClub.Impresa)
+                                    {         
+                                        <input class="checkbox" disabled="disabled" style="display: inline-flex;opacity: 0.8" type="checkbox">
+                                    }
+                                    else
+                                    {     
+                                        <input class="checkbox checktcimp checktr" value="@item.IdTarjetaClub" style="display: inline-flex" type="checkbox" name="idtcimp">
+                                    }
+                                    &nbsp;
+                                    <a class="dialog-window" href=@Url.Action("Details", "TarjetasClub", new { id = item.IdTarjetaClub }) title="Detalles Tarjeta Club" data-placement="left" data-toggle="tooltip"><span class="glyphicon glyphicon-align-justify"></span></a>
+                                </div>
+                            </td>
+                        </tr>
+                  
+                       
+                    }
+                    </tbody>
+                </table>
+                
+                @if (Model.Count() == Model.Count(x => x.EstadoTarjetaClub == EstadoTarjetaClub.Impresa))
+                {   <a class="btn btn-default"data-placement="right" data-toggle="tooltip" title="¡ Todas las tarjetas de este archivo ya están Impresas !" >Impresa</a>
+                }
+                else
+                { <div class="btn-group">
+                      <a class="btn btn-info" id="imptc" onclick="imprimirtc()">Impresa</a>
+                      <a class="btn btn-info dropdown-toggle dropcheckbutton" data-toggle="dropdown" href="#" aria-expanded="false" >
+                          <span class="caret"></span>
+                      </a>
+                      <div class="dropdown-menu dropcheckmenu" x-placement="bottom-start">
+                          <li class="dropdown-item dropcheck" id="allchecktc" onclick="allcheck('checktcimp')">Seleccionar todas</li>
+                          <li class="dropdown-item dropcheck" id="nochecktc" onclick="nocheck('checktcimp')">Anular selección</li>
+                       
+                      </div>
+                  </div> }
+
+            </section>
+            <h3 style="padding-right: 10px">Impresa</h3>
+        <section>
+            <table class="table table-condensed table-hover" style="width: 100%">
+                <thead class="text-primary">
+                <tr class="text-center">
+                    <th class="text-left" style="font-weight: bold">
+                        N° Tarjeta
+                    </th>
+                    <th class="text-left" style="font-weight: bold">
+                        Impresión
+                    </th>
+                    <th class="text-left" style="font-weight: bold">
+                        Apellido y nombre
+                    </th>
+                    <th class="text-left" style="font-weight: bold">
+                       Precio
+                    </th>
+                   
+                        <th></th>
+
+                </tr>
+                </thead>
+                <tbody>
+                @foreach (var item in Model.Where(x=>x.EstadoTarjetaClub==EstadoTarjetaClub.Impresa))
+                {
+                      
+                    <tr class="showhim">
+                        <td class="text-left tddetails">
+                            @Html.DisplayFor(modelItem => item.Numero)
+                        </td>
+                        <td class="text-left tddetails">
+                            @item.FechaImpresion.Value.ToString("yyyy/MM/dd HH:mm")
+                        </td>
+                        <td class="text-left tddetails">
+                            @Html.DisplayFor(modelItem => item.Apellido), @Html.DisplayFor(modelItem => item.Nombres)
+                        </td>
+                        <td class="text-left tddetails">
+                            @Html.DisplayFor(modelItem => item.Precio)
+                        </td>
+                        
+                        <td class="text-left tddetails">
+                            <div class="showme">
+                                <input class="checkbox checktcpent checktr" value="@item.IdTarjetaClub" style="display: inline-flex" type="checkbox" name="idtcpent">&nbsp;
+
+                                <a class="dialog-window" href=@Url.Action("Details", "TarjetasClub", new { id = item.IdTarjetaClub }) title="Detalles Tarjeta Club" data-placement="left" data-toggle="tooltip"><span class="glyphicon glyphicon-align-justify"></span></a>
+                            </div>
+                        </td>
+                    </tr>
+                  
+                       
+                }
+                </tbody>
+            </table>
+            <div class="btn-group">
+                <a class="btn btn-info" id="imptc" onclick="pentregartc()">P/Entregar</a>
+                <a class="btn btn-info dropdown-toggle dropcheckbutton" data-toggle="dropdown" href="#" aria-expanded="false" >
+                    <span class="caret"></span>
+                </a>
+                <div class="dropdown-menu dropcheckmenu" x-placement="bottom-start">
+                    <li class="dropdown-item dropcheck" id="allchecktc" onclick="allcheck('checktcpent')">Seleccionar todas</li>
+                    <li class="dropdown-item dropcheck" id="nochecktc" onclick="nocheck('checktcpent')">Anular selección</li>
+                       
+                </div>
+            </div>
+        </section>
+        <h3 style="padding-right: 10px">P/Entregar</h3>
+        <section>
+            <table class="table table-condensed table-hover" style="width: 100%">
+                <thead class="text-primary">
+                <tr class="text-center">
+                    <th class="text-left" style="font-weight: bold">
+                        N° Tarjeta
+                    </th>
+                    <th class="text-left" style="font-weight: bold">
+                        P/Entregar
+                    </th>
+                    <th class="text-left" style="font-weight: bold">
+                        Apellido y nombre
+                    </th>
+                    <th class="text-left" style="font-weight: bold">
+                        Ubicación
+                    </th>
+                    <th class="text-left" style="font-weight: bold">
+                        Precio
+                    </th>
+                   
+                    <th></th>
+                        
+
+                </tr>
+                </thead>
+                <tbody>
+                @foreach (var item in Model.Where(x=>x.EstadoTarjetaClub==EstadoTarjetaClub.ListaParaEntregar))
+                {
+                      
+                    <tr class="showhim">
+                        <td class="text-left tddetails">
+                            @Html.DisplayFor(modelItem => item.Numero)
+                        </td>
+                        <td class="text-left tddetails">
+                            @item.FechaParaEntregar.Value.ToString("yyyy/MM/dd HH:mm")
+                        </td>
+                        <td class="text-left tddetails">
+                            @Html.DisplayFor(modelItem => item.Apellido), @Html.DisplayFor(modelItem => item.Nombres)
+                        </td>
+                        <td class="text-left tddetails">
+                            @Html.DisplayFor(modelItem => item.UbicacionTarjetaClub)
+                        </td>
+                        <td class="text-left tddetails">
+                            @Html.DisplayFor(modelItem => item.Precio)
+                        </td>
+                       
+                        <td class="text-left tddetails">
+                            <div class="showme">
+                                <input class="checkbox checktcent checktr" value="@item.IdTarjetaClub" style="display: inline-flex" type="checkbox" name="idtcent">&nbsp;
+
+                                <a class="dialog-window" href=@Url.Action("Details", "TarjetasClub", new { id = item.IdTarjetaClub }) title="Detalles Tarjeta Club" data-placement="left" data-toggle="tooltip"><span class="glyphicon glyphicon-align-justify"></span></a>
+                            </div>
+                        </td>
+                    </tr>
+                  
+                       
+                }
+                </tbody>
+            </table>
+            <div class="btn-group">
+                <a class="btn btn-info" id="enttc" onclick="entregadastc()">Entregadas</a>
+                <a class="btn btn-info dropdown-toggle dropcheckbutton" data-toggle="dropdown" href="#" aria-expanded="false" >
+                    <span class="caret"></span>
+                </a>
+                <div class="dropdown-menu dropcheckmenu" x-placement="bottom-start">
+                    <li class="dropdown-item dropcheck" id="allchecktc" onclick="allcheck('checktcent')">Seleccionar todas</li>
+                    <li class="dropdown-item dropcheck" id="nochecktc" onclick="nocheck('checktcent')">Anular selección</li>
+                       
+                </div>
+            </div>
+
+        </section>
+            <h3 style="padding-right: 10px">Entregada</h3>
+            <section>
+                <table class="table table-condensed table-hover" style="width: 100%">
+                    <thead class="text-primary">
+                    <tr class="text-center">
+                        <th class="text-left" style="font-weight: bold">
+                            N° Tarjeta
+                        </th>
+                        <th class="text-left" style="font-weight: bold">
+                            Fec. Entrega
+                        </th>
+                        <th class="text-left" style="font-weight: bold">
+                            Apellido y nombre
+                        </th>
+                        <th class="text-left" style="font-weight: bold">
+                            Precio
+                        </th>
+                       
+                        <th></th>
+                        
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach (var item in Model.Where(x=>x.EstadoTarjetaClub==EstadoTarjetaClub.Entregada))
+                    {
+                      
+                        <tr class="showhim">
+                            <td class="text-left tddetails">
+                                @Html.DisplayFor(modelItem => item.Numero)
+                            </td>
+                            <td class="text-left tddetails">
+                                @item.FechaEntrega.Value.ToString("yyyy/MM/dd HH:mm")
+                            </td>
+                            <td class="text-left tddetails">
+                                @Html.DisplayFor(modelItem => item.Apellido), @Html.DisplayFor(modelItem => item.Nombres)
+                            </td>
+                            <td class="text-left tddetails">
+                                @Html.DisplayFor(modelItem => item.Precio)
+                            </td>
+                          
+                            <td class="text-left tddetails">
+                                <div class="showme">
+                                    <a class="dialog-window" href=@Url.Action("Details", "TarjetasClub", new { id = item.IdTarjetaClub }) title="Detalles Tarjeta Club" data-placement="left" data-toggle="tooltip"><span class="glyphicon glyphicon-align-justify"></span></a>
+                                </div>
+                            </td>
+                        </tr>
+                  
+                       
+                    }
+                    </tbody>
+                </table>
+
+
+            </section>
+            <h3 style="padding-right: 10px">Inactiva</h3>
+            <section>
+                <table class="table table-condensed table-hover" style="width: 100%">
+                    <thead class="text-primary">
+                    <tr class="text-center">
+                        <th class="text-left" style="font-weight: bold">
+                            N° Tarjeta
+                        </th>
+                        <th class="text-left" style="font-weight: bold">
+                            Apellido y nombre
+                        </th>
+                        <th class="text-left" style="font-weight: bold">
+                            Precio
+                        </th>
+                        
+                        <th></th>
+                        
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach (var item in Model.Where(x=>x.EstadoTarjetaClub==EstadoTarjetaClub.Inactiva))
+                    {
+                      
+                        <tr>
+                            <td class="text-left tddetails">
+                                @Html.DisplayFor(modelItem => item.Numero)
+                            </td>
+                            <td class="text-left tddetails">
+                                @Html.DisplayFor(modelItem => item.Apellido), @Html.DisplayFor(modelItem => item.Nombres)
+                            </td>
+                            <td class="text-left tddetails">
+                                @Html.DisplayFor(modelItem => item.Precio)
+                            </td>
+                          
+                            <td class="text-left tddetails">
+                                <div class="showme">
+                                    <a class="dialog-window" href=@Url.Action("Details", "TarjetasClub", new { id = item.IdTarjetaClub }) title="Detalles Tarjeta Club" data-placement="left" data-toggle="tooltip"><span class="glyphicon glyphicon-align-justify"></span></a>
+                                </div>
+                            </td>
+                        </tr>
+                  
+                       
+                    }
+                    </tbody>
+                </table>
+
+            </section>
+            <h3 style="padding-right: 10px">Baja</h3>
+            <section>
+                <table class="table table-condensed table-hover" style="width: 100%">
+                    <thead class="text-primary">
+                    <tr class="text-center">
+                        <th class="text-left" style="font-weight: bold">
+                            N° Tarjeta
+                        </th>
+                        <th class="text-left" style="font-weight: bold">
+                            Apellido y nombre
+                        </th>
+                        <th class="text-left" style="font-weight: bold">
+                            Precio
+                        </th>
+                      
+                        <th></th>
+                        
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach (var item in Model.Where(x=>x.EstadoTarjetaClub==EstadoTarjetaClub.Baja))
+                    {
+                      
+                        <tr>
+                            <td class="text-left tddetails">
+                                @Html.DisplayFor(modelItem => item.Numero)
+                            </td>
+                            <td class="text-left tddetails">
+                                @Html.DisplayFor(modelItem => item.Apellido), @Html.DisplayFor(modelItem => item.Nombres)
+                            </td>
+                            <td class="text-left tddetails">
+                                @Html.DisplayFor(modelItem => item.Precio)
+                            </td>
+                            
+                            <td class="text-left tddetails">
+                                <div class="showme">
+                                    <a class="dialog-window" href=@Url.Action("Details", "TarjetasClub", new { id = item.IdTarjetaClub }) title="Detalles Tarjeta Club" data-placement="left" data-toggle="tooltip"><span class="glyphicon glyphicon-align-justify"></span></a>
+                                </div>
+                            </td>
+                        </tr>
+                  
+                       
+                    }
+                    </tbody>
+                </table>
+
+            </section>
+
+        </div>
+
+    </div>
+</div>
+<div class="modal fade" id="modalDetalles" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="width: max-content;margin-top: 10px!important">
+        <div class="modal-content">
+            <div class="modal-body" style="padding-top: 10px; padding-right: 10px; padding-bottom: 10px; padding-left: 10px;">
+                <div class="te"></div>
+              
+            </div>
+            
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+@section scripts{
+<script src="~/Scripts/TarjetaClub/Index.js"></script>
+
+   }

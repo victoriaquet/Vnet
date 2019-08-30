@@ -1,0 +1,143 @@
+﻿
+@{
+    ViewBag.Title = "ConfiguracionCasos";
+}
+
+<style>
+    .card-header {
+        height: auto !important;
+    }
+
+    .card-content {
+        padding-top: 0px !important;
+        min-height: 76px !important;
+    }
+
+    .card .card-header.card-chart {
+        min-height: 93px !important;
+    }
+
+    .container {
+        background: gainsboro;
+    }
+
+    .grow:hover {
+        -webkit-transform: scale(1.03);
+        -ms-transform: scale(1.03);
+        transform: scale(1.03);
+    }
+</style>
+<div class="card">
+    <div class="card-header" data-background-color="green" style="display: flex">
+        <div style="display: inline-flex;">
+            <i class="material-icons">record_voice_over</i>
+            <h4 class="title">&nbsp;&nbsp;Configuración Casos</h4>
+
+        </div>
+
+    </div>
+    <hr />
+
+    <div class="card-content">
+        <div class="card" style="background: aliceblue">
+
+            <div class="card-header" data-background-color="blue" style="display: flex">
+                <h4 class="title">Puede modificar los siguientes componentes de casos</h4>
+
+            </div>
+            <br />
+            <div class="card-content">
+                <div class="row">
+                    <div class="col-lg-2 col-md-6 col-sm-6 grow" onclick="location.href='/Areacasos/Index'" style="padding-right: 2px !important; padding-left: 2px !important;cursor: pointer">
+                        <div class="card card-stats">
+                            <div class="card-header" data-background-color="gray">
+                                <i class="material-icons">settings</i>
+                            </div>
+                            <div class="card-content">
+
+                                <h3 class="title"></h3>
+                            </div>
+                            <div class="card-footer">
+                                <div class="stats">
+                                    <i class="material-icons">exit_to_app</i>Áreas
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-6 col-sm-6 grow" onclick="location.href='/AsuntoCasos/Index/'" style="padding-right: 2px !important; padding-left: 2px !important;cursor: pointer">
+                        <div class="card card-stats">
+                            <div class="card-header" data-background-color="green">
+                                <i class="material-icons">settings</i>
+                            </div>
+                            <div class="card-content">
+                                <h3 class="title"></h3>
+                            </div>
+                            <div class="card-footer">
+                                <div class="stats">
+                                    <i class="material-icons">exit_to_app</i>Asuntos
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-6 col-sm-6 grow" onclick="location.href='/EstadosCasos/Index/'" style="padding-right: 2px !important; padding-left: 2px !important;cursor: pointer">
+                        <div class="card card-stats">
+                            <div class="card-header" data-background-color="red">
+                                <i class="material-icons">settings</i>
+                            </div>
+                            <div class="card-content">
+                                <h3 class="title"></h3>
+                            </div>
+                            <div class="card-footer">
+                                <div class="stats">
+                                    <i class="material-icons">exit_to_app</i>Estados
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-6 col-sm-6 grow" onclick="location.href='/MotivoCierreCasos/Index/'" style="padding-right: 2px !important; padding-left: 2px !important">
+                        <div class="card card-stats">
+                            <div class="card-header" data-background-color="blue">
+                                <i class="material-icons">settings</i>
+                            </div>
+                            <div class="card-content">
+                                <p class="category"></p>
+                                <h3 class="title"></h3>
+                            </div>
+                            <div class="card-footer">
+                                <div class="stats">
+                                    <i class="material-icons">exit_to_app</i>Motivos de cierre
+                                </div>
+                            </div>
+                        </div>
+                    </div> 
+                    <div class="col-lg-2 col-md-6 col-sm-6 grow" onclick="location.href='/TiposCasos/Index/'" style="padding-right: 2px !important; padding-left: 2px !important">
+                        <div class="card card-stats">
+                            <div class="card-header" data-background-color="orange">
+                                <i class="material-icons">settings</i>
+                            </div>
+                            <div class="card-content">
+                                <p class="category"></p>
+                                <h3 class="title"></h3>
+                            </div>
+                            <div class="card-footer">
+                                <div class="stats">
+                                    <i class="material-icons">exit_to_app</i>Tipos
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+</div>
+
+
+
+
+
+

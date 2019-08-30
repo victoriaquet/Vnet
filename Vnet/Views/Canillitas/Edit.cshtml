@@ -1,0 +1,227 @@
+﻿@model SNC2017.Models.Canillita
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+
+<style>
+    /*fin estilos genearales*/
+    td .form-group {
+        margin-top: 0px !important
+    }
+
+    td {
+        padding: 0px !important
+    }
+
+    .form-group {
+        display: flex;
+        margin-top: 0px
+    }
+
+    .padedit {
+        padding-top: 15px !important
+    }
+</style>
+<div class="card">
+    <div class="card-header" data-background-color="green" style="display: flex">
+        <h4 class="title">Editar Canillita: @Model.Apellido, @Model.Nombre</h4>
+    </div>
+
+    <div class="card-content">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+
+            <div id="example-tabs">
+                <h3>Datos Generales</h3>
+                <section style="overflow-y: scroll">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.HiddenFor(model => model.IdCanillita)
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.NroCanillita, htmlAttributes: new { @class = "col-md-2 padedit" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.NroCanillita, new { htmlAttributes = new { @class = "form-control", @required = "required" } })
+                            @Html.ValidationMessageFor(model => model.NroCanillita, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Nombre, htmlAttributes: new { @class = "col-md-2 padedit" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Nombre, new { htmlAttributes = new { @class = "form-control", @required = "required" } })
+                            @Html.ValidationMessageFor(model => model.Nombre, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Apellido, htmlAttributes: new { @class = "col-md-2 padedit" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Apellido, new { htmlAttributes = new { @class = "form-control", @required = "required" } })
+                            @Html.ValidationMessageFor(model => model.Apellido, "", new { @class = "text-danger" })
+                        </div>
+                    </div>  
+                    
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.NroTel, htmlAttributes: new { @class = "col-md-2 padedit" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.NroTel, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.NroTel, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Activo, htmlAttributes: new { @class = "col-md-2 padedit" })
+                        <div class="col-md-10">
+                            <select class="form-control" name="Activo">
+                                @if (Model.Activo)
+                                {
+                                    <option value=true selected="selected">Activo</option>
+                                    <option value=false>Inactivo</option>
+                                }
+                                else
+                                {
+                                    <option value=true>Activo</option>
+                                    <option value=false selected="selected">Inactivo</option>}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.Label("Distribuidor", htmlAttributes: new { @class = "col-md-2 padedit" })
+
+                        <div class="col-md-10">
+                            <select class="form-control" id="IdDistribuidor" name="IdDistribuidor" style="width: 90%;">
+                                @foreach (var d in ViewBag.Distribuidores)
+                                {
+                                    if (d.IdDistribuidor == Model.IdDistribuidor)
+                                    {
+                                        <option value="@d.IdDistribuidor" selected>@d.Nombre</option>
+
+                                    }
+                                    else
+                                    {
+                                        <option value="@d.IdDistribuidor">@d.Nombre</option>
+                                    }
+                                }
+
+
+                            </select>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div style="width: 100%;display: flex">
+                        <div class="text-right" style="width: 30%">
+                            <input type="submit" value="Guardar" class="btn btn-success" />
+
+                        </div>
+
+                        <div style="width: 40%">
+                        </div>
+                        <div style="width: 30%"></div>
+                    </div>
+
+                </section>
+
+
+            </div>
+
+
+
+            <div style="width: 100%;display: flex">
+                <div style="width: 30%">
+
+                    @Html.ActionLink("Ir al listado", "Index", null, new { @class = "btn btn-sm btn-default" })
+                </div>
+
+                <div class="text-center" style="width: 40%">
+                    @*<input type="submit" value="Guardar" class="btn btn-success" />*@
+                </div>
+                <div style="width: 30%"></div>
+            </div>
+        }
+
+    </div>
+</div>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+}
+
+
+
+@*@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Canillita</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.IdCanillita)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.NroCanillita, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.NroCanillita, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.NroCanillita, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Nombre, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Nombre, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Nombre, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Apellido, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Apellido, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Apellido, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Activo, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="checkbox">
+                    <select class="form-control" name="Activo">
+                        @if (Model.Activo)
+                        {
+                            <option value=true selected="selected">Activo</option>
+                            <option value=false>Inactivo</option>
+                        }
+                        else
+                        {
+                            <option value=true>Activo</option>
+                            <option value=false selected="selected">Inactivo</option>}
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}*@

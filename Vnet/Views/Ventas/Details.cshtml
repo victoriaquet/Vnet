@@ -1,0 +1,74 @@
+﻿@model SNC2017.Models.Venta
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Venta</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Comercio.Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Comercio.Nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TarjetaClub.Nombres)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TarjetaClub.Nombres)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Monto)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Monto)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Fecha)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Fecha)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IdUsuarioAlta)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IdUsuarioAlta)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaAlta)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FechaAlta)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.IdVenta }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

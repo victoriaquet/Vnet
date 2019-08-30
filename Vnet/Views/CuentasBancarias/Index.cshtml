@@ -1,0 +1,63 @@
+﻿@model IEnumerable<SNC2017.Models.CuentaBancaria>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Suscriptor.Nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CBU)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NombreTitular)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DNITitular)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CUITTitular)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AliasCuenta)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Suscriptor.Nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CBU)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NombreTitular)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DNITitular)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CUITTitular)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AliasCuenta)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.IdCuentaBancaria }) |
+            @Html.ActionLink("Details", "Details", new { id=item.IdCuentaBancaria }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.IdCuentaBancaria })
+        </td>
+    </tr>
+}
+
+</table>

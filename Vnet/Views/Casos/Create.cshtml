@@ -1,0 +1,316 @@
+﻿@model SNC2017.Models.Caso
+
+@{
+    ViewBag.Title = "Nuevo caso";
+}
+
+
+@Html.Hidden("getDays", Url.Action("GetOfferDays", "Suscripciones"))
+<head>
+    <style>
+        summary .form-group {
+            margin-top: 0px;
+            padding-bottom: 0px;
+        }
+
+        .summaryselect {
+            padding-top: 3px;
+            padding-bottom: 2px;
+        }
+
+        .optioncopiardom {
+            display: none;
+        }
+
+        .inputTd {
+            border: none;
+        }
+
+        .ui-widget.ui-widget-content {
+            width: 100% !important;
+            border: none;
+        }
+
+        .ui-datepicker-group {
+            border-style: ridge
+        }
+
+
+
+        /*estilo para resaltar los  dias*/
+        td.highlight {
+            border: none !important;
+            padding: 1px 0 1px 1px !important;
+            background: none !important;
+            overflow: hidden;
+        }
+
+            td.highlight a {
+                background: #99dd73 url("https://pagos.diarionorte.com/Content/Images/logonorte.png") 50% 100% repeat-x !important;
+                border: 1px #88a276 solid !important;
+                background-size: contain !important;
+            }
+
+        .highlight a {
+            background: greenyellow !important;
+        }
+    </style>
+    <link rel="stylesheet" type="text/css" href="~/Content/themes/base/jquery-ui.css" />
+    <link rel="stylesheet" type="text/css" href="~/Content/themes/base/all.css" />
+    <link rel="stylesheet" type="text/css" href="~/Content/themes/base/theme.css" />
+    <style src="~/Content/Suscripciones/create.css"></style>
+</head>
+
+
+<div class="card">
+    <div class="card-header" data-background-color="green" style="display: flex">
+        <h4 class="title">Caso</h4>
+        <span class="category" style="margin-top: 4px;margin-left:10px">Nuevo</span>
+    </div>
+
+
+    <div class="card-content">
+        @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "suscform" }))
+        {
+            @Html.AntiForgeryToken()
+
+
+            <div id="example-tabs">
+                <h3>Datos Básicos</h3>
+                <section class="row">
+                    <div class="col-lg-6">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.FechaCarga, htmlAttributes: new { @class = "control-label" })
+
+                            @Html.EditorFor(model => model.FechaCarga, new { htmlAttributes = new { @class = "form-control", @Value = DateTime.Now.ToString("yyyy-MM-dd"), @readonly = "readonly", @style = "width:min-content" } })
+                            @Html.ValidationMessageFor(model => model.FechaCarga, "", new { @class = "text-danger" })
+
+                        </div>
+
+                        <div class="form-group is-focused">
+                            @*<label class="control-label">Suscripción</label> 
+                            <label>buscar por:</label>
+                            
+                            <select id="buscarPor">
+                                
+                                <option selected="selected" value="1">DNI</option>
+                                
+                                <option value="2">Nro. Susc</option>
+                                
+                                <option value="3">Nombre y/o apellido</option>
+                            
+                             </select>*@
+
+                            <select class="form-control" id="linesuscriptorcaso">
+
+                            </select>
+                            @*<div>
+                                <select class="select2Suscripciones" required id="linesuscriptorcaso" onchange="loadCalendar()" name="IdSuscripcion" style="width: 90%; margin-bottom: 7px">
+
+                                    <option title="Nombre, Apellido, DNI, Nro. Suscripción" value="">Seleccionar Suscripcion/Suscriptor...</option>
+                                    @foreach (var item in ViewBag.Suscripciones)
+                                    {
+                                        <option title="Nombre, Apellido, DNI, Nro. Suscripción" value="@item.Value">@item.Text</option>
+
+                                    }
+
+                                </select>
+                            </div>*@
+                            <span class="text-danger" id="validationSuscCaso"></span>
+                            @*@Html.ValidationMessageFor(model => model.IdSuscripcion, "", new { @class = "text-danger" })*@
+                        </div>
+
+                        <br />
+                        <br />
+                        <div class="form-group label-floating">
+                            @Html.Label("Tipo", htmlAttributes: new { @class = "control-label" })
+                            <div>
+                                <select class="js-example-basic-single" required id="" name="IdTipoCaso" style="width: 90%; margin-bottom: 7px">
+
+                                    <option value="">Tipo caso...</option>
+                                    @foreach (var item in ViewBag.IdTipoCaso)
+                                    {
+                                        <option value="@item.IdTipoCaso">@item.Descripcion</option>
+
+                                    }
+
+                                </select>
+                            </div>
+                            @Html.ValidationMessageFor(model => model.IdTipoCaso, "", new { @class = "text-danger" })
+
+                        </div>
+
+                        <div class="form-group label-floating">
+                            @Html.Label("Área: asunto", htmlAttributes: new { @class = "control-label" })
+                            <div>
+                                <select class="areacaso" id="" required name="IdAsuntoCaso" style="width: 90%; margin-bottom: 7px">
+                                    <option value="">Área: asunto</option>
+                                    @foreach (var area in ViewBag.IdAreaCaso)
+                                    {
+                                        <optgroup label="@area.Descripcion"></optgroup>
+                                        foreach (var asunto in area.AsuntosCasos)
+                                        {
+                                            <option value="@asunto.IdAsuntoCaso">@area.Descripcion: @asunto.Descripcion</option>
+                                        }
+
+
+                                    }
+
+                                </select>
+                            </div>
+
+                            @Html.ValidationMessageFor(model => model.IdAsuntoCaso, "", new { @class = "text-danger" })
+
+                        </div>
+
+
+
+                        <div class="form-group label-floating is-empty ">
+
+                            <label for="Descripcion" style="margin-top: 2%; margin-bottom: 1%">Descripción</label>
+                            <textarea class="form-control" placeholder="(Detalles del caso)" id="Descripcion" name="Descripcion"></textarea>
+                            @Html.ValidationMessageFor(model => model.Descripcion, "", new { @class = "text-danger" })
+
+                        </div>
+
+                    </div>
+                    <div class="col-lg-6">
+                        <br />
+                        <div class="form-group" style="margin-top: 0px" title="Fecha de vencimiento sugerida">
+                            @Html.LabelFor(model => model.FechaVencimiento, htmlAttributes: new { @class = "control-label" })
+                            <input class="form-control" required type="date" value="@DateTime.Now.AddDays(5).ToString("yyyy-MM-dd")" name="FechaVencimiento" id="FechaVencimiento" />
+                            @Html.ValidationMessageFor(model => model.FechaVencimiento, "", new { @class = "material-input" })
+
+                        </div>
+                        <div class="form-group label-floating is-empty">
+
+                            <label for="Observaciones" style="margin-top: 2%; margin-bottom: 1%">Observaciones</label>
+                            <textarea class="form-control" placeholder="(Notas internas para personal)" id="Observaciones" name="Observacion"></textarea>
+                            @Html.ValidationMessageFor(model => model.Observacion, "", new { @class = "text-danger" })
+
+                        </div>
+                        <div class="form-group">
+                            @Html.Label("Estado", htmlAttributes: new { @class = "control-label" })
+
+                            "El estado por defecto es Abierto"
+
+                        </div>
+
+                    </div>
+                </section>
+
+                <h3>Días del caso</h3>
+                <section class="col-lg-12">
+                    <div class="form-group" style="display: flex">
+                        <label for="from">Desde</label>
+                        <input class="form-control" style="width: auto" id="from" onchange="validacionFechas()" type="date" value="" />
+
+                        <label for="to">Hasta</label>
+                        <input class="form-control" type="date" style="width: auto" name="FechaHasta" id="to" value="" />
+                        <label>(funcionalidad de rango de fechas aún no disponible)</label>
+
+                    </div>
+
+                    <div id="datepicker"></div>
+                    <table class="table table-condensed" style="width: 100%">
+                        <thead class="text-primary">
+                            <tr class="text-center">
+
+                                <th class="text-left" colspan="2" style="width: 30%; font-weight: bold">
+                                    Descripción
+                                </th>
+
+                                <th class="text-center" style="width: 10%; font-weight: bold"></th>
+                            </tr>
+                        </thead>
+                        <tbody id="last">
+                            <tr style="background: aliceblue">
+
+
+                                <td colspan="2">
+                                    <div class="form-group">
+
+                                        <textarea style="max-width: none" class="form-control" id="DiaDevolucionCaso_Observaciones" name="Observaciones" cols="" rows=""></textarea>
+
+                                    </div>
+                                </td>
+
+
+
+
+                                <td class="text-center">
+                                    <button type="button" id="adddiadev" class="btn btn-success btn-sm" value="Agregar" />
+                                    <span class="glyphicon glyphicon-plus"></span>
+                                </td>
+                            </tr>
+                            <tr id="subtitulocontenidodiasdev">
+                                <td style="font-weight: bold">Fecha</td>
+                                <td style="font-weight: bold">Detalles</td>
+                                <td></td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </section>
+
+
+
+
+
+            </div>
+
+
+
+            <div class="row">
+                <div class="col-md-3">
+
+                    @Html.ActionLink("Volver", "Index", null, new { @class = "btn btn-default" })
+                </div>
+
+                <div class="col-md-3">
+                    <input type="submit" value="Guardar" onclick="selectNoEmpty()" class="btn btn-success" />
+                </div>
+
+            </div>
+        }
+
+    </div>
+</div>
+
+
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            CargarDataListSusc();
+            $("#linesuscriptorcaso").select2({
+
+            });
+            $(".areacaso").select2({
+
+
+            });
+            //Carga los datos del suscriptor precargado
+            //  var msg = @*@Html.Raw(Json.Encode(ViewBag.idsus))*@;
+            //if (msg != null & msg != "") {
+            //$("#linesuscriptor").trigger('change');
+            //};
+            //
+        });
+        function selectNoEmpty() {
+
+            $("select").each(function() {
+                if ($(this).val() =="") {
+                    $(this).addClass("ValidationError");
+                } else {
+                    $(this).removeClass("ValidationError");
+                }
+            });
+        }
+
+
+    </script>
+    <script src="~/Scripts/Casos/Create.js"></script>
+}

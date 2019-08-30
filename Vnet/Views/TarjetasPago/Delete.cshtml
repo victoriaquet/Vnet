@@ -1,0 +1,58 @@
+﻿@model SNC2017.Models.TarjetaPago
+
+@{
+    ViewBag.Title = "Details";
+}
+
+@{Layout = null;}
+<style>
+    .divtarjeta {
+        margin-left: 35px
+    }
+</style>
+<div class="col-lg-12 col-lg-offset-3">
+    <div style="display: flex">
+        @Html.Label("N° Tarjeta", htmlAttributes: new { @class = "labeldetails" })
+        <div class="divdetails divtarjeta">@Model.Numero</div>
+    </div>
+    <div style="display: flex">
+        @Html.LabelFor(model => model.NombreExacto, htmlAttributes: new { @class = "labeldetails " })
+        <div class="divdetails divtarjeta">@Model.NombreExacto</div>
+    </div>
+    <div style="display: flex">
+        @Html.LabelFor(model => model.MesVencimiento, htmlAttributes: new { @class = "labeldetails" })
+        <div class=" divdetails divtarjeta">@Model.MesVencimiento</div>
+    </div>
+    <div style="display: flex">
+        @Html.LabelFor(model => model.AñoVencimiento, htmlAttributes: new { @class = "labeldetails " })
+        <div class=" divdetails divtarjeta">@Model.AñoVencimiento</div>
+    </div>
+    <div style="display: flex">
+        @Html.LabelFor(model => model.CodigoSeguridad, htmlAttributes: new { @class = "labeldetails" })
+        <div class=" divdetails divtarjeta">@Model.CodigoSeguridad</div>
+    </div>
+    <div style="display: flex">
+        @Html.LabelFor(model => model.TipoPeriodoEfectivo, htmlAttributes: new { @class = "labeldetails " })
+        <div class=" divdetails divtarjeta">@Model.TipoPeriodoEfectivo</div>
+    </div>
+
+    <div style="display: flex">
+        @Html.LabelFor(model => model.FechaDesde, htmlAttributes: new { @class = "labeldetails " })
+        <div class=" divdetails divtarjeta">@Model.FechaDesde</div>
+    </div>
+    <div style="display: flex">
+        @Html.LabelFor(model => model.FechaHasta, htmlAttributes: new { @class = "labeldetails " })
+        <div class=" divdetails divtarjeta">@Model.FechaHasta</div>
+    </div>
+    <div style="display: flex">
+        @Html.LabelFor(model => model.TipoTarjeta, htmlAttributes: new { @class = "labeldetails " })
+        <div class=" divdetails divtarjeta">@Model.TipoTarjeta</div>
+    </div>
+</div>
+
+   
+        <div class="text-center" style="width: 100%">
+            <button type="button" class="btn btn-default" data-dismiss="modal" aria-hidden="true" style="width: 25%">Cancelar</button> 
+            <input onclick="eliminartarjeta(@Model.IdTarjetaPago)" value="Eliminar" class="btn btn-danger" style="width: 25%" />
+        </div>
+ 

@@ -8,6 +8,31 @@
         font-weight: bold;
         font-family: monospace;
     }
+    #tablenormal tbody tr.selected {
+        background-color: papayawhip
+    }
+
+    #tablecorporativo tbody tr.selected {
+        background-color: papayawhip
+    }
+    /*FIX FOR DATATABLES INSIDE STEPS*/
+    #tablenormal_paginate .pagination {
+        display: inline-flex !important;
+        list-style: none !important;
+    }
+
+    #tablenormal_wrapper {
+        padding-top: 5px
+    }
+
+    #tablecorporativo_paginate .pagination {
+        display: inline-flex !important;
+        list-style: none !important;
+    }
+
+    #tablecorporativo_wrapper {
+        padding-top: 5px
+    }
 </style>
 
 <section>
@@ -15,55 +40,168 @@
  
 </section>
 
-<section>
+<div class="card">
+    <div class="card-header" data-background-color="green" style="display: flex">
+        <h4 class="title">Registros Visa V-Net</h4>
+    </div>
 
-    <h2>Registros Visa V-Net</h2>
-    <table class="table table-bordered table-hover">
-        <thead>
-            <tr>
-                <th>Nro. Orden </th>
-                <th>Nro. Registro </th>
-                <th>Nro. de Establecimiento </th>
-                <th>Nombre Comercio</th>
-                <th>Nro. de Terminal</th>
-                <th>Fecha Movimiento</th>
-                <th>Hora Movimiento</th>
-                <th>Nro. de Tarjeta</th>
-                <th>Importe</th>
-                <th>Descuento</th>
-                <th>Importe Desc.</th>
-                <th>Descripción</th>
-            </tr>
-        </thead>
+    <div class="card-content">
 
-        <tbody>
-            @foreach (var registro in Model)
-            {
-                <tr>
+        <div class="example-tab">
+
+            <button onclick="verRegistro()" style="font-weight: bolder" class="btn btn-info btn-sm"><span class="glyphicon glyphicon-align-justify"></span> &nbsp;Detalles</button> &nbsp;
+            <button onclick="eliminarRegistro()" style="font-weight: bolder" class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-remove"></span> &nbsp;Eliminar</button> &nbsp;
 
 
-                    <td>@registro.Id</td>
-                    <td>@registro.NroRegistro</td>
-                    <td>@registro.NroEstablecimiento</td>
-                    <td>@registro.Comercio.Nombre</td>
-                    <td>@registro.NroTerminal</td>
-                    <td>@registro.FechaHoraMov.Day/@registro.FechaHoraMov.Month/@registro.FechaHoraMov.Year</td>
-                    <td>@registro.FechaHoraMov.TimeOfDay</td>
-                    <td>@registro.NroTarjeta</td>
-                    <td>$@registro.Importe</td>
-                    <td>@registro.Descuento%</td>
-                    <td>$@registro.ImporteDescuento</td>
-                    <td>$@registro.Descripcion</td>
-                    @*Para mapear lo anterior, hay que cargar a los clientes y sus tipos de membresia juntos (eager loading)*@
-                </tr>
-            }
-        </tbody>
-    </table>
+            <h3>Mes Actual</h3>
+            <section>
+                <table id="tablenormal" style="width: 100%" class="card-content table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>Nro. Orden </th>
+                            <th>Nro. Registro </th>
+                            <th>Nro. de Establecimiento </th>
+                            <th>Nombre Comercio</th>
+                            <th>Nro. de Terminal</th>
+                            <th>Fecha Movimiento</th>
+                            <th>Hora Movimiento</th>
+                            <th>Nro. de Tarjeta</th>
+                            <th>Importe</th>
+                            <th>Descuento</th>
+                            <th>Importe Desc.</th>
+                            <th>Descripción</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @foreach (var registro in Model)
+                        {
+                            <tr>
+
+
+                                <td>@registro.Id</td>
+                                <td>@registro.NroRegistro</td>
+                                <td>@registro.NroEstablecimiento</td>
+                                <td>@registro.Comercio.Nombre</td>
+                                <td>@registro.NroTerminal</td>
+                                <td>@registro.FechaHoraMov.Day/@registro.FechaHoraMov.Month/@registro.FechaHoraMov.Year</td>
+                                <td>@registro.FechaHoraMov.TimeOfDay</td>
+                                <td>@registro.NroTarjeta</td>
+                                <td>$@registro.Importe</td>
+                                <td>@registro.Descuento%</td>
+                                <td>$@registro.ImporteDescuento</td>
+                                <td>@registro.Descripcion</td>
+                                @*Para mapear lo anterior, hay que cargar a los clientes y sus tipos de membresia juntos (eager loading)*@
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </section>
+
+            <h3>Mes Actual</h3>
+            <section>
+                <table id="tablenormal" style="width: 100%" class="card-content table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>Nro. Orden </th>
+                            <th>Nro. Registro </th>
+                            <th>Nro. de Establecimiento </th>
+                            <th>Nombre Comercio</th>
+                            <th>Nro. de Terminal</th>
+                            <th>Fecha Movimiento</th>
+                            <th>Hora Movimiento</th>
+                            <th>Nro. de Tarjeta</th>
+                            <th>Importe</th>
+                            <th>Descuento</th>
+                            <th>Importe Desc.</th>
+                            <th>Descripción</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @foreach (var registro in Model)
+                        {
+                            <tr>
+
+
+                                <td>@registro.Id</td>
+                                <td>@registro.NroRegistro</td>
+                                <td>@registro.NroEstablecimiento</td>
+                                <td>@registro.Comercio.Nombre</td>
+                                <td>@registro.NroTerminal</td>
+                                <td>@registro.FechaHoraMov.Day/@registro.FechaHoraMov.Month/@registro.FechaHoraMov.Year</td>
+                                <td>@registro.FechaHoraMov.TimeOfDay</td>
+                                <td>@registro.NroTarjeta</td>
+                                <td>$@registro.Importe</td>
+                                <td>@registro.Descuento%</td>
+                                <td>$@registro.ImporteDescuento</td>
+                                <td>$@registro.Descripcion</td>
+                                @*Para mapear lo anterior, hay que cargar a los clientes y sus tipos de membresia juntos (eager loading)*@
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </section>
+
+            <h3>Mes 2</h3>
+            <section>
+                <table id="table2" style="width: 100%" class="card-content table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>Nro. Orden </th>
+                            <th>Nro. Registro </th>
+                            <th>Nro. de Establecimiento </th>
+                            <th>Nombre Comercio</th>
+                            <th>Nro. de Terminal</th>
+                            <th>Fecha Movimiento</th>
+                            <th>Hora Movimiento</th>
+                            <th>Nro. de Tarjeta</th>
+                            <th>Importe</th>
+                            <th>Descuento</th>
+                            <th>Importe Desc.</th>
+                            <th>Descripción</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @foreach (var registro in Model)
+                        {
+                            <tr>
+
+
+                                <td>@registro.Id</td>
+                                <td>@registro.NroRegistro</td>
+                                <td>@registro.NroEstablecimiento</td>
+                                <td>@registro.Comercio.Nombre</td>
+                                <td>@registro.NroTerminal</td>
+                                <td>@registro.FechaHoraMov.Day/@registro.FechaHoraMov.Month/@registro.FechaHoraMov.Year</td>
+                                <td>@registro.FechaHoraMov.TimeOfDay</td>
+                                <td>@registro.NroTarjeta</td>
+                                <td>$@registro.Importe</td>
+                                <td>@registro.Descuento%</td>
+                                <td>$@registro.ImporteDescuento</td>
+                                <td>$@registro.Descripcion</td>
+                                @*Para mapear lo anterior, hay que cargar a los clientes y sus tipos de membresia juntos (eager loading)*@
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </section>
 
 
 
 
-</section>
+
+
+        </div>
+
+
+    </div>
+
+    @section Scripts{
+        <script src="~/Scripts/Vnet/Index.js"></script>
+    }
+
 
 
 

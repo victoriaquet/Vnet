@@ -1,0 +1,216 @@
+﻿@using SNC2017.Models
+@model SNC2017.Models.TarjetaClub
+
+@{
+    ViewBag.Title = "Details";
+    Layout = Request.IsAjaxRequest() ? null : "~/Views/Shared/_Layout.cshtml";
+    string ahide = Request.IsAjaxRequest() ? "hidden" : null;
+    string nhide = Request.IsAjaxRequest() ? null : "hidden";
+}
+<style>
+    #tbodyprecio tr:first-child {
+        font-weight: bold;
+        font-family: monospace;
+    }
+</style>
+<div class="card">
+    <div class="card-header" data-background-color="green" style="display: flex">
+        <h4 class="title">Detalles Tarjeta Club N°@Model.Numero</h4>
+
+    </div>
+
+    <div class="card-content">
+
+
+        <div id="example-tabs">
+            <h3>Generales</h3>
+            <section style="overflow-y: scroll">
+                <table class="table table-condensed table-hover" style="width: 100%">
+
+                    <tbody>
+
+                        <tr>
+                            <td class="text-left tddetails tdddetailslabel">
+                                N° Tarjeta
+                            </td>
+                            <td class="text-left  tddetails">
+                                @Model.Numero
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-left tddetails tdddetailslabel">
+                                Tipo Tarjeta
+                            </td>
+                            <td class="text-left tddetails">
+                                @Model.TipoTarjetaClub
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-left tddetails tdddetailslabel">
+                                Apellido y nombre
+                            </td>
+                            <td class="text-left  tddetails">
+                                @Model.Apellido, @Model.Nombres
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-left tddetails tdddetailslabel">
+                                Sexo
+                            </td>
+                            <td class="text-left  tddetails">
+                                @Html.DisplayFor(model => model.TipoSexo, new { htmlAttributes = new { @class = "form-control" } })
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-left tddetails tdddetailslabel">
+                                Fec. Nacimiento
+                            </td>
+                            <td class="text-left  tddetails">
+                                @Html.DisplayFor(model => model.FechaNacimiento, new { htmlAttributes = new { @class = "form-control" } })
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-left tddetails tdddetailslabel">
+                                DNI
+                            </td>
+                            <td class="text-left  tddetails">
+                                @Model.DNI
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-left tddetails tdddetailslabel">
+                                Email
+                            </td>
+                            <td class="text-left  tddetails">
+                                @Model.Email
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-left tddetails tdddetailslabel">
+                                Celular
+                            </td>
+                            <td class="text-left  tddetails">
+                                @Model.TelefonoMovilArea @Model.TelefonoMovilNumero
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-left tddetails tdddetailslabel">
+                                Precio
+                            </td>
+                            <td class="text-left tddetails">
+                                @Model.Precio
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-left tddetails tdddetailslabel">
+                                Estado
+                            </td>
+                            <td class="text-left tddetails">
+                                @Model.EstadoTarjetaClub
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td class="text-left tddetails tdddetailslabel">
+                                Fecha sol. Impresión
+                            </td>
+                            <td class="text-left tddetails">
+                                @Model.FechaSolicitudImpresion
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-left tddetails tdddetailslabel">
+                                Fecha Impresion
+                            </td>
+                            <td class="text-left tddetails">
+                                @Model.FechaImpresion
+
+                            </td>
+                        </tr>
+                        @*<tr>
+            <td class="text-left tddetails tdddetailslabel">
+                Fecha de recepción
+            </td>
+            <td class="text-left tddetails">
+                @Model.FechaRecepción
+
+            </td>
+        </tr>*@
+
+                        <tr>
+                            <td class="text-left tddetails tdddetailslabel">
+                                Fecha entrega
+                            </td>
+                            <td class="text-left tddetails">
+                                @Model.FechaEntrega
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-left tddetails tdddetailslabel">
+                                Suscripción
+                            </td>
+                            <td class="text-left  tddetails">
+                                <a href="@Url.Action("Details","Suscripciones", new {id=@Model.Suscripcion.IdSuscripcion})">N°@Model.Suscripcion.NumeroSuscripcion - @Model.Suscripcion.Suscriptor.Apellido, @Model.Suscripcion.Suscriptor.Nombre</a>
+
+                            </td>
+                        </tr>
+
+
+
+                    </tbody>
+                </table>
+                <div style="width: 100%;display: inline-flex">
+                    <div style="width: 30%">
+                        <div class="container text-left @nhide">
+                            <button type="button" class="btn btn-xs btn-default" data-dismiss="modal">Cerrar</button>
+                        </div>
+                    </div>
+                    <div style="width: 40%">
+                
+                        @if (Model.EstadoTarjetaClub == EstadoTarjetaClub.DerivadaAImpresion | Model.EstadoTarjetaClub == EstadoTarjetaClub.Pendiente)
+                        {
+                            @Html.ActionLink("Editar", "Edit", "TarjetasClub", new {id = Model.IdTarjetaClub}, new {@class = "btn btn-primary"})
+
+
+
+                        }
+                        else
+                        {
+                            <a class="btn btn-default sombrabtncreate" data-placement="top" data-toggle="tooltip" title="Sólo se permite la edición de Tarjeta Club en estado Pendiente|Derivada a impresión">Editar</a>}
+
+
+
+                    </div>
+                </div>
+
+            </section>
+          
+            
+        </div>
+
+    </div>
+</div>
+
+
+<div class="navbar-xs navbar-inverse navbar-fixed-bottom @ahide" style="background: none; border: none; padding-bottom: 0px;padding-left: 260px">
+    <div style="width: 100%;display: inline-flex">
+        <div style="width: 30%">
+            <div class="container text-left" style="height: 40px">
+                @Html.ActionLink("Volver", "Details", "Suscripciones", new{id=Model.IdSuscripcion}, new { @class = "btn btn-sm btn-default" })
+            </div>
+        </div>
+      
+    </div>
+   
+</div>
+

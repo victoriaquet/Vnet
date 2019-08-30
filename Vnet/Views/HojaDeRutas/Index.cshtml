@@ -1,0 +1,458 @@
+﻿@using SNC2017.ViewModels
+@model SNC2017.ViewModels.HojaRutaTemporalVM
+@{
+    ViewBag.Title = "Index";
+}
+<style>
+    /*FIX FOR DATATABLES INSIDE STEPS*/
+    #tableayer_paginate .pagination
+    {display: inline-flex!important;
+        list-style: none!important;}
+    #tablehoy_paginate .pagination
+    {display: inline-flex!important;
+        list-style: none!important;}
+    #tablemañana_paginate .pagination
+    {display: inline-flex!important;
+        list-style: none!important;}
+    #tabletodas_paginate .pagination
+    {display: inline-flex!important;
+        list-style: none!important;}
+    #tableayer_wrapper{padding-top: 5px}
+    .content.clearfix {
+        height: -moz-available !important; /* WebKit-based browsers will ignore this. */
+        height: -webkit-fill-available !important; /* Mozilla-based browsers will ignore this. */
+        height: fill-available !important;
+    }
+    #tablehoy_wrapper{padding-top: 5px}
+    .content.clearfix {
+        height: -moz-available !important; /* WebKit-based browsers will ignore this. */
+        height: -webkit-fill-available !important; /* Mozilla-based browsers will ignore this. */
+        height: fill-available !important;
+    }
+    #tablemañana_wrapper{padding-top: 5px}
+    .content.clearfix {
+        height: -moz-available !important; /* WebKit-based browsers will ignore this. */
+        height: -webkit-fill-available !important; /* Mozilla-based browsers will ignore this. */
+        height: fill-available !important;
+    }
+    #tabletodas_wrapper{padding-top: 5px}
+    .content.clearfix {
+        height: -moz-available !important; /* WebKit-based browsers will ignore this. */
+        height: -webkit-fill-available !important; /* Mozilla-based browsers will ignore this. */
+        height: fill-available !important;
+    }
+    .dataTables_length label{ display: inline-flex !important;float: left!important}
+    .dataTables_filter label{ display: inline-flex !important;float: right!important}
+    @@media (max-width: 200px), (max-width: 448px) {
+    .dataTables_filter label div input {
+        width: 100px !important
+    }
+    } 
+    .thfoot{padding-top: 1px!important;padding-bottom: 1px!important;}
+    .thaccion input{display: none!important}
+    .thfoot .form-group {
+        padding-top: 1px !important;
+        padding-bottom: 1px !important;
+        margin-top: 1px !important;
+        margin-bottom: 1px !important
+    }
+    .thfoot .form-group .form-control {
+        padding-top: 1px !important;
+        padding-bottom: 1px !important;
+        margin-top: 1px !important;
+        margin-bottom: 1px !important;
+        height: initial;
+        background: white
+
+    }
+    .darkslateblue{color:darkslateblue!important}
+</style>
+<div class="card">
+    <div class="card-header" data-background-color="green" style="display: flex">
+        <h4 class="title">Hojas de rutas</h4>
+        <a href=@Url.Action("Create") class="btn btn-success btn-sm sombrabtncreate btnadd">
+            <span class="glyphicon glyphicon-plus"></span>
+        </a>&nbsp;&nbsp;&nbsp;
+        <a href=@Url.Action("Imprimir") class="btn btn-success btn-sm sombrabtncreate btnadd">
+            <span class="glyphicon glyphicon-print"></span>
+        </a>
+
+    </div>
+
+    <div class="card-content">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            <div id="example-tabs">
+            <h3>@DateTime.Now.AddDays(-1).ToString("yyyy/MM/dd")&nbsp;<i class="darkslateblue">(Ayer)</i></h3>
+                <section>
+                    <table class=" table table-condensed" id="tableayer" style="width: 100%">
+                        <thead class="text-primary">
+                            <tr class="text-center">
+                                <th>
+                                    Fecha Entrega
+                                </th>
+                                <th>
+                                    Canillita
+                                </th>
+
+                                <th>
+                                    Fecha Generación
+                                </th>
+
+
+
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        @foreach (var item in Model.HojaDeRutaAyer)
+                        {
+                            <tr class="showhim">
+                                <td>
+                                    @item.FechaEntrega.ToString("yyyy/MM/dd")
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(model => item.Canillita.Nombre)
+
+                                </td>
+
+                                <td>
+                                    @item.FechaGeneracion.ToString("yyyy/MM/dd HH:mm")
+                                </td>
+
+
+                                <td>
+                                    <div class="showme">
+                                        <a href="@Url.Action("Details", new {id = item.IdHojaDeRuta})" data-placement="left" data-toggle="tooltip" title="Detalles"><span class="glyphicon glyphicon-align-justify"></span></a>&nbsp;
+                                    </div>
+
+                                </td>
+                            </tr>
+                        }
+                        </tbody>
+                        <tfoot>
+                        <tr>
+                            <th class="thfoot"></th>
+                            <th class="thfoot" ></th>
+                            <th class="thfoot"></th>
+                            <th class="thfoot thaccion"></th>
+                        </tr>
+                        </tfoot>
+                    </table>
+                </section>
+                <h3>@DateTime.Now.ToString("yyyy/MM/dd")&nbsp;<i class="darkslateblue">(Hoy)</i></h3>
+                <section>
+                    <table class=" table table-condensed" id="tablehoy" style="width: 100%">
+                        <thead class="text-primary">
+                            <tr class="text-center">
+                                <th>
+                                    Fecha Entrega
+                                </th>
+                                <th>
+                                    Canillita
+                                </th>
+
+                                <th>
+                                    Fecha Generación
+                                </th>
+
+
+
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        @foreach (var item in Model.HojaDeRutaHoy)
+                        {
+                            <tr class="showhim">
+                                <td>
+                                    @item.FechaEntrega.ToString("yyyy/MM/dd")
+                                </td>
+                                <td>
+                                  @Html.DisplayFor(model => item.Canillita.Nombre)
+
+                                </td>
+
+                                <td>
+                                    @item.FechaGeneracion.ToString("yyyy/MM/dd HH:mm")
+                                </td>
+
+
+                                <td>
+                                    <div class="showme">
+                                        <a href="@Url.Action("Details", new {id = item.IdHojaDeRuta})" data-placement="left" data-toggle="tooltip" title="Detalles"><span class="glyphicon glyphicon-align-justify"></span></a>&nbsp;
+                                    </div>
+
+                                </td>
+                            </tr>
+                        }
+                        </tbody>
+                        <tfoot>
+                        <tr>
+                            <th class="thfoot"></th>
+                            <th class="thfoot" ></th>
+                            <th class="thfoot"></th>
+                            <th class="thfoot thaccion"></th>
+                        </tr>
+                        </tfoot>
+                    </table>
+
+
+
+
+                </section>
+                <h3>@DateTime.Now.AddDays(+1).ToString("yyyy/MM/dd")&nbsp;<i class="darkslateblue">(Mañana)</i></h3>
+                <section>
+                    <table class= "table table-condensed" id="tablemañana" style="width: 100%">
+                        <thead class="text-primary">
+                            <tr class="text-center">
+                                <th>
+                                    Fecha Entrega
+                                </th>
+                                <th>
+                                    Canillita
+                                </th>
+
+                                <th>
+                                    Fecha Generación
+                                </th>
+
+
+
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        @foreach (var item in Model.HojaDeRutaMañana)
+                        {
+                            <tr class="showhim">
+                                <td>
+                                    @item.FechaEntrega.ToString("yyyy/MM/dd")
+                                </td>
+                                <td>
+                                   @Html.DisplayFor(model => item.Canillita.Nombre)
+
+                                </td>
+
+                                <td>
+                                    @item.FechaGeneracion.ToString("yyyy/MM/dd HH:mm")
+                                </td>
+
+
+                                <td>
+                                    <div class="showme">
+                                        <a href="@Url.Action("Details", new {id = item.IdHojaDeRuta})" data-placement="left" data-toggle="tooltip" title="Detalles"><span class="glyphicon glyphicon-align-justify"></span></a>&nbsp;
+                                    </div>
+
+                                </td>
+                            </tr>
+                        }
+                        </tbody>
+                        <tfoot>
+                        <tr>
+                            <th class="thfoot"></th>
+                            <th class="thfoot" ></th>
+                            <th class="thfoot"></th>
+                            <th class="thfoot thaccion"></th>
+                        </tr>
+                        </tfoot>
+                    </table>
+
+
+
+
+                </section>
+                <h3>Todas</h3>
+                <section>
+                    <table class=" table table-condensed" id="tabletodas" style="width: 100%">
+                        <thead class="text-primary">
+                            <tr class="text-center">
+                                <th>
+                                    Fecha Entrega
+                                </th>
+                                <th>
+                                    Canillita
+                                </th>
+
+                                <th>
+                                    Fecha Generación
+                                </th>
+
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        @foreach (var item in Model.HojaDeRutaTodas)
+                        {
+                            <tr class="showhim">
+                                <td>
+                                    @item.FechaEntrega.ToString("yyyy/MM/dd")
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(model => item.Canillita.Nombre)
+
+                                </td>
+
+                                <td>
+                                    @item.FechaGeneracion.ToString("yyyy/MM/dd HH:mm")
+                                </td>
+
+
+                                <td>
+                                    <div class="showme">
+                                        <a href="@Url.Action("Details", new {id = item.IdHojaDeRuta})" data-placement="left" data-toggle="tooltip" title="Detalles"><span class="glyphicon glyphicon-align-justify"></span></a>&nbsp;
+                                    </div>
+
+                                </td>
+                            </tr>
+                        }
+                        </tbody>
+                        <tfoot>
+                        <tr>
+                           <th class="thfoot"></th>
+                            <th class="thfoot"></th>
+                            <th class="thfoot"></th>
+                            <th class="thfoot thaccion"></th>
+                        </tr>
+                        </tfoot>
+                    </table>
+
+
+
+
+                </section>
+
+            </div>
+
+
+
+
+        }
+
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            // INICIALIZACION Y CONFIGURACION DE LA TABLA
+            var tabletodas = $('#tabletodas').DataTable(
+                { "order": [[0, "desc"]],
+                    "lengthMenu": [[10, 50, 100, -1], [10, 50, 100, "Todas"]],
+                    "language": {
+                        "url": '/Scripts/DataTables/spanish.json'
+                    }
+                   
+                });
+            //CARGA DE DATOS EN EL FOOTER
+            $('#tabletodas tfoot th').each(function () {
+                var title = $(this).text();
+                $(this).html('<input class="form-control"  type="text" placeholder="' + title + "..." + '" />');
+
+            });
+            // CONFIGURACION DE LA BUSQUEDA POR COLUMNAS
+            tabletodas.columns().every(function () {
+                var that1 = this;
+                $('input', this.footer()).on('keyup change', function () {
+                    if (that1.search() !== this.value) {
+                        that1
+                            .search(this.value)
+                            .draw();
+                    }
+                });
+            });
+            //reposicionamiento de tfooter
+            $('#tabletodas tfoot tr').insertAfter($('#tabletodas thead tr'));
+
+            // INICIALIZACION Y CONFIGURACION DE LA TABLA
+            var tablehoy = $('#tablehoy').DataTable(
+                { "order": [[0, "desc"]],
+                    "lengthMenu": [[10, 50, 100, -1], [10, 50, 100, "Todas"]],
+                    "language": {
+                        "url": '/Scripts/DataTables/spanish.json'
+                    }
+                  
+                });
+            //CARGA DE DATOS EN EL FOOTER
+            $('#tablehoy tfoot th').each(function () {
+                var title = $(this).text();
+                $(this).html('<input class="form-control"  type="text" placeholder="' + title + "..." + '" />');
+
+            });
+            // CONFIGURACION DE LA BUSQUEDA POR COLUMNAS
+            tablehoy.columns().every(function () {
+                var that2 = this;
+                $('input', this.footer()).on('keyup change', function () {
+                    if (that2.search() !== this.value) {
+                        that2
+                            .search(this.value)
+                            .draw();
+                    }
+                });
+            });
+            //reposicionamiento de tfooter
+            $('#tablehoy tfoot tr').insertAfter($('#tablehoy thead tr'));
+
+            // INICIALIZACION Y CONFIGURACION DE LA TABLA
+            var tableayer = $('#tableayer').DataTable(
+                { "order": [[0, "desc"]],
+                    "lengthMenu": [[10, 50, 100, -1], [10, 50, 100, "Todas"]],
+                    "language": {
+                        "url": '/Scripts/DataTables/spanish.json'
+                    }
+                  
+                });
+            //CARGA DE DATOS EN EL FOOTER
+            $('#tableayer tfoot th').each(function () {
+                var title = $(this).text();
+                $(this).html('<input class="form-control"  type="text" placeholder="' + title + "..." + '" />');
+
+            });
+            // CONFIGURACION DE LA BUSQUEDA POR COLUMNAS
+            tableayer.columns().every(function () {
+                var that3 = this;
+                $('input', this.footer()).on('keyup change', function () {
+                    if (that3.search() !== this.value) {
+                        that3
+                            .search(this.value)
+                            .draw();
+                    }
+                });
+            });
+            //reposicionamiento de tfooter
+            $('#tableayer tfoot tr').insertAfter($('#tableayer thead tr'));
+
+            // INICIALIZACION Y CONFIGURACION DE LA TABLA
+            var tablemañana = $('#tablemañana').DataTable(
+                { "order": [[0, "desc"]],
+                    "lengthMenu": [[10, 50, 100, -1], [10, 50, 100, "Todas"]],
+                    "language": {
+                        "url": '/Scripts/DataTables/spanish.json'
+                    }
+                    
+                 
+                });
+            //CARGA DE DATOS EN EL FOOTER
+            $('#tablemañana tfoot th').each(function () {
+                var title = $(this).text();
+                $(this).html('<input class="form-control"  type="text" placeholder="' + title + "..." + '" />');
+
+            });
+            // CONFIGURACION DE LA BUSQUEDA POR COLUMNAS
+            tablemañana.columns().every(function () {
+                var that4 = this;
+                $('input', this.footer()).on('keyup change', function () {
+                    if (that4.search() !== this.value) {
+                        that4
+                            .search(this.value)
+                            .draw();
+                    }
+                });
+            });
+            //reposicionamiento de tfooter
+            $('#tablemañana tfoot tr').insertAfter($('#tablemañana thead tr'));
+        });
+     
+    </script>
+    }

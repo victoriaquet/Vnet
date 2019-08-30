@@ -23,20 +23,27 @@ namespace Vnet.Controllers
 
          }
 
-     
+
 
         [HttpPost]
         public ActionResult TratarArchivo(HttpPostedFileBase file)
         {
             StreamReader archivo = new StreamReader(file.InputStream);
-            string linea = archivo.ReadLine();
 
-           //if (linea == null)
-           //{ }
+            string nombre = file.FileName;
+
+            //Control Input:
+            if (!ControlNombreArchivo(nombre) && !ControlRepeticionArchivo(nombre))
+                return View("Error");
+            
+            
+            string linea = archivo.ReadLine();
+            ControlLinea(linea);
+
 
             while ( linea != null)
             {
-                TratarLinea(linea);
+                TratarLinea(linea,nombre);
                 linea = archivo.ReadLine();
             }
 
@@ -48,8 +55,8 @@ namespace Vnet.Controllers
 
           
         
-        //Trato la linea de los txt
-        void TratarLinea (string linea)
+        //Trato la linea de los txt. Guardo cada registro correspondiente a la linea de un archivo.
+        void TratarLinea (string linea, string nombreArchivo)
         {
             var l = linea.Length;
 
@@ -66,6 +73,8 @@ namespace Vnet.Controllers
                 //Empiezo a crear variable auxiliaries para rescatar los campos de el string.
                 var nroRegistro = Convert.ToInt32(linea.Substring(1, 11));
                 var nroEstablecimiento = Convert.ToInt32(linea.Substring(12, 12));
+                ControlNroEstablecimiento(nroEstablecimiento);
+
                 var nroTerminal = Convert.ToInt32(linea.Substring(24, 12));
 
                 //Fecha
@@ -105,20 +114,24 @@ namespace Vnet.Controllers
 
                 var nuevoRegistro = new VnetRegistro
                 {
-                     Id = 0,
-                     NroRegistro = nroRegistro,
-                     NroEstablecimiento = nroEstablecimiento,
-                     NroTerminal = nroTerminal,
-                     Comercio = comercios.SingleOrDefault(c => c.Establecimiento == nroEstablecimiento),
+                    Id = 0,
+                    NroRegistro = nroRegistro,
+                    NroEstablecimiento = nroEstablecimiento,
+                    NroTerminal = nroTerminal,
+                    Comercio = comercios.SingleOrDefault(c => c.Establecimiento == nroEstablecimiento),
 
-                     FechaHoraMov = fechaCompleta,
-                     NroTarjeta = nroTarjeta,
+                    FechaHoraMov = fechaCompleta,
+                    NroTarjeta = nroTarjeta,
 
 
-                     Descuento = descuento,
-                     Importe = importe,
-                     ImporteDescuento = importeDescuento,
-                     Descripcion = descripcion
+                    Descuento = descuento,
+                    Importe = importe,
+                    ImporteDescuento = importeDescuento,
+                    Descripcion = descripcion,
+
+                    NombreArchivo = nombreArchivo,
+                    HoraDeSubida = DateTime.Now
+
                  };
 
                  //Guardo el Registro
@@ -140,16 +153,60 @@ namespace Vnet.Controllers
         void SaveRegistroVnet(VnetRegistro registro)
 
         {
+           if (!ModelState.IsValid)
+            {
+                Index();
+            }
             _context.VnetRegistros.Add(registro);
 
-
             _context.SaveChanges();
-
-
         }
 
+        //------------------------------------------------------
+        //----------CONTROLES DE INPUTS-------------------------
+        //public Boolean ControlNombreArchivo (string nombre)
+        //{
+        //    var prefijo = nombre.Substring(0,9);
+        //    //Ver que el nombre del archivo empiece con 'SNC_Visa_'
+        //    if (prefijo == "SNC_Visa_")
+        //        return (true);
 
-        //Metodo enel que hice el paser teniendp en cuenta txt de una linea
+        //    return (false);            
+        //}
+
+
+        ////Ver que ya no se hayan cargado registros de ese archivo (agregar path a Vnet Registro)
+        //public Boolean ControlRepeticionArchivo (string nombre)
+        //{
+        //    var control = _context.VnetRegistros.SingleOrDefault(c=> c.NombreArchivo == nombre);
+
+        //    if (control == null)
+        //        return (true);
+
+        //    return (false);          
+
+        //}//No anda
+
+
+
+        //void ControlLinea (string data)
+        //{
+        //    //Si la linea es blanca o excede la longitud devuelve falso
+        //}
+
+        //void ControlNroEstablecimiento (int nro)
+        //{
+        //    //Controlar que el numero de establecimiento parseado exista, 
+        //    //sino tirar :´El archivo ingresado no pertenece a un comercio activo en nuestras BD. Comuniquese con Admin.´
+        //}
+
+        //void ControlFormatoFecha (int fecha)
+        //{
+        //    //Controla que los parametros de la fecha sean valores copados. reemplazo por try parse?
+        //}
+
+
+        //Metodo en el que hice el parser teniendp en cuenta txt de una linea
         [HttpPost]
         public ActionResult TratarArchivoMonoLinea(HttpPostedFileBase file)
         {
@@ -267,6 +324,16 @@ namespace Vnet.Controllers
         {
             return View();
         }
+
+        //------------------------------------------------------------
+        //--------- Generar Pdf
+
+        public ActionResult Imprimir()
+        {
+            return View();
+        }
+
+
 
 
 

@@ -1,0 +1,117 @@
+﻿@model IEnumerable<SNC2017.Models.Orden>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Suscripcion.IdSuscripcion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Numero)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Fecha)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Monto)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SuscripcionInicio)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SuscripcionFin)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FechaLibro)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NroLegalLetra)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NroLegalPuntoVenta)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NroLegalNumero)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ReciboNroLegalLetra)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ReciboNroLegalPuntoVenta)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ReciboNroLegalNumero)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Observaciones)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EstadoOrden)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Suscripcion.IdSuscripcion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Numero)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Fecha)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Monto)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SuscripcionInicio)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SuscripcionFin)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FechaLibro)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NroLegalLetra)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NroLegalPuntoVenta)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NroLegalNumero)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ReciboNroLegalLetra)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ReciboNroLegalPuntoVenta)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ReciboNroLegalNumero)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Observaciones)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EstadoOrden)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.IdOrden }) |
+            @Html.ActionLink("Details", "Details", new { id=item.IdOrden }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.IdOrden })
+        </td>
+    </tr>
+}
+
+</table>

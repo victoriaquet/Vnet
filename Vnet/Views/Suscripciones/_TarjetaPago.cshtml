@@ -1,0 +1,57 @@
+﻿@model SNC2017.ViewModels.SuscripcionVM
+   
+<div class="bs-callout bs-callout-success">
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group label-floating">
+        @Html.LabelFor(model => model.TarjetaPago.TipoTarjeta, htmlAttributes: new { @class = "control-label" })
+
+        <select class="form-control" id="TipoTarjeta" name="TarjetaPago.TipoTarjeta.TipoTarjetaId">
+
+            @{
+                foreach (var item in ViewBag.TipoTarjetaCred)
+                {
+                    <option value="@item.TipoTarjetaId">@item.Descripcion</option>
+                }
+            }
+
+        </select>
+        @Html.ValidationMessageFor(model => model.TarjetaPago.TipoTarjeta, "", new { @class = "text-danger" })
+
+
+    </div>
+    <div class="form-group label-floating is-empty">
+        @Html.LabelFor(model => model.TarjetaPago.Numero, htmlAttributes: new { @class = "control-label" })
+        @Html.EditorFor(model => model.TarjetaPago.Numero, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.TarjetaPago.Numero, "", new { @class = "text-danger" })
+    </div>
+    <div class="form-group label-floating is-empty">
+        @Html.LabelFor(model => model.TarjetaPago.NombreExacto, htmlAttributes: new { @class = "control-label" })
+        @Html.EditorFor(model => model.TarjetaPago.NombreExacto, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.TarjetaPago.NombreExacto, "", new { @class = "text-danger" })
+    </div>
+    <div class="form-group label-floating is-empty">
+        @Html.LabelFor(model => model.TarjetaPago.MesVencimiento, htmlAttributes: new { @class = "control-label" })"+
+        "
+        @*<input class="form-control" id="MesVencimiento" type="number" name="tarjetaPago.MesVencimiento" value="" />*@
+        @Html.EditorFor(model => model.TarjetaPago.MesVencimiento, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.TarjetaPago.MesVencimiento, "", new { @class = "text-danger" })
+    </div>
+    <div class="form-group label-floating is-empty">
+        @Html.LabelFor(model => model.TarjetaPago.AñoVencimiento, htmlAttributes: new { @class = "control-label" })
+        @Html.EditorFor(model => model.TarjetaPago.AñoVencimiento, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.TarjetaPago.AñoVencimiento, "", new { @class = "text-danger" })
+    </div>
+    <div class="form-group label-floating is-empty">
+        @Html.LabelFor(model => model.TarjetaPago.CodigoSeguridad, htmlAttributes: new { @class = "control-label" })
+        @Html.EditorFor(model => model.TarjetaPago.CodigoSeguridad, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.TarjetaPago.CodigoSeguridad, "", new { @class = "text-danger" })
+    </div>
+
+
+</div>
+
+
+       
+    
+
+

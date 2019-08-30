@@ -1,0 +1,74 @@
+﻿@model SNC2017.Models.ArchivoEnvio
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>ArchivoEnvio</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.numero)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.numero)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Fecha)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Fecha)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaCreacion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FechaCreacion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaRespuesta)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FechaRespuesta)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Archivo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Archivo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CantidadRegistros)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CantidadRegistros)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ImporteTotal)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ImporteTotal)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.IdArchivoEnvio }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

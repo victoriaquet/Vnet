@@ -1,0 +1,109 @@
+﻿
+
+@{
+    ViewBag.Title = "Buscar";
+}
+
+<div class="card">
+    <div class="card-header" data-background-color="green" style="display: flex">
+        <h4 class="title">BÚSQUEDA TARJETA SOYNORTECLUB</h4>
+    </div>
+
+    <div class="card-content">
+        <br/>
+        <div class="bs-callout bs-callout-info">
+            <button type="button" title="cerrar" style="color:red" class="close" data-dismiss="alert" aria-label="Close">
+                <i class="material-icons">close</i>
+            </button>
+            <span><b> <i class="material-icons">help</i> </b> Cómo se utiliza? Ingrese en el cuadro de búsqueda 
+                una de las siguientes opciones:
+                  <b>
+                      <br />
+                      1) Número de tarjeta
+                  </b>: introduciendo sólo los últimos números de la tarjeta, que se encuentran luego de la secuencia de ceros.
+                <br />
+                <b>
+                    2) Apellido y/o Nombre(s)
+                </b>: Comience a escribir y se le sugerirán posibles resultados.
+                    <br />
+                    Si los datos son válidos, se le indicará el titular de la suscripción y su estado.
+                    <br />
+                    Puede guardar sus ventas, indicando monto y descripción (opcional)
+                
+                
+            </span>
+        </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <label>Ingrese el Nº de tarjeta club o nombre...</label>
+                        <div class="form-group label-floating is-empty">
+                            @*<input id="numerotarjeta" class="form-control" />*@
+                            <select id="numerotarjeta" name="tclub" style="width: 100%" required class="form-control"></select>
+               
+                        </div>
+                        <a class="btn btn-block btn-success" onclick="buscar()">BUSCAR</a>
+                    </div>
+                    <div class="col-md-8">
+                        <span id="resultado"></span>
+                    </div>
+                </div>
+    </div>
+</div>
+
+@section Scripts{
+   
+   
+    <script>
+
+        function buscar() {
+            var a = $("#numerotarjeta").val();
+            $.get('@Url.Action("ObtenerTarjetaClub", "TarjetasClub")'+'?numero=' + a,
+                function (data) {
+                    $("#resultado").html(data);
+                });
+        }
+        $('#numerotarjeta').select2({
+            minimumInputLength: 1,
+            //dropdownCssClass: "custom-dropdown",
+            placeholder: "Buscar...",
+            minimumResultsForSearch: -1,
+            allowClear: true,
+            ajax: {
+                url: "/TarjetasClub/GetTarjetasClub",
+                dataType: 'json',
+                global:false,
+                type: "GET",
+                data: function (params) {
+                    var query = {
+                        term: params.term
+                    };
+                    return query;
+                },
+                processResults: function (resultado) {
+                    return {
+                        results: $.map(resultado, function (item) {
+                            return {
+                                id: item.id,
+                                text: item.text
+                            };
+                        })
+                    };
+                }
+            },
+            escapeMarkup: function (markup) {
+                return markup;
+            },
+            //language:"es"
+            "language": {
+                "noResults": function() {
+                    return "No se encontraron resultados";
+                },
+                "searching": function() {
+                    return "Buscando";
+                }
+            }
+        });
+    </script>
+}
+   
+

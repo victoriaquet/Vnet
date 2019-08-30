@@ -1,0 +1,93 @@
+﻿@model SNC2017.ViewModels.SuscripcionVM
+
+@{
+    Layout = null;
+}
+
+
+<div class="row">
+    <div class="col-lg-6">
+        <div class="form-group label-floating formgroupsinmargen">
+            @Html.Label("Nombre (*)", htmlAttributes: new { @class = "control-label" })
+
+            @Html.EditorFor(model => model.NombresTarjetaClub, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.NombresTarjetaClub, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="form-group label-floating formgroupsinmargen">
+            @Html.Label("Apellido (*)", htmlAttributes: new { @class = "control-label" })
+            @Html.EditorFor(model => model.ApellidoTarjetaClub, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.ApellidoTarjetaClub, "", new { @class = "text-danger" })
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-6">
+        <div class="form-group label-floating formgroupsinmargen">
+            @Html.Label("DNI (*)", htmlAttributes: new { @class = "control-label" })
+
+            @Html.EditorFor(model => model.DNITarjetaClub, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.DNITarjetaClub, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="form-group label-floating formgroupsinmargen" >
+            @Html.LabelFor(model => model.EmailTarjetaClub, htmlAttributes: new { @class = "control-label" })
+            @Html.EditorFor(model => model.EmailTarjetaClub, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.EmailTarjetaClub, "", new { @class = "text-danger" })
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-6">
+        <div class="form-group label-floating formgroupsinmargen">
+            @Html.LabelFor(model => model.TelefonoMovilAreaTarjetaClub, htmlAttributes: new { @class = "control-label" })
+
+            @Html.EditorFor(model => model.TelefonoMovilAreaTarjetaClub, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.TelefonoMovilAreaTarjetaClub, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="form-group label-floating formgroupsinmargen">
+            @Html.LabelFor(model => model.TelefonoMovilNumeroTarjetaClub, htmlAttributes: new { @class = "control-label" })
+            @Html.EditorFor(model => model.TelefonoMovilNumeroTarjetaClub, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.TelefonoMovilNumeroTarjetaClub, "", new { @class = "text-danger" })
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-6">
+        <div class="form-group formgroupsinmargen">
+            @Html.LabelFor(model => model.FechaNacimientoTarjetaClub, htmlAttributes: new { @class = "control-label", @style = "margin-top: 0px" })
+            <input class="form-control" type="date" name="FechaNacimientoTarjetaClub" id="FechaNacimientoTarjetaClub" />
+            @Html.ValidationMessageFor(model => model.FechaNacimientoTarjetaClub, "", new { @class = "material-input" })
+        </div>
+    </div>
+    <div class="col-lg-6">
+
+        <div class="form-group is-empty divsus" style="margin-top: 0px">
+            @Html.Label("Sexo", htmlAttributes: new { @class = "control-label", @style = "margin-top: 0px" })
+
+            <div>
+                <select class="form-control" id="TipoSexoTarjetaClub" name="TipoSexoTarjetaClub" style="width: 90%;">
+
+                    <option value="1" selected>Masculino</option>
+                    <option value="2">Femenino</option>
+                    <option value="3">Otro</option>
+
+                </select>
+
+
+
+            </div>
+
+        </div>
+
+
+    </div>
+</div>
+
+
+
+

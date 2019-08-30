@@ -1,0 +1,115 @@
+﻿@using SNC2017.Models
+@model SNC2017.Models.TarjetaClub
+@{
+    ViewBag.Title = "ObtenerTarjetaClub";
+    Layout = null;
+}
+@if (Model == null)
+{<div class="panel panel-danger">
+        <div class="panel-heading"><b>ATENCIÓN</b></div>
+        <div class="panel-body">
+            <h5>No se encontraron resultados . . .</h5>
+        </div>
+    </div>}
+else
+{
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <b> N° TARJETA: @Model.Numero</b>
+        </div>
+        <div class="panel-body">
+            <table class="table table-condensed table-hover" style="width: 100%">
+
+                <tbody>
+                    <tr>
+                        <td class="text-left tddetails tdddetailslabel">
+                            N° Suscripción
+                        </td>
+                        <td class="text-left  tddetails">
+                            @Model.Suscripcion.NumeroSuscripcion
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-left tddetails tdddetailslabel">
+                            Titular
+                        </td>
+                        <td class="text-left  tddetails">
+                            @Model.Suscripcion.Suscriptor.Apellido, @Model.Suscripcion.Suscriptor.Nombre
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-left tddetails tdddetailslabel">
+                            Nombre Tarjeta
+                        </td>
+                        <td class="text-left  tddetails">
+                            @Model.Apellido, @Model.Nombres
+
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="text-left tddetails tdddetailslabel">
+                            Estado
+                        </td>
+                        <td class="text-left tddetails">
+                            <b>@Model.Suscripcion.EstadoSuscripcionHistorial.LastOrDefault().EstadoSuscripcion.ToString().ToUpper()</b>
+                        </td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+    using (Html.BeginForm("GenerarVenta","Comercios",FormMethod.Post))
+     {
+         <div class="panel panel-success">
+             <div class="panel-heading">
+                 <b>CARGAR VENTA</b>
+             </div>
+             <div class="panel-body">
+                 <input class="hidden"type="number"id="idtc" value="@Model.IdTarjetaClub"/>
+                 <div class="form-group label-floating is-empty">
+                     <label for="descripcion" class="control-label">Descripción</label>
+                     <input type="text" id="descripcion" class="form-control"/>
+                 </div>
+                 <div class="form-group label-floating is-empty">
+                     <label for="monto" class="control-label">Monto (*)</label>
+                     <input type="number" min="1" step="any" required="required" id="monto" class="form-control"/>
+                 </div>
+             </div>
+             <div class="panel-footer">
+                 <button type="submit" class="btn btn-success btn-block">Generar</button>
+             </div>
+         </div>
+     }
+
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        $("form").submit(function () {
+            var descripcion = $("#descripcion").val();
+            var monto = $("#monto").val();
+            var idtc = $("#idtc").val();
+            $.ajax({
+                data: {"descripcion": descripcion, "monto": monto,"idtc":idtc},
+                type:"POST",
+                url: $(this).attr('action'),
+                success: function(a) {
+                    if (a.success) {
+                        toastr.success(a.message,"EXITO");
+                        $("#descripcion").val("");
+                        $("#monto").val("");
+                    } else {
+                        toastr.error(a.message, "ERROR");
+                    };
+                }
+            });
+
+
+            return false;
+        });
+    </script>
+}
+
+

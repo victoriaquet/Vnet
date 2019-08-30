@@ -1,0 +1,194 @@
+﻿@model SNC2017.Models.DatosFacturacion
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<style>
+    #tbodyprecio tr:first-child {
+        font-weight: bold;
+        font-family: monospace;
+    }
+</style>
+<div class="card">
+    <div class="card-header" data-background-color="green" style="display: flex">
+        <h4 class="title">Datos facturación</h4>
+
+    </div>
+
+    <div class="card-content">
+
+
+        <div id="example-tabs">
+            <h3>Datos personales</h3>
+            <section style="overflow-y: scroll">
+                <table class="table table-condensed table-hover" style="width: 100%">
+
+                    <tbody>
+                      
+                        <tr>
+                            <td class="text-left tddetails tdddetailslabel">
+                                Nombre
+                            </td>
+                            <td class="text-left  tddetails">
+                                @Model.Nombre
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-left tddetails tdddetailslabel">
+                                Apellido
+                            </td>
+                            <td class="text-left tddetails">
+                                @Model.Apellido
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-left tddetails tdddetailslabel">
+                                DNI
+                            </td>
+                            <td class="text-left tddetails">
+                                @Model.DNI
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-left tddetails tdddetailslabel">
+                                CUIT
+                            </td>
+                            <td class="text-left tddetails">
+                                @Model.CUIT
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-left tddetails tdddetailslabel">
+                                Razón social
+                            </td>
+                            <td class="text-left tddetails">
+                                @Model.RazonSocial
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-left tddetails tdddetailslabel">
+                                Tipo IVA
+                            </td>
+                            <td class="text-left tddetails">
+                                @Model.TipoIva
+
+                            </td>
+                        </tr>
+                       
+                        <tr>
+                            <td class="text-left tddetails tdddetailslabel">
+                                Localidad
+                            </td>
+                            <td class="text-left tddetails">
+                                @Model.Domicilio.Localidad.Nombre (@Model.Domicilio.Localidad.Provincia.Nombre)
+
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+
+            </section>
+            <h3>Domicilio</h3>
+            <section style="overflow-y: scroll">
+                <table class="table table-condensed table-hover" style="width: 100%">
+
+                    <tbody>
+
+                        <tr>
+                            <td class="text-left tddetails tdddetailslabel">
+                                Localidad
+                            </td>
+                            <td class="text-left tddetails">
+                                @Model.Domicilio.Localidad.Nombre (@Model.Domicilio.Localidad.Provincia.Nombre)
+
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td class="text-left tddetails tdddetailslabel">
+                                Calle
+                            </td>
+                            <td class="text-left tddetails">
+                                @Model.Domicilio.Calle
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-left tddetails tdddetailslabel">
+                                Altura
+                            </td>
+                            <td class="text-left tddetails">
+                                @Model.Domicilio.Altura
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-left tddetails tdddetailslabel">
+                                Piso
+                            </td>
+                            <td class="text-left tddetails">
+                                @Model.Domicilio.Piso
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-left tddetails tdddetailslabel">
+                                Depto.
+                            </td>
+                            <td class="text-left tddetails">
+                                @Model.Domicilio.Departamento
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-left tddetails tdddetailslabel">
+                                Barrio
+                            </td>
+                            <td class="text-left tddetails">
+                                @Model.Domicilio.Barrio
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-left tddetails tdddetailslabel">
+                                Calle Lat. 1
+                            </td>
+                            <td class="text-left tddetails">
+                                @Model.Domicilio.CalleLateral1
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-left tddetails tdddetailslabel">
+                                Calle Lat. 2
+                            </td>
+                            <td class="text-left tddetails">
+                                @Model.Domicilio.CalleLateral2
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-left tddetails tdddetailslabel">
+                                Obs. Domicilio
+                            </td>
+                            <td class="text-left tddetails">
+                                @Model.Domicilio.Observaciones
+
+                            </td>
+                        </tr>
+
+                    </tbody>
+                </table>
+
+            </section>
+         
+
+        </div>
+
+    </div>
+</div>

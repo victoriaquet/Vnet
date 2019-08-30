@@ -1,0 +1,105 @@
+﻿@model IEnumerable<SNC2017.Models.UserView>
+
+@{
+    ViewBag.Title = "Usuarios";
+}
+@if (User.IsInRole("Administrador") | User.IsInRole("Moderador"))
+{
+    if (TempData["vencer"] != null)
+    {
+        {
+            <input id="vencer" style="display: none" value="@TempData["vencer"]" />
+
+        }
+
+    }
+}
+<div class="col-lg-12">
+    <ol class="breadcrumb titulosPag text-center">
+        <li class="active">
+            <i class="fa fa-fw fa-users"></i> Usuarios
+        </li>
+    </ol>
+
+</div>
+<br />
+<p>
+    @Html.ActionLink("Agregar Usuario", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink", @class = "btn btn-success" })
+    @Html.ActionLink("Roles", "VerPermisos", null, htmlAttributes: new { @class = "btn btn-info" })
+</p>
+
+<table id="mitabla" class="table table-striped table-bordered">
+    <thead>
+
+        <tr class="text-center" style="color: #2c3e50; background-color: lightblue">
+            <th class="text-left" style="border-radius: 3px">
+                Usuario
+            </th>
+            <th class="text-left" style="border-radius: 3px">
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th class="text-center" style="border-radius: 3px">
+                Acciones
+            </th>
+
+
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var item in Model)
+        {
+            <tr style="background-color: azure">
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+
+                <td class="text-center">
+                    @* <a href="@Url.Action("Roles", "Users")" class="btn btn-primary btn-sm">Ver Permisos</a>*@
+                    @Html.ActionLink("Permisos", "Roles", new { userID = item.UserID }, new { @class = "btn btn-primary btn-sm" })
+                    @if (item.Name == "admin@diarionorte.com")
+                    {<span class="btn btn-danger btn-sm disabled" style="visibility: hidden">Eliminar Usuario</span> }
+                    @* <a href="@Url.Action("Roles", "Users")" class="btn btn-primary btn-sm">Ver Permisos</a>*@
+                    else
+                    {
+                        @Html.ActionLink("Eliminar Usuario", "DeleteUser", new { id = item.UserID }, new { @class = "btn btn-danger btn-sm borrarusu", @data_nombreusu = item.Name })}
+
+
+                </td>
+
+            </tr>
+        }
+    </tbody>
+
+</table>
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $("#mitabla").DataTable({
+                "language": {
+                                        "url": '@Url.Content("~/Scripts/DataTables/spanish.json")'
+                }
+            });
+        });
+        $(document).on("click", ".borrarusu", function (e) {
+            // save the dom element
+            var self = this;
+            var nombreusu = $(this).data('nombreusu');;
+            // confirm
+            var mensaje = "¿Está seguro que desea eliminar el usuario: "+ nombreusu + " ?";
+            bootbox.confirm(mensaje, function (result) {
+                //navigate on ok
+                if (result) {
+                    window.location = self.href;
+                }
+            });
+            // cancel anchor behavior
+            e.preventDefault();
+        });
+
+    </script>
+}

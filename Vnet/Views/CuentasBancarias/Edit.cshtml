@@ -1,0 +1,218 @@
+﻿@model SNC2017.Models.CuentaBancaria
+@{
+    ViewBag.Title = "Editar cuenta bancaria";
+}
+<style>    .control-label {
+        margin-top: 0px!important
+    }
+     .is-empty {
+         margin-top: 0px!important
+     }
+</style>
+<div class="card">
+    <div class="card-header" data-background-color="green" style="display: flex">
+        <h4 class="title">Editar cuenta bancaria</h4>
+        <span class="category" style="margin-top: 4px;margin-left:10px">@ViewBag.apellidosuscriptor, @ViewBag.nombresuscriptor</span>
+    </div>
+
+
+    <div class="card-content">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(model=>model.DomicilioTitular.IdDomicilio)
+            @Html.HiddenFor(model=>model.IdDomicilio)
+            @Html.HiddenFor(model=>model.IdCuentaBancaria)
+            @Html.HiddenFor(model=>model.DomicilioTitular.Localidad.IdLocalidad)
+
+            <div id="example-tabs">
+                <h3>Datos Tarjeta</h3>
+                <section style="overflow-y: scroll" class="col-lg-12">
+                    <input class="hidden" id="IdSuscriptor" name="IdSuscriptor" value="@ViewBag.idsuscriptor" />
+
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                    <div class="form-group  is-empty">
+                        @Html.LabelFor(model => model.CBU, htmlAttributes: new { @class = "control-label" })
+
+                        @Html.EditorFor(model => model.CBU, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.CBU, "", new { @class = "text-danger" })
+
+                    </div>
+
+                    <div class="form-group is-empty">
+                        @Html.LabelFor(model => model.NombreTitular, htmlAttributes: new { @class = "control-label" })
+
+                        @Html.EditorFor(model => model.NombreTitular, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.NombreTitular, "", new { @class = "text-danger" })
+
+                    </div>
+                    <div class="form-group is-empty">
+                        @Html.LabelFor(model => model.DNITitular, htmlAttributes: new { @class = "control-label" })
+
+                        @Html.EditorFor(model => model.DNITitular, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.DNITitular, "", new { @class = "text-danger" })
+
+                    </div>
+                    <div class="form-group is-empty">
+                        @Html.LabelFor(model => model.CUITTitular, htmlAttributes: new { @class = "control-label" })
+
+                        @Html.EditorFor(model => model.CUITTitular, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.CUITTitular, "", new { @class = "text-danger" })
+
+                    </div>
+                    <div class="form-group  is-empty">
+                        @Html.LabelFor(model => model.AliasCuenta, htmlAttributes: new { @class = "control-label" })
+
+                        @Html.EditorFor(model => model.AliasCuenta, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.AliasCuenta, "", new { @class = "text-danger" })
+
+                    </div>
+
+                </section>
+               <h3>Domicilio titular</h3>
+
+                <section style="overflow-y: scroll">
+
+                    <div class="row">
+                        <div class="col-lg-6">
+
+                            <div class="form-group is-empty">
+                                @Html.LabelFor(model => model.DomicilioTitular.Calle, htmlAttributes: new { @class = "control-label" })
+
+                                @Html.EditorFor(model => model.DomicilioTitular.Calle, new { htmlAttributes = new { @class = "form-control", required = "required"} })
+                                @Html.ValidationMessageFor(model => model.DomicilioTitular.Calle, "", new { @class = "text-danger" })
+
+                            </div>
+
+                            <div class="form-group is-empty">
+                                @Html.LabelFor(model => model.DomicilioTitular.Altura, htmlAttributes: new { @class = "control-label " })
+
+                                @Html.EditorFor(model => model.DomicilioTitular.Altura, new { htmlAttributes = new { @class = "form-control",required="required" } })
+                                @Html.ValidationMessageFor(model => model.DomicilioTitular.Altura, "", new { @class = "text-danger" })
+
+                            </div>
+
+                            <div class="form-group  is-empty">
+                                @Html.LabelFor(model => model.DomicilioTitular.Piso, htmlAttributes: new { @class = "control-label " })
+
+                                @Html.EditorFor(model => model.DomicilioTitular.Piso, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.DomicilioTitular.Piso, "", new { @class = "text-danger" })
+
+                            </div>
+
+                            <div class="form-group is-empty">
+                                @Html.LabelFor(model => model.DomicilioTitular.Departamento, htmlAttributes: new { @class = "control-label " })
+
+                                @Html.EditorFor(model => model.DomicilioTitular.Departamento, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.DomicilioTitular.Departamento, "", new { @class = "text-danger" })
+
+                            </div>
+
+                            <div class="form-group is-empty">
+                                @Html.LabelFor(model => model.DomicilioTitular.CalleLateral1, htmlAttributes: new { @class = "control-label " })
+
+                                @Html.EditorFor(model => model.DomicilioTitular.CalleLateral1, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.DomicilioTitular.CalleLateral1, "", new { @class = "text-danger" })
+
+                            </div>
+
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group is-empty">
+                                @Html.LabelFor(model => model.DomicilioTitular.CalleLateral2, htmlAttributes: new { @class = "control-label " })
+
+                                @Html.EditorFor(model => model.DomicilioTitular.CalleLateral2, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.DomicilioTitular.CalleLateral2, "", new { @class = "text-danger" })
+
+                            </div>
+
+                            <div class="form-group is-empty">
+                                @Html.LabelFor(model => model.DomicilioTitular.Barrio, htmlAttributes: new { @class = "control-label " })
+
+                                @Html.EditorFor(model => model.DomicilioTitular.Barrio, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.DomicilioTitular.Barrio, "", new { @class = "text-danger" })
+
+                            </div> 
+                      
+                            <div class="form-group is-empty" style="margin-top: 0px">
+                                @Html.Label("Provincia", htmlAttributes: new { @class = "control-label ", @style = "margin-top:0px" })
+
+                                <div>
+                                    <select class="form-control" id="lineprovincia" required name="DomicilioTitular.Localidad.IdProvincia" onchange="localidadesPorProv(this)" style="width: 90%;">
+                                        <option value="@Model.DomicilioTitular.Localidad.IdProvincia" selected>@Model.DomicilioTitular.Localidad.Provincia.Nombre</option>
+                                        @foreach (var item in ViewBag.provincias)
+                                        {
+
+                                            <option value="@item.IdProvincia">@item.Nombre</option>
+
+                                        }
+                                    </select>
+
+                                </div>
+                                @Html.ValidationMessageFor(model => model.DomicilioTitular.Localidad.IdProvincia, "", new { @class = "text-danger" })
+
+                            </div>
+
+                            <div class="form-group is-empty" style="margin-top: 0px">
+                                @Html.Label("Localidad", htmlAttributes: new { @class = "control-label ", @style = "margin-top:0px" })
+
+                                <div>
+                                    <select class="form-control" id="linelocalidad" required name="DomicilioTitular.IdLocalidad" style="width: 90%;">
+                                        <option value="@Model.DomicilioTitular.Localidad.IdProvincia"  selected >@Model.DomicilioTitular.Localidad.Nombre</option>
+                                    </select>
+
+                                </div>
+                                @Html.ValidationMessageFor(model => model.DomicilioTitular.Localidad.IdLocalidad, "", new { @class = "text-danger" })
+
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="form-group label-floating is-empty" style="margin-top: 0">
+                                <label for="ObservacionesDomicilioSuscriptor" style="margin-top: 0; margin-bottom: 0">Observaciones</label>
+                                <textarea class="form-control" id="ObservacionesDomicilioSuscriptor" name="DomicilioTitular.Observaciones" style="max-width: 100% !important">@Model.DomicilioTitular.Observaciones</textarea>
+                                @Html.ValidationMessageFor(model => model.DomicilioTitular.Observaciones, "", new { @class = "text-danger" })
+
+                            </div>
+                        </div>
+                    </div>
+
+                </section>
+            </div>
+
+
+
+            <div class="navbar-xs navbar-inverse navbar-fixed-bottom" style="background: none; border: none; padding-bottom: 0px;padding-left: 260px">
+
+                <div style="width: 100%;display: inline-flex">
+                    <div style="width: 30%">
+                        <div class="container text-left" style="height: 40px">
+
+                            @Html.ActionLink("Volver", "Details", "Suscriptores", new { id = ViewBag.idsuscriptor }, new { @class = "btn btn-sm btn-default" })
+
+                        </div>
+                    </div>
+                    <div  style="width: 40%"><input type="submit" value="Guardar" class="btn btn-success" />    </div>
+                    <div style="width: 30%"></div>
+
+                </div>
+
+
+
+
+
+
+            </div>
+        }
+
+    </div>
+</div>
+@Html.Hidden("localidadesProv", Url.Action("LocalidadesProv", "Suscriptores"))
+
+@section Scripts {
+    <script src="~/Scripts/localidadesPorProv.js"></script>
+ 
+}

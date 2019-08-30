@@ -1,0 +1,253 @@
+﻿@model SNC2017.Models.Oferta
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<style>
+    #tbodyprecio tr:first-child {
+        font-weight: bold;
+        font-family: monospace;
+    }
+   
+</style>
+<div class="card">
+    <div class="card-header" data-background-color="green" style="display: flex">
+        <h4 class="title">Detalles: @Model.Nombre</h4>
+
+    </div>
+
+    <div class="card-content">
+
+
+        <div id="example-tabs">
+            <h3>Generales</h3>
+            <section style="overflow-y: scroll">
+              
+            
+                <table class="table table-condensed table-hover" style="width: 100%">
+
+                    <tbody>
+
+                        <tr>
+                            <td class="text-left tddetails tdddetailslabel">
+                                Cód.
+                            </td>
+                            <td class="text-left tddetails">
+                                @Model.Codigo
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-left tddetails tdddetailslabel">
+                                Estado
+                            </td>
+                            <td class="text-left tddetails">
+                                @Model.EstadoOferta.Descripcion
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-left tddetails tdddetailslabel">
+                                Tipo
+                            </td>
+                            <td class="text-left tddetails">
+                                @Model.TipoOferta
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td class="text-left tddetails tdddetailslabel">
+                                Editorial
+                            </td>
+                            <td class="text-left tddetails">
+                                @Model.Editorial
+
+                            </td>
+                        </tr>
+                    <tr>
+                        <td class="text-left tddetails tdddetailslabel">
+                            Nombre
+                        </td>
+                        <td class="text-left tddetails">
+                            @Model.Nombre
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="text-left tddetails tdddetailslabel">
+                                Descripción
+                            </td>
+                            <td class="text-left tddetails">
+                                @Model.Descripcion
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-left tddetails tdddetailslabel">
+                                Precio
+                            </td>
+                            <td class="text-left tddetails">
+                                @Model.Precio
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-left tddetails tdddetailslabel">
+                                Cant. Días
+                            </td>
+                            <td class="text-left tddetails">
+                                @Model.CantDias
+                            </td>
+                        </tr>
+                    <tr>
+                        <td class="text-left tddetails tdddetailslabel">
+                            Tarjetas adic.
+                        </td>
+                        <td class="text-left tddetails">
+                            @Model.CantTarjetasAdicionales
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-left tddetails tdddetailslabel">
+                            Fecha inicio
+                        </td>
+                        <td class="text-left tddetails">
+                            @Model.FechaInicio.ToShortDateString()
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-left tddetails tdddetailslabel">
+                            Fecha carga
+                        </td>
+                        <td class="text-left tddetails">
+                            @Model.FechaCarga.ToShortDateString()
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-left tddetails tdddetailslabel">
+                            Fecha modif.
+                        </td>
+                        <td class="text-left tddetails">
+                            @if (Model.FechaModificacion != null) {@Convert.ToDateTime(Model.FechaModificacion).ToShortDateString() }
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-left tddetails tdddetailslabel">
+                            Cód. Servinor
+                        </td>
+                        <td class="text-left tddetails">
+                            @Model.CodigoProductoServinor
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-left tddetails tdddetailslabel">
+                            Nombre Servinor
+                        </td>
+                        <td class="text-left tddetails">
+                            @Model.NombreProductoServinor
+                        </td>
+                    </tr>
+
+
+                </table>
+
+
+               
+            </section>
+            <h3>Productos</h3>
+            <section>
+                <table class="table table-condensed table-hover" style="width: 100%">
+                    <thead class="text-primary">
+                    <tr class="text-center">
+                        <th class="text-center" style="font-weight: bold">
+                            Cód.
+                        </th>
+                        <th class="text-left" style="font-weight: bold">
+                            Nombre
+                        </th>
+                        <th class="text-left" style="font-weight: bold">
+                            Descripción
+                        </th>
+
+                        <th class="text-center" style="font-weight: bold">
+                            Monto
+                        </th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach (var item in Model.ProductoOfertas)
+                    {
+                        <tr>
+                            <td class="text-center">
+                                @Html.DisplayFor(modelItem => item.Producto.Codigo)
+                            </td>
+                            <td class="text-left">
+                                @Html.DisplayFor(modelItem => item.Producto.Nombre)
+                            </td>
+                            <td class="text-left">
+                                @Html.DisplayFor(modelItem => item.Producto.Descripcion)
+                            </td>
+                            <td class="text-center">
+                                @Html.DisplayFor(modelItem => item.Producto.Monto)
+                            </td>
+
+                             
+                        </tr>
+                    }
+                    </tbody>
+                </table>
+             
+            </section>
+
+            <h3>Historial precios</h3>
+            <section style="overflow-y: scroll">
+                <table class="table table-condensed" style="width: 90%">
+                    <thead class="text-primary">
+                    <tr class="text-center">
+                        <th class="text-center" style="font-weight: bold;width: 50%">
+                            Fecha Inicio
+                        </th>
+                        <th class="text-center" style="font-weight: bold;width: 50%">
+                            Precio
+                        </th>
+                                                
+                    </tr>
+                    </thead>
+                    <tbody id="tbodyprecio">
+                    @foreach (var precio in Model.HistorialPrecioOfertas.OrderByDescending(x=>x.FechaInicio))
+                    {<tr>
+                         <td class="text-center">
+                             @Html.DisplayFor(modelItem => precio.FechaInicio)
+                         </td> 
+                         <td class="text-center">
+                             @Html.DisplayFor(modelItem => precio.Precio)
+                         </td>
+                     </tr>
+                    }
+                    </tbody>
+                </table>
+            
+            </section>
+           
+        </div>
+      
+    </div>
+</div>
+
+<div class="navbar-xs navbar-inverse navbar-fixed-bottom" style="background: none; border: none; padding-bottom: 0px;padding-left: 260px">
+    <div style="width: 100%;display: inline-flex">
+        <div style="width: 30%">
+            <div class="container text-left" style="height: 40px">
+                @Html.ActionLink("Ir al listado", "Index", "Ofertas", null, new { @class = "btn btn-sm btn-default" })
+            </div>
+        </div>
+        <div style="width: 40%">
+                @Html.ActionLink("Editar", "Edit", "Ofertas", new{id=Model.IdOferta}, new { @class = "btn btn-default" })
+        </div>
+    </div>
+   
+</div>

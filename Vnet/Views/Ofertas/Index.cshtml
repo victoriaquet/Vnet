@@ -1,0 +1,400 @@
+﻿@using SNC2017.Models
+@model IEnumerable<SNC2017.Models.Oferta>
+
+@{
+    ViewBag.Title = "Ofertas";
+}
+<style>#tbodyhistorial tr:first-child {    font-weight: bold;
+      
+     font-family: monospace;
+ }</style>
+
+<div class="card">
+    <div class="card-header" data-background-color="green" style="display: flex">
+    <h4 class="title">Ofertas</h4>
+            <a href=@Url.Action("Create") class="btn btn-success btn-sm sombrabtncreate btnadd" >
+                <span class="glyphicon glyphicon-plus"></span></a>
+        
+    </div>
+
+    <div class="card-content">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+
+        <div id="example-tabs">
+            <h3>Normal</h3>
+            <section>
+                <table class="datatablebase table table-condensed" id="table" style="width: 100%">
+                    <thead class="text-primary">
+                        <tr class="text-center">
+                            <th class="text-center">
+                                Cód.
+                            </th>
+                            <th class="text-center">
+                                Editorial
+                            </th>
+                            <th class="text-center">
+                                Nombre
+                            </th>
+                            <th class="text-center">
+                                Productos
+                            </th>
+
+                            <th class="text-center">
+                                Precio
+                            </th>
+                            <th class="text-center">
+                                <text title="tarjetas adicionales">T.A</text>
+                            </th>
+                            <th class="text-center">
+                                F. Ini.
+                            </th>
+                            <th class="text-center">
+                                Estado
+                            </th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.ToList().FindAll(x => x.TipoOferta == TipoOferta.Estandar))
+                        {
+                            <tr class="showhim">
+
+                                <td class="text-center">
+                                    @Html.DisplayFor(modelItem => item.Codigo)
+                                </td>
+                                <td class="text-center">
+                                    @Html.DisplayFor(modelItem => item.Editorial)
+                                </td>
+                                <td class="text-center" id="@("nombre" + item.IdOferta)">
+                                    @Html.DisplayFor(modelItem => item.Nombre) + @Html.DisplayFor(modelItem => item.CantDias)
+                                </td>
+                                <td class="text-center">
+                                    @foreach (var prod in item.ProductoOfertas)
+                                    {
+                                        <text><b>|</b>@prod.Producto.Nombre<b>|</b></text>}
+                                </td>
+                                <td class="text-center">
+                                    @Html.DisplayFor(modelItem => item.Precio)<span class="showme">&nbsp;<a onclick="HistorialModal(@item.IdOferta)"><span class="glyphicon glyphicon-info-sign"></span> &nbsp;</a><a href=@Url.Action("Create","HistorialPrecioOfertas", new{idoferta=item.IdOferta})><span class="glyphicon glyphicon-edit"></span></a></span>
+                                    <div style="display: none" id="@("historial" + item.IdOferta)">
+                                        <table class="table table-condensed" style="width: 90%">
+                                            <thead class="text-primary">
+                                                <tr class="text-center">
+                                                    <th class="text-center">
+                                                        Fecha Inicio
+                                                    </th>
+                                                    <th class="text-center">
+                                                        Precio
+                                                    </th>
+
+                                                </tr>
+                                            </thead>
+                                            <tbody id="tbodyhistorial">
+                                                @foreach (var precio in item.HistorialPrecioOfertas.OrderByDescending(x => x.IdHistorialPrecioOferta))
+                                                {
+                                                    <tr>
+                                                        <td class="text-center">
+                                                            @Html.DisplayFor(modelItem => precio.FechaInicio)
+                                                        </td>
+                                                        <td class="text-center">
+                                                            @Html.DisplayFor(modelItem => precio.Precio)
+                                                        </td>
+
+                                                    </tr>
+                                                }
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+                                </td>
+                                <td class="text-center">
+                                    @Html.DisplayFor(modelItem => item.CantTarjetasAdicionales)
+                                </td>
+                                <td class="text-center">
+                                    @Html.DisplayFor(modelItem => item.FechaInicio)
+                                </td>
+                                <td class="text-center">
+                                    @Html.DisplayFor(modelItem => item.EstadoOferta.Descripcion)
+                                </td>
+                                <td class="text-center">
+                                    <div class="showme">
+                                        <a href="@Url.Action("Details", "Ofertas", new {id = item.IdOferta})" title="Detalles oferta"><span class="glyphicon glyphicon-align-justify"></span></a>&nbsp;
+                                        <a href="@Url.Action("Edit", "Ofertas", new {id = item.IdOferta})" title="Editar oferta"><span class="glyphicon glyphicon-edit"></span></a>&nbsp;
+                                        <a href="@Url.Action("Delete", "Ofertas", new {id = item.IdOferta})" title="Eliminar oferta"><span class="glyphicon glyphicon-erase"></span></a>
+                                    </div>
+
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+
+
+
+            </section>
+            <h3>Coorporativa (Libre)</h3>
+            <section>
+                <table class="datatablebase table table-condensed" id="table" style="width: 100%">
+                    <thead class="text-primary">
+                        <tr class="text-center">
+                            <th class="text-center">
+                                Cód.
+                            </th>
+                            <th class="text-center">
+                                Editorial
+                            </th>
+                            <th class="text-center">
+                                Nombre
+                            </th>
+                            <th class="text-center">
+                                Productos
+                            </th>
+
+                            <th class="text-center">
+                                Precio
+                            </th>
+                            <th class="text-center">
+                                <text title="tarjetas adicionales">T.A</text>
+                            </th>
+                            <th class="text-center">
+                                F. Ini.
+                            </th>
+                            <th class="text-center">
+                                Estado
+                            </th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.ToList().FindAll(x => x.TipoOferta == TipoOferta.Coorporativa))
+                        {
+                            <tr class="showhim">
+
+                                <td class="text-center">
+                                    @Html.DisplayFor(modelItem => item.Codigo)
+                                </td>
+                                <td class="text-center">
+                                    @Html.DisplayFor(modelItem => item.Editorial)
+                                </td>
+                                <td class="text-center" id="@("nombre" + item.IdOferta)">
+                                    @Html.DisplayFor(modelItem => item.Nombre) + @Html.DisplayFor(modelItem => item.CantDias)
+                                </td>
+                                <td class="text-center">
+                                    @foreach (var prod in item.ProductoOfertas)
+                                    {
+                                        <text><b>|</b>@prod.Producto.Nombre<b>|</b></text>}
+                                </td>
+                                <td class="text-center">
+                                    @Html.DisplayFor(modelItem => item.Precio)<span class="showme">&nbsp;<a onclick="HistorialModal(@item.IdOferta)"><span class="glyphicon glyphicon-info-sign"></span> &nbsp;</a><a href=@Url.Action("Create","HistorialPrecioOfertas", new{idoferta=item.IdOferta})><span class="glyphicon glyphicon-edit"></span></a></span>
+                                    <div style="display: none" id="@("historial" + item.IdOferta)">
+                                        <table class="table table-condensed" style="width: 90%">
+                                            <thead class="text-primary">
+                                                <tr class="text-center">
+                                                    <th class="text-center">
+                                                        Fecha Inicio
+                                                    </th>
+                                                    <th class="text-center">
+                                                        Precio
+                                                    </th>
+
+                                                </tr>
+                                            </thead>
+                                            <tbody id="tbodyhistorial">
+                                                @foreach (var precio in item.HistorialPrecioOfertas.OrderByDescending(x => x.IdHistorialPrecioOferta))
+                                                {
+                                                    <tr>
+                                                        <td class="text-center">
+                                                            @Html.DisplayFor(modelItem => precio.FechaInicio)
+                                                        </td>
+                                                        <td class="text-center">
+                                                            @Html.DisplayFor(modelItem => precio.Precio)
+                                                        </td>
+
+                                                    </tr>
+                                                }
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+                                </td>
+                                <td class="text-center">
+                                    @Html.DisplayFor(modelItem => item.CantTarjetasAdicionales)
+                                </td>
+                                <td class="text-center">
+                                    @Html.DisplayFor(modelItem => item.FechaInicio)
+                                </td>
+                                <td class="text-center">
+                                    @Html.DisplayFor(modelItem => item.EstadoOferta.Descripcion)
+                                </td>
+                                <td class="text-center">
+                                    <div class="showme">
+                                        <a href="@Url.Action("Details", "Ofertas", new {id = item.IdOferta})" title="Detalles oferta"><span class="glyphicon glyphicon-align-justify"></span></a>&nbsp;
+                                        <a href="@Url.Action("Edit", "Ofertas", new {id = item.IdOferta})" title="Editar oferta"><span class="glyphicon glyphicon-edit"></span></a>&nbsp;
+                                        <a href="@Url.Action("Delete", "Ofertas", new {id = item.IdOferta})" title="Eliminar oferta"><span class="glyphicon glyphicon-erase"></span></a>
+                                    </div>
+
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+
+
+
+            </section>
+            <h3>Coorporativa (Asignada)</h3>
+            <section>
+                <table class="datatablebase table table-condensed" id="table" style="width: 100%">
+                    <thead class="text-primary">
+                        <tr class="text-center">
+                            <th class="text-center">
+                                Cód.
+                            </th>
+                            <th class="text-center">
+                                Editorial
+                            </th>
+                            <th class="text-center">
+                                Nombre
+                            </th>
+                            <th class="text-center">
+                                Productos
+                            </th>
+
+                            <th class="text-center">
+                                Precio
+                            </th>
+                            <th class="text-center">
+                                <text title="tarjetas adicionales">T.A</text>
+                            </th>
+                            <th class="text-center">
+                                F. Ini.
+                            </th>
+                            <th class="text-center">
+                                Estado
+                            </th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.ToList().FindAll(x => x.TipoOferta == TipoOferta.CoorporativaAsignada))
+                        {
+                            <tr class="showhim">
+
+                                <td class="text-center">
+                                    @Html.DisplayFor(modelItem => item.Codigo)
+                                </td>
+                                <td class="text-center">
+                                    @Html.DisplayFor(modelItem => item.Editorial)
+                                </td>
+                                <td class="text-center" id="@("nombre" + item.IdOferta)">
+                                    @Html.DisplayFor(modelItem => item.Nombre) + @Html.DisplayFor(modelItem => item.CantDias)
+                                </td>
+                                <td class="text-center">
+                                    @foreach (var prod in item.ProductoOfertas)
+                                    {
+                                        <text><b>|</b>@prod.Producto.Nombre<b>|</b></text>}
+                                </td>
+                                <td class="text-center">
+                                    @Html.DisplayFor(modelItem => item.Precio)<span class="showme">&nbsp;<a onclick="HistorialModal(@item.IdOferta)"><span class="glyphicon glyphicon-info-sign"></span> &nbsp;</a><a href=@Url.Action("Create","HistorialPrecioOfertas", new{idoferta=item.IdOferta})><span class="glyphicon glyphicon-edit"></span></a></span>
+                                    <div style="display: none" id="@("historial" + item.IdOferta)">
+                                        <table class="table table-condensed" style="width: 90%">
+                                            <thead class="text-primary">
+                                                <tr class="text-center">
+                                                    <th class="text-center">
+                                                        Fecha Inicio
+                                                    </th>
+                                                    <th class="text-center">
+                                                        Precio
+                                                    </th>
+
+                                                </tr>
+                                            </thead>
+                                            <tbody id="tbodyhistorial">
+                                                @foreach (var precio in item.HistorialPrecioOfertas.OrderByDescending(x => x.IdHistorialPrecioOferta))
+                                                {
+                                                    <tr>
+                                                        <td class="text-center">
+                                                            @Html.DisplayFor(modelItem => precio.FechaInicio)
+                                                        </td>
+                                                        <td class="text-center">
+                                                            @Html.DisplayFor(modelItem => precio.Precio)
+                                                        </td>
+
+                                                    </tr>
+                                                }
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+                                </td>
+                                <td class="text-center">
+                                    @Html.DisplayFor(modelItem => item.CantTarjetasAdicionales)
+                                </td>
+                                <td class="text-center">
+                                    @Html.DisplayFor(modelItem => item.FechaInicio)
+                                </td>
+                                <td class="text-center">
+                                    @Html.DisplayFor(modelItem => item.EstadoOferta.Descripcion)
+                                </td>
+                                <td class="text-center">
+                                    <div class="showme">
+                                        <a href="@Url.Action("Details", "Ofertas", new {id = item.IdOferta})" title="Detalles oferta"><span class="glyphicon glyphicon-align-justify"></span></a>&nbsp;
+                                        <a href="@Url.Action("Edit", "Ofertas", new {id = item.IdOferta})" title="Editar oferta"><span class="glyphicon glyphicon-edit"></span></a>&nbsp;
+                                        <a href="@Url.Action("Delete", "Ofertas", new {id = item.IdOferta})" title="Eliminar oferta"><span class="glyphicon glyphicon-erase"></span></a>
+                                    </div>
+
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+
+
+
+            </section>
+        </div>
+
+
+
+           
+        }
+
+    </div>
+</div>
+<div class="modal fade" id="modaloferta" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 id="titmodal" class="modal-title text-center">Historial precios</h4>
+            </div>
+            <div class="modal-body" id="historial">
+                <p></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+@section Scripts
+
+
+{<script src="~/Scripts/Ofertas/Index.js"></script>
+    <script>
+        $(document).ready(function () {
+            var msg = @Html.Raw(Json.Encode(ViewBag.msg));
+            if (msg != null & msg != "" & msg != "mensaje") { toastr.success(msg); };
+        });
+
+    </script>
+}

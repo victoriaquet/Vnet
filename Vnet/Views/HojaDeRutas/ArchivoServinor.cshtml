@@ -1,0 +1,55 @@
+﻿@model SNC2017.Models.HojaDeRuta
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<div class="card">
+    <div class="card-header" data-background-color="green" style="display: flex">
+        <h4 class="title">Hoja de ruta</h4>
+
+    </div>
+
+    <div class="card-content">
+        <div id="example-tabs">
+            <h3>Generar Archivo Servinor</h3>
+            <section>
+
+
+                @using (Html.BeginForm("ArchivoServinorPost", "HojaDeRutas", null, FormMethod.Post, new
+                {
+                    target = "_blank",
+                   
+                }))
+                {
+                    @Html.AntiForgeryToken()
+                    <br />
+                    <label>Ingrese la fecha de entrega a generar...</label>
+                    <div class="form-group label-floating is-empty">
+                        @Html.Label("Ingrese la fecha...", htmlAttributes: new { @class = "control-label " })
+                        @Html.EditorFor(model => model.FechaEntrega, new { htmlAttributes = new { @class = "form-control", @type = "date" } })
+                        @Html.ValidationMessageFor(model => model.FechaEntrega, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div style="width: 100%;display: flex">
+                        <div style="width: 30%">
+                            <input type="submit" value="Generar" class="btn btn-success" />
+                        </div>
+                        <div class="text-center" style="width: 40%">
+                        </div>
+                        <div style="width: 30%"></div>
+                    </div>
+                }
+                
+            </section>
+
+        </div>
+
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+

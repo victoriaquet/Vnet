@@ -1,0 +1,129 @@
+﻿@using SNC2017.Models
+@model IEnumerable<SNC2017.Models.ArchivoImpresionTC>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<style>
+
+</style>
+<div class="card">
+    <div class="card-header" data-background-color="green" style="display: flex">
+        <h4 class="title">Archivos impresión Tarjetas Club</h4>
+    </div>
+
+    <div class="card-content">
+        <div id="example-tabs">
+          
+            <h3>Pendientes</h3>
+            <section style="overflow-y: scroll">
+                <table class="table table-condensed table-hover" style="width: 100%">
+                    <thead class="text-primary">
+                        <tr class="text-center">
+                            <th class="text-left" style="font-weight: bold">
+                                Fecha creación
+                            </th>
+                            <th class="text-left" style="font-weight: bold">
+                                Nombre
+                            </th>
+                            <th class="text-left" style="font-weight: bold">
+                                Responsable
+                            </th>
+                            
+                            <th></th>
+
+
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @foreach (var item in Model.Where(x => x.TCporArchivo.Count(a=>a.TarjetaClub.EstadoTarjetaClub==EstadoTarjetaClub.ListaParaImprimir)>0))
+                        {
+                            <tr class="showhim">
+                                <td class="text-left tddetails">
+                                    @item.FechaCreacion.ToString("yyyy/MM/dd HH:mm")
+                                </td>
+                                <td class="text-left tddetails">
+                                    @Html.DisplayFor(modelItem => item.NombreArchivo)
+                                </td>
+                                <td class="text-left tddetails">
+                                    @Html.DisplayFor(modelItem => item.Responsable)
+                                </td>
+                                
+                                <td class="text-left tddetails">
+                                    <div class="showme">
+                                        <a href="@Url.Action("Details", "ArchivoImpresionTCs", new {id = item.IdArchivoImpresionTC})" title="Detalles archivo" data-placement="left" data-toggle="tooltip"><span class="glyphicon glyphicon-align-justify"></span></a>
+                                    </div>
+                                </td>
+                            </tr>
+
+
+                        }
+
+                    </tbody>
+                </table>
+            </section>
+            <h3 style="padding-right: 10px">Finalizados</h3>
+            <section>
+                <table class="table table-condensed table-hover" style="width: 100%">
+                    <thead class="text-primary">
+                        <tr class="text-center">
+                            <th class="text-left" style="font-weight: bold">
+                                Fecha creación
+                            </th>
+                            <th class="text-left" style="font-weight: bold">
+                                Nombre
+                            </th>
+                            <th class="text-left" style="font-weight: bold">
+                                Responsable
+                            </th>
+
+                            <th></th>
+
+
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                    @foreach (var item in Model.Where(x => x.TCporArchivo.Count(a=>a.TarjetaClub.EstadoTarjetaClub==EstadoTarjetaClub.ListaParaImprimir)== 0))
+                    {
+                            <tr class="showhim">
+                                <td class="text-left tddetails">
+                                    @item.FechaCreacion.ToString("yyyy/MM/dd HH:mm")
+                                </td>
+                                <td class="text-left tddetails">
+                                    @Html.DisplayFor(modelItem => item.NombreArchivo)
+                                </td>
+                                <td class="text-left tddetails">
+                                    @Html.DisplayFor(modelItem => item.Responsable)
+                                </td>
+
+                                <td class="text-left tddetails">
+                                    <div class="showme">
+                                        <a href="@Url.Action("Details", "ArchivoImpresionTCs", new {id = item.IdArchivoImpresionTC})" title="Detalles archivo" data-placement="left" data-toggle="tooltip"><span class="glyphicon glyphicon-align-justify"></span></a>
+                                    </div>
+                                </td>
+                            </tr>
+
+
+                        }
+                        
+
+                    </tbody>
+                    </table>
+
+</section>
+           
+           
+         
+        </div>
+
+    </div>
+</div>
+
+@section scripts{
+    <script>
+
+       
+    </script>}

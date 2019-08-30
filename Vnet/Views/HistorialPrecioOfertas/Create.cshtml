@@ -1,0 +1,140 @@
+﻿@model SNC2017.Models.Oferta
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<style>
+    tbody tr:first-child {    font-weight: bold;
+      
+        font-family: monospace;
+    }
+</style>
+<input id="finiold" class="hidden" value="@Model.FechaInicio.ToString("yyyy-MM-dd")"/>
+<div class="card">
+    <div class="card-header" data-background-color="green" style="display: flex">
+        <h4 class="title">Historial precios: @Model.Nombre</h4>
+       
+    </div>
+
+    <div class="card-content">
+      
+
+            <div id="example-tabs">
+                <h3>Todos</h3>
+                <section>
+                    <table class="table table-condensed" style="width: 90%">
+                        <thead class="text-primary">
+                        <tr class="text-center">
+                            <th class="text-center" style="font-weight: bold;width: 50%">
+                                Fecha Inicio
+                            </th>
+                            <th class="text-center" style="font-weight: bold;width: 50%">
+                                Precio
+                            </th>
+                            <th></th>           
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach (var precio in Model.HistorialPrecioOfertas.OrderByDescending(x => x.FechaInicio))
+                        {
+                            <tr class="showhim">
+                                <td class="text-center">
+                                    @Html.DisplayFor(modelItem => precio.FechaInicio)
+                                </td>
+                                <td class="text-center">
+                                    @Html.DisplayFor(modelItem => precio.Precio)
+                                </td>
+                                <td class="text-center">
+                                    @if(precio.IdHistorialPrecioOferta== Model.HistorialPrecioOfertas.OrderByDescending(x => x.FechaInicio).First().IdHistorialPrecioOferta) {
+                                        <div class="showme">
+                                            <a href="@Url.Action("Edit", "HistorialPrecioOfertas", new {id = precio.IdHistorialPrecioOferta})" title="Editar precio"><span class="glyphicon glyphicon-edit"></span></a>
+                                        </div> }
+                                   
+
+                                </td>
+                            </tr>
+                        }
+                        </tbody>
+                    </table>
+
+
+
+                </section>
+                <h3>Nuevo precio</h3>
+                <section>
+                @using (Html.BeginForm(null,null, FormMethod.Post, new {id="myform"}))
+                {
+                    @Html.AntiForgeryToken()
+
+                    @Html.HiddenFor(model=>model.IdOferta)
+                    <div class="form-group label-floating is-empty">
+                        @Html.LabelFor(model => model.FechaInicio, htmlAttributes: new {@class = "control-label "})
+                        <input class="form-control" id="FechaInicio" type="text" required  name="FechaInicio" onfocus="(this.type = 'date')" onfocusout="(this.type='text')"/>
+                        @Html.ValidationMessageFor(model => model.FechaInicio, "", new {@class = "text-danger finierror"})
+                    </div>
+                    <div class="form-group label-floating is-empty">
+                        @Html.LabelFor(model => model.Precio, htmlAttributes: new {@class = "control-label "})
+
+                        <input class="form-control text-box single-line input-validation-error" data-val="true" data-val-number="El campo debe ser un número." data-val-required="El campo Precio es obligatorio." id="Precio" name="Precio" type="text" value="">                        @Html.ValidationMessageFor(model => model.Precio, "", new {@class = "text-danger"})
+
+
+                    </div>
+                    <div style="width: 100%;display: flex">
+                        <div style="width: 30%">
+                            <span  value="Guardar" id="guardar" class="btn btn-success">Guardar</span>
+
+                        </div>
+
+                        <div class="text-center" style="width: 40%">
+                        </div>
+                        <div style="width: 30%"></div>
+                    </div>
+                }
+                </section>
+            </div>
+        <div style="width: 100%;display: flex">
+            <div style="width: 30%">
+
+                @Html.ActionLink("Ir al listado", "Index","Ofertas", null, new { @class = "btn btn-sm btn-default" })
+            </div>
+
+            <div class="text-center" style="width: 40%">
+                @*<input type="submit" value="Guardar" class="btn btn-success" />*@
+            </div>
+            <div style="width: 30%"></div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+<script>
+    $(document).ready(function () {
+        $.validator.messages.required = 'Completa este campo';
+        var msg = @Html.Raw(Json.Encode(ViewBag.msg));
+        if (msg != null & msg != "" & msg != "mensaje") { toastr.success(msg); };
+
+
+        $("#guardar").click(function () {
+
+            var finiold = $("#finiold").val();
+            var fininew = $("#FechaInicio").val();
+            var validator = $("#myform").validate();
+
+            if (Date.parse(fininew) <= Date.parse(finiold)) {
+                $(".finierror").html("La fecha debe ser posterior a " + finiold);
+            } else { $(".finierror").html(""); $("#myform").submit() }
+
+        });
+
+
+    });
+
+</script>
+}
+
+
+

@@ -1,0 +1,84 @@
+﻿@model IEnumerable<Vnet.Models.Comercio>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="card">
+    <div class="card-header" data-background-color="green" style="display: flex">
+        <h4 class="title">Comercios</h4>
+        <a href=@Url.Action("Create","Comercios") class="btn btn-success btn-sm sombrabtncreate btnadd">
+            <span class="glyphicon glyphicon-plus"></span>
+        </a>
+    </div>
+
+    <div class="card-content">
+        <div id="example-tabs">
+            <h3>Todos</h3>
+            <section>
+                <table class="datatablebase table table-condensed table-hover" id="table" style="width: 100%">
+                    <thead class="text-primary">
+                        <tr class="text-center">
+                            <th class="text-center" style="font-weight: bold">
+                                Nro.
+                            </th>
+                            <th class="text-left" style="font-weight: bold">
+                                Nombre
+                            </th>
+                            <th class="text-center" style="font-weight: bold">
+                                Adhesión activa
+                            </th>
+                            <th class="text-center" style="font-weight: bold">
+                                Fecha adhesión
+                            </th>
+                           
+                            <th class="text-center">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr class="showhim">
+                                <td class="text-center">
+                                    @Html.DisplayFor(modelItem => item.IdComercio)
+                                </td>
+                                <td class="text-left">
+                                    @Html.DisplayFor(modelItem => item.Nombre)
+                                </td>
+                                <td class="text-center">
+                                    @Html.DisplayFor(modelItem => item.AdhesionActiva)
+                                </td>
+                                <td class="text-center">
+
+                                    @Html.DisplayFor(modelItem => item.FechaAdhesion)
+                                </td>
+                                <td class="text-center " style="font-size: large">
+
+                                    <div class="showme">
+                                        <a href="@Url.Action("Details", "Comercios", new {id = item.IdComercio})" data-placement="left" data-toggle="tooltip" title="Detalles"><span class="glyphicon glyphicon-align-justify"></span></a>&nbsp;
+
+                                        <a href="@Url.Action("Edit", "Comercios", new {id = item.IdComercio})" title="Editar" data-placement="left" data-toggle="tooltip"><span class="glyphicon glyphicon-edit"></span></a>&nbsp;
+                                    </div>
+
+
+
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+
+
+
+            </section>
+
+        </div>
+
+
+
+
+
+
+    </div>
+</div>

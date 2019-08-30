@@ -1,0 +1,77 @@
+﻿@model IEnumerable<SNC2017.Models.Venta>
+
+@{
+    ViewBag.Title = "Listado";
+}
+
+
+
+<div class="card">
+    <div class="card-header" data-background-color="green" style="display: flex">
+        <h4 class="title">Ventas</h4>
+
+    </div>
+
+    <div class="card-content">
+
+
+        <div id="example-tabs">
+
+            <h3>Listado</h3>
+            <section style="overflow-y: scroll">
+                <table class="datatablebase table table-condensed table-hover" id="table" style="width: 100%">
+                    <thead class="text-primary">
+                        <tr class="text-center">
+                            <th class="text-center" style="font-weight: bold">
+                                Nro.
+                            </th>
+                            <th class="text-left" style="font-weight: bold">
+                                Comercio
+                            </th>
+                            <th class="text-left" style="font-weight: bold">
+                                Tarjeta Club
+                            </th>
+                            <th class="text-center" style="font-weight: bold">
+                                Fecha
+                            </th>
+                            <th class="text-left" style="font-weight: bold">
+                                Descripción
+                            </th>
+                            <th class="text-center" style="font-weight: bold">
+                                Monto
+                            </th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr class="showhim">
+                                <td class="text-center">
+                                    @Html.DisplayFor(modelItem => item.IdVenta)
+                                </td>
+                                <td class="text-left">
+                                    <a target="_blank" href="@Url.Action("Details", "Comercios", new {id = item.IdComercio})">@Html.DisplayFor(modelItem => item.Comercio.Nombre)</a>
+                                </td>
+                                <td class="text-left">
+                                    <a target="_blank" href="@Url.Action("Details", "TarjetasClub", new {id = item.IdTarjetaClub})">@Html.DisplayFor(modelItem => item.TarjetaClub.Apellido), @Html.DisplayFor(modelItem => item.TarjetaClub.Nombres)</a>
+                                </td>
+                                <td class="text-center">
+                                    @item.Fecha.Value.ToString("yyyy/MM/dd HH:mm")
+                                </td>
+                                <td class="text-left">
+                                    @Html.DisplayFor(modelItem => item.Descripcion)
+                                </td>
+                                <td class="text-center">
+                                    $@Html.DisplayFor(modelItem => item.Monto)
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </section>
+        </div>
+
+    </div>
+</div>
+

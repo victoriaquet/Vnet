@@ -1,0 +1,286 @@
+﻿
+@model IEnumerable<SNC2017.Models.Caso>
+
+@{
+    ViewBag.Title = "Listado de Casos";
+}
+
+        <input value="@TempData["msg"]" id="mensajeToastr" class="hidden"/>
+   
+
+<head>
+    @*<style>
+        input[type=color] {
+            width: 10px;
+            height: 10px;
+            /*display: inline-block;*/
+            -moz-border-radius: 50%;
+            -webkit-border-radius: 50%;
+            border-radius: 50%;
+        }
+    </style>*@
+</head>
+<div class="card">
+    <div class="card-header" data-background-color="green" style="display: flex">
+        <h4 class="title">Casos</h4>
+        <a href=@Url.Action("Create") class="btn btn-success btn-sm sombrabtncreate btnadd">
+            <span class="glyphicon glyphicon-plus"></span>
+        </a>
+
+    </div>
+
+    <div class="card-content">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+
+        <div id="example-tabs">
+            @*seccion todos*@
+            <h3>Todos</h3>
+            <section>
+                <table class="datatablebase table table-condensed" id="table" style="width: 100%">
+                    <thead class="text-primary">
+                        <tr class="text-center">
+                            <th>
+                                Nº Caso
+                            </th>
+                            <th>
+                                Estado
+                            </th>
+                            <th>
+                                Suscripción
+                            </th>
+                            <th>
+                                Suscriptor
+                            </th>
+                            <th>
+                                Canillita
+                            </th>
+                            <th>Creado por</th>
+                            <th>
+                                Fecha Apertura
+                            </th>
+
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @*<input class="img-rounded" type="color" readonly title="@item.EstadoCaso.Descripcion" value="@item.EstadoCaso.Color" />*@
+                                    @Html.DisplayFor(modelItem => item.IdCaso)
+                                </td>
+                                <td style="background: @item.EstadoCaso.Color;">
+                                    @Html.DisplayFor(modelItem => item.EstadoCaso.Descripcion)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Suscripcion.NumeroSuscripcion)
+                                </td>
+                                <td>
+                                    <a href="@Url.Action("Details", "Casos", new {id = item.IdCaso})" title="Detalles caso">
+                                        @item.Suscripcion.Suscriptor.Nombre
+                                        @item.Suscripcion.Suscriptor.Apellido
+                                    </a>
+
+
+                                </td>
+                                <td>@Html.DisplayFor(modelItem=> item.Canillita.Nombre)</td> 
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.UsuarioCarga)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.FechaCarga)
+                                </td>
+
+                                <td>
+
+                                    <a href="@Url.Action("Details", "Casos", new {id = item.IdCaso})" data-placement="left" data-toggle="tooltip" title="Detalles caso"><span class="glyphicon glyphicon-align-justify"></span></a>&nbsp;
+                                    <a href="@Url.Action("Edit", "Casos", new {id = item.IdCaso})" data-placement="left" data-toggle="tooltip" title="Editar caso"><span class="glyphicon glyphicon-edit"></span></a>&nbsp;
+                                    <a href="@Url.Action("Delete", "Casos", new {id = item.IdCaso})" data-placement="left" data-toggle="tooltip" title="Eliminar caso"><span class="glyphicon glyphicon-remove"></span></a>
+
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+
+            </section>
+            @*fin seccion todos*@
+
+            @*sección casos abiertos*@
+            <h3>Abiertos</h3>
+            <section>
+                <table class="datatablebase table table-condensed" id="table" style="width: 100%">
+                    <thead class="text-primary">
+                        <tr class="text-center">
+                            <th>
+                                Nº Caso
+                            </th>
+                            <th>
+                                Estado
+                            </th>
+                            <th>
+                                Suscripción
+                            </th>
+                            <th>
+                                Suscriptor
+                            </th>
+                            <th>Creado por</th>
+                            <th>
+                                Fecha Apertura
+                            </th>
+
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            if (item.IdEstadoCaso != 2)
+                            {
+                                <tr>
+                                    <td>
+                                        @*<input class="img-rounded" type="color" readonly title="@item.EstadoCaso.Descripcion" value="@item.EstadoCaso.Color" />*@
+                                        @Html.DisplayFor(modelItem => item.IdCaso)
+                                    </td>
+                                    <td style="background: @item.EstadoCaso.Color;">
+                                        @Html.DisplayFor(modelItem => item.EstadoCaso.Descripcion)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Suscripcion.NumeroSuscripcion)
+                                    </td>
+                                    <td>
+                                        <a href="@Url.Action("Details", "Casos", new {id = item.IdCaso})" title="Detalles caso">
+                                            @item.Suscripcion.Suscriptor.Nombre
+                                            @item.Suscripcion.Suscriptor.Apellido
+                                        </a>
+
+
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.UsuarioCarga)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.FechaCarga)
+                                    </td>
+
+                                    <td>
+
+                                        <a href="@Url.Action("Details", "Casos", new {id = item.IdCaso})" data-placement="left" data-toggle="tooltip" title="Detalles caso"><span class="glyphicon glyphicon-align-justify"></span></a>&nbsp;
+                                        <a href="@Url.Action("Edit", "Casos", new {id = item.IdCaso})" data-placement="left" data-toggle="tooltip" title="Editar caso"><span class="glyphicon glyphicon-edit"></span></a>&nbsp;
+                                        <a href="@Url.Action("Delete", "Casos", new {id = item.IdCaso})" data-placement="left" data-toggle="tooltip" title="Eliminar caso"><span class="glyphicon glyphicon-remove"></span></a>
+
+                                    </td>
+                                </tr>
+                            }
+
+                        }
+                    </tbody>
+                </table>
+
+
+            </section>
+
+            @*seccion cerrados*@
+            <h3>Cerrados</h3>
+            <section>
+                <table class="datatablebase table table-condensed" id="table" style="width: 100%">
+                    <thead class="text-primary">
+                        <tr class="text-center">
+                            <th>
+                                Nº Caso
+                            </th>
+                           <th>
+                                Suscripción
+                            </th>
+                            <th>
+                                Suscriptor
+                            </th>
+                            <th>Creado por</th>
+                            <th>
+                                Fecha cierre
+                            </th>
+                            <th>Motivo cierre</th>
+
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            if (item.IdEstadoCaso == 2)
+                            {
+                                <tr>
+                                    <td>
+                                        @*<input class="img-rounded" type="color" readonly title="@item.EstadoCaso.Descripcion" value="@item.EstadoCaso.Color" />*@
+                                        @Html.DisplayFor(modelItem => item.IdCaso)
+                                    </td>
+                                   
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Suscripcion.NumeroSuscripcion)
+                                    </td>
+                                    <td>
+                                        <a href="@Url.Action("Details", "Casos", new {id = item.IdCaso})" title="Detalles caso">
+                                            @item.Suscripcion.Suscriptor.Nombre
+                                            @item.Suscripcion.Suscriptor.Apellido
+                                        </a>
+
+
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.UsuarioCarga)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.FechaCierre)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.MotivoCierreCaso.Descripcion)
+                                    </td>
+
+                                    <td>
+
+                                        <a href="@Url.Action("Details", "Casos", new {id = item.IdCaso})" data-placement="left" data-toggle="tooltip" title="Detalles caso"><span class="glyphicon glyphicon-align-justify"></span></a>&nbsp;
+                                        <a href="@Url.Action("Edit", "Casos", new {id = item.IdCaso})" data-placement="left" data-toggle="tooltip" title="Editar caso"><span class="glyphicon glyphicon-edit"></span></a>&nbsp;
+                                        <a href="@Url.Action("Delete", "Casos", new {id = item.IdCaso})" data-placement="left" data-toggle="tooltip" title="Eliminar caso"><span class="glyphicon glyphicon-remove"></span></a>
+
+                                    </td>
+                                </tr>
+                            }
+
+                        }
+                    </tbody>
+                </table>
+
+
+            </section>
+            @*fin seccion cerrados*@
+        </div>
+
+
+
+
+        }
+
+    </div>
+</div>
+
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $('input[type=color]').click(function () {
+                event.preventDefault();
+            });
+            if ($('#mensajeToastr').val() != "" && $('#mensajeToastr').val() != null) {
+                toastr["warning"]($('#mensajeToastr').val(), "Atención");
+            }
+           
+
+        });
+
+    </script>
+}

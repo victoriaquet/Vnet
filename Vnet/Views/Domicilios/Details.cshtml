@@ -1,0 +1,130 @@
+﻿@model SNC2017.Models.Domicilio
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<style>
+    #tbodyprecio tr:first-child {
+        font-weight: bold;
+        font-family: monospace;
+    }
+</style>
+<div class="card">
+    <div class="card-header" data-background-color="green" style="display: flex">
+        <h4 class="title">Detalles domilio: @Model.TituloDom</h4>
+
+    </div>
+
+    <div class="card-content">
+
+
+        <div id="example-tabs">
+            <h3>Domicilio</h3>
+            <section style="overflow-y: scroll">
+                <table class="table table-condensed table-hover" style="width: 100%">
+
+                    <tbody>
+
+                        <tr>
+                            <td class="text-left tddetails tdddetailslabel">
+                                Localidad
+                            </td>
+                            <td class="text-left tddetails">
+                                @Model.Localidad.Nombre (@Model.Localidad.Provincia.Nombre)
+
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td class="text-left tddetails tdddetailslabel">
+                                Calle
+                            </td>
+                            <td class="text-left tddetails">
+                                @Model.Calle
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-left tddetails tdddetailslabel">
+                                Altura
+                            </td>
+                            <td class="text-left tddetails">
+                                @Model.Altura
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-left tddetails tdddetailslabel">
+                                Piso
+                            </td>
+                            <td class="text-left tddetails">
+                                @Model.Piso
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-left tddetails tdddetailslabel">
+                                Depto.
+                            </td>
+                            <td class="text-left tddetails">
+                                @Model.Departamento
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-left tddetails tdddetailslabel">
+                                Barrio
+                            </td>
+                            <td class="text-left tddetails">
+                                @Model.Barrio
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-left tddetails tdddetailslabel">
+                                Calle Lat. 1
+                            </td>
+                            <td class="text-left tddetails">
+                                @Model.CalleLateral1
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-left tddetails tdddetailslabel">
+                                Calle Lat. 2
+                            </td>
+                            <td class="text-left tddetails">
+                                @Model.CalleLateral2
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-left tddetails tdddetailslabel">
+                                Obs. Domicilio
+                            </td>
+                            <td class="text-left tddetails">
+                                @Model.Observaciones
+
+                            </td>
+                        </tr>
+
+                    </tbody>
+                </table>
+
+            </section>
+         
+        </div>
+
+    </div>
+</div>
+
+<div class="navbar-xs navbar-inverse navbar-fixed-bottom" style="background: none; border: none; padding-bottom: 0px;padding-left: 260px">
+    <div style="width: 100%;display: inline-flex">
+      
+        <div style="width: 40%">
+            @Html.ActionLink("Editar", "Edit", "Domicilios", new { id = Model.IdDomicilio }, new { @class = "btn btn-default" })
+        </div>
+    </div>
+
+</div>

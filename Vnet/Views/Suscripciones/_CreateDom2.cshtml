@@ -1,0 +1,174 @@
+﻿@model SNC2017.ViewModels.SuscripcionVM
+@{ Layout = null;}
+<details id="domicilio-2">
+    <summary class="summaryselect"><div style="display:  inline-flex;width: 20%;">Martes (*)</div><div style="display: inline-flex;margin-left: 10%">
+            <select class="form-control" id="selectMartes" style="width: 100%;font-weight: bold">
+                <option value="" selected disabled>Copiar desde:</option>
+                <option value="Suscriptor">Principal</option>
+                <option value="Lunes" class="optioncopiardom">Lunes</option>
+                @*<option value="Martes" class="optioncopiardom">Martes</option>*@
+                <option value="Miercoles" class="optioncopiardom">Miércoles</option>
+                <option value="Jueves" class="optioncopiardom">Jueves</option>
+                <option value="Viernes" class="optioncopiardom">Viernes</option>
+                <option value="Sabado" class="optioncopiardom">Sábado</option>
+                <option value="Domingo" class="optioncopiardom">Domingo</option>
+
+            </select>
+            <a id="copiar-Martes" class="btn btn-xs btn-info" style="margin-bottom: 3px">Copiar</a></div>
+    </summary>
+    <div class="row">
+        <div class="col-lg-6">
+
+            <div class="form-group label-floating is-empty  divsusMartes">
+                @Html.Label("Calle (*)", htmlAttributes: new { @class = "control-label " })
+
+                @Html.EditorFor(model => model.CalleMartes, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.CalleMartes, "", new { @class = "text-danger" })
+
+            </div>
+
+            <div class="form-group label-floating is-empty  divsusMartes">
+                @Html.Label("Altura (*)", htmlAttributes: new { @class = "control-label " })
+
+                @Html.EditorFor(model => model.AlturaMartes, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.AlturaMartes, "", new { @class = "text-danger" })
+
+            </div>
+
+            <div class="form-group label-floating is-empty divsusMartes">
+                @Html.LabelFor(model => model.PisoMartes, htmlAttributes: new { @class = "control-label " })
+
+                @Html.EditorFor(model => model.PisoMartes, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.PisoMartes, "", new { @class = "text-danger" })
+
+            </div>
+
+            <div class="form-group label-floating is-empty divsusMartes">
+                @Html.LabelFor(model => model.DepartamentoMartes, htmlAttributes: new { @class = "control-label " })
+
+                @Html.EditorFor(model => model.DepartamentoMartes, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.DepartamentoMartes, "", new { @class = "text-danger" })
+
+            </div>
+
+            <div class="form-group label-floating is-empty divsusMartes">
+                @Html.LabelFor(model => model.CalleLateral1Martes, htmlAttributes: new { @class = "control-label " })
+
+                @Html.EditorFor(model => model.CalleLateral1Martes, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.CalleLateral1Martes, "", new { @class = "text-danger" })
+
+            </div>
+
+        </div>
+        <div class="col-lg-6">
+            <div class="form-group label-floating is-empty divsusMartes">
+                @Html.LabelFor(model => model.CalleLateral2Martes, htmlAttributes: new { @class = "control-label " })
+
+                @Html.EditorFor(model => model.CalleLateral2Martes, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.CalleLateral2Martes, "", new { @class = "text-danger" })
+
+            </div>
+
+            <div class="form-group label-floating is-empty divsusMartes">
+                @Html.LabelFor(model => model.BarrioMartes, htmlAttributes: new { @class = "control-label " })
+
+                @Html.EditorFor(model => model.BarrioMartes, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.BarrioMartes, "", new { @class = "text-danger" })
+
+            </div>
+
+
+            <div class="form-group is-empty  divsusMartes" style="margin-top: 0px">
+                @Html.Label("Provincia (*)", htmlAttributes: new { @class = "control-label ", @style = "margin-top:0px" })
+
+                <div>
+                    <select class="form-control" id="IdProvinciaMartes" name="IdProvinciaMartes" onchange="localidadesPorProvMartes(this)" style="width: 90%;">
+                        <option value="" selected disabled>Seleccione...</option>
+                        @foreach (var item in ViewBag.provincias)
+                        {
+
+                            <option value="@item.IdProvincia">@item.Nombre</option>
+
+                        }
+                    </select>
+
+                </div>
+            </div>
+
+            <div class="form-group is-empty  divsusMartes" style="margin-top: 0px">
+                @Html.Label("Localidad (*)", htmlAttributes: new { @class = "control-label ", @style = "margin-top:0px" })
+
+                <div>
+                    <select class="form-control" id="linelocalidadMartes" name="IdLocalidadMartes" style="width: 90%;">
+                        <option value="" selected disabled>Seleccione una provincia</option>
+                    </select>
+
+                </div>
+
+            </div>
+
+
+            <div class="form-group label-floating is-empty divsusMartes">
+                <label for="ObservacionesDomicilioMartes" style="margin-top: 2%; margin-bottom: 1%">Observaciones</label>
+                <textarea class="form-control" id="ObservacionesDomicilioMartes" name="ObservacionesDomicilioMartes"></textarea>
+                @Html.ValidationMessageFor(model => model.ObservacionesDomicilioMartes, "", new { @class = "text-danger" })
+
+            </div>
+
+        </div>
+    </div>
+</details>
+<script>
+    $("#copiar-Martes").click(function (event) {
+        event.preventDefault();
+        var copiardiadestino = this.id.split("-")[1];
+        var copiardiaorigen = "";
+         
+        if ($("#select" + copiardiadestino).val() != null) {
+            copiardiaorigen = $("#select" + copiardiadestino).val();
+            if (copiardiaorigen == "Suscriptor") {
+
+                var CopiarIdProvincia = $("#IdProvincia").val();
+                var CopiarIdLocalidad = $("#linelocalidad").val();
+
+            } else {
+                var CopiarIdProvincia = $("#IdProvincia" + copiardiaorigen).val();
+                var CopiarIdLocalidad = $("#linelocalidad" + copiardiaorigen).val();
+
+            }
+            var CopiarCalle = $("#Calle" + copiardiaorigen).val();
+            var CopiarAltura = $("#Altura" + copiardiaorigen).val();
+            var CopiarPiso = $("#Piso" + copiardiaorigen).val();
+            var CopiarDepartamento = $("#Departamento" + copiardiaorigen).val();
+            var CopiarCalleLateral1 = $("#CalleLateral1" + copiardiaorigen).val();
+            var CopiarCalleLateral2 = $("#CalleLateral2" + copiardiaorigen).val();
+            var CopiarBarrio = $("#Barrio" + copiardiaorigen).val();
+            var CopiarObservaciones = $("#ObservacionesDomicilio" + copiardiaorigen).val();
+
+            $("#Calle" + copiardiadestino).val(CopiarCalle);
+            $("#Altura" + copiardiadestino).val(CopiarAltura);
+            $("#Piso" + copiardiadestino).val(CopiarPiso);
+            $("#Departamento" + copiardiadestino).val(CopiarDepartamento);
+            $("#CalleLateral1" + copiardiadestino).val(CopiarCalleLateral1);
+            $("#CalleLateral2" + copiardiadestino).val(CopiarCalleLateral2);
+            $("#Barrio" + copiardiadestino).val(CopiarBarrio);
+            $("#IdProvincia" + copiardiadestino).val(CopiarIdProvincia).trigger("change");
+            $("#linelocalidad" + copiardiadestino).val(CopiarIdLocalidad);
+            $("#ObservacionesDomicilio" + copiardiadestino).val(CopiarObservaciones);
+
+            $(".divsus" + copiardiadestino).removeClass("is-empty");
+            toastr.success("Copia de domicilo exitosa.", "Aviso");
+
+        } else {
+            toastr["warning"]("Debe seleccionar el día de origen.", "Error.");
+        }
+
+
+        //alert($("#select" + copiardia).val());
+
+
+
+
+    });
+
+</script>

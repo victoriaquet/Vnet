@@ -1,0 +1,103 @@
+﻿@model SNC2017.Models.SuscriptorSecundario
+@{
+    Layout = null;
+}
+
+@foreach (var item in Model.DiaEntregas)
+{
+    <details>
+        <summary>Domicilio - @item.NombreDia &nbsp;<a data-dismiss="modal" class="editdomicilio" onclick="window.open($(this).attr('href'))" href="@Url.Action("Edit", "Domicilios", new {id = item.Domicilio.IdDomicilio})" title="Editar domicilio de entrega"><span class="glyphicon glyphicon-edit"></span></a></summary>
+        <table class="table table-condensed table-hover" style="width: 100%">
+            <tr>
+                <td class="text-left tddetails tdddetailslabel">
+                    Localidad
+                </td>
+                <td class="text-left tddetails">
+                    @item.Domicilio.Localidad.Nombre (@item.Domicilio.Localidad.Provincia.Nombre)
+
+                </td>
+            </tr>
+            <tr>
+                <td class="text-left tddetails tdddetailslabel">
+                    Calle
+                </td>
+                <td class="text-left tddetails">
+                    @item.Domicilio.Calle
+
+                </td>
+            </tr>
+            <tr>
+                <td class="text-left tddetails tdddetailslabel">
+                    Altura
+                </td>
+                <td class="text-left tddetails">
+                    @item.Domicilio.Altura
+
+
+                </td>
+            </tr>
+            <tr>
+                <td class="text-left tddetails tdddetailslabel">
+                    Piso
+                </td>
+                <td class="text-left tddetails">
+                    @item.Domicilio.Piso
+
+
+                </td>
+            </tr>
+
+            <tr>
+                <td class="text-left tddetails tdddetailslabel">
+                    Depto.
+                </td>
+                <td class="text-left tddetails">
+                    @item.Domicilio.Departamento
+
+
+                </td>
+            </tr>
+            <tr>
+                <td class="text-left tddetails tdddetailslabel">
+                    Calle lat. 1
+                </td>
+                <td class="text-left tddetails">
+                    @item.Domicilio.CalleLateral1
+
+
+                </td>
+            </tr>
+            <tr>
+                <td class="text-left tddetails tdddetailslabel">
+                    Calle lat. 2
+                </td>
+                <td class="text-left tddetails">
+                    @item.Domicilio.CalleLateral2
+
+
+                </td>
+            </tr>
+            <tr>
+                <td class="text-left tddetails tdddetailslabel">
+                    Barrio
+                </td>
+                <td class="text-left tddetails">
+                    @item.Domicilio.Barrio
+
+
+                </td>
+            </tr>
+            <tr>
+                <td class="text-left tddetails tdddetailslabel">
+                    Observaciones
+                </td>
+                <td class="text-left tddetails">
+                    @item.Domicilio.Barrio
+
+
+                </td>
+            </tr>
+        </table>
+
+    </details>
+}

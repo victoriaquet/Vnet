@@ -1,0 +1,103 @@
+﻿@model IEnumerable<SNC2017.Models.HojaDeRuta>
+
+@{
+    Layout = null;
+
+}
+
+<html>
+<head>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet">
+    <style>.table{table-layout: fixed}
+ .table-bordered>thead>tr>th, .table-bordered>tbody>tr>th, .table-bordered>tfoot>tr>th, .table-bordered>thead>tr>td, .table-bordered>tbody>tr>td, .table-bordered>tfoot>tr>td {
+     
+     padding-top: 1px;
+     padding-bottom: 1px;font-size: small}
+    .containerdetails{page-break-after: always}
+    .titulo{color: green}
+    .vendedor{ background: darkseagreen;margin-top: 30px}
+    .subrayado{ text-decoration: underline;color: black;background: darkseagreen}
+
+</style>
+    
+</head>
+@foreach (var hr in Model)
+{
+    <div class="container containerdetails">
+        <img class="pull-left" src="/Content/Layout/img/logonortesinfondo.png" style="width: 200px">
+        <h2 class="text-center nomargin titulo">HOJA DE RUTA - <span class="subrayado">@hr.FechaEntrega.ToString("d") | @hr.FechaEntrega.ToString("ddddd").ToUpper()</span></h2>
+      
+
+        <h3 class="nomargin vendedor"><b>Vendedor:</b>@Html.DisplayFor(model => hr.Canillita.Apellido) @Html.DisplayFor(model => hr.Canillita.Nombre) </h3>
+
+        <table class="table table-bordered table-condensed">
+            <thead>
+                <tr>
+                    <th class="text-center" style="width: 2%">#</th>
+                    <th class="text-center" style="width: 7%">N° Susc.</th>
+                    <th style="width: 20%">Nombre</th>
+                    <th style="width: 20%">Domicilio/Barrio</th>
+                    <th style="width: 10%">Localidad</th>
+                    <th class="text-center"style="width: 15%">Días Suscriptos</th>
+                    <th>Observación</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var item in hr.Lineas)
+                {
+                    <tr style="page-break-inside: avoid!important">
+                        <td style="page-break-inside: avoid!important" class="text-center">
+                            @Html.DisplayFor(modelItem => item.NumeroOrden)
+                        </td>
+                        <td style="page-break-inside: avoid!important" class="text-center">
+                            @Html.DisplayFor(modelItem => item.NumeroSuscriptor)
+                        </td>
+                        <td style="page-break-inside: avoid!important">
+                            @Html.DisplayFor(modelItem => item.NombreSuscriptor)
+                        </td>
+                        <td style="page-break-inside: avoid!important">
+                            @Html.DisplayFor(modelItem => item.Domicilio)
+                        </td>
+                        <td style="page-break-inside: avoid!important">
+                            @Html.DisplayFor(modelItem => item.Localidad)
+                        </td>
+                        <td class="text-center" style="page-break-inside: avoid !important;font-size: x-small">
+                            @if (item.Lunes)
+                            {
+                                <text>Lu </text>}
+                            @if (item.Martes)
+                            {
+                                <text>Ma </text>}
+                            @if (item.Miercoles)
+                            {
+                                <text>Mi </text>}
+                            @if (item.Jueves)
+                            {
+                                <text>Ju </text>}
+                            @if (item.Viernes)
+                            {
+                                <text>Vi </text>}
+                            @if (item.Sabado)
+                            {
+                                <text>Sa </text>}
+                            @if (item.Domingo)
+                            {
+                                <text>Do</text>}
+                        </td>
+                        <td style="page-break-inside: avoid!important;font-size: xx-small">
+                            @Html.DisplayFor(modelItem => item.Observacion)
+                        </td>
+
+                    </tr>
+                }
+            </tbody>
+
+
+        </table>
+
+    </div>
+
+}
+</html>
+

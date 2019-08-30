@@ -1,0 +1,138 @@
+﻿@model SNC2017.Models.Orden
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Orden</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Suscripcion.IdSuscripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Suscripcion.IdSuscripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Numero)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Numero)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Fecha)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Fecha)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Monto)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Monto)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SuscripcionInicio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SuscripcionInicio)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SuscripcionFin)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SuscripcionFin)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaLibro)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FechaLibro)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NroLegalLetra)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NroLegalLetra)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NroLegalPuntoVenta)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NroLegalPuntoVenta)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NroLegalNumero)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NroLegalNumero)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ReciboNroLegalLetra)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ReciboNroLegalLetra)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ReciboNroLegalPuntoVenta)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ReciboNroLegalPuntoVenta)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ReciboNroLegalNumero)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ReciboNroLegalNumero)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Observaciones)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Observaciones)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EstadoOrden)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EstadoOrden)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.IdOrden }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

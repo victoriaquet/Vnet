@@ -1,0 +1,203 @@
+﻿@using System.Web.UI.WebControls
+@model SNC2017.Models.Domicilio
+
+@{
+    ViewBag.Title = "Editar domicilio";
+}
+
+
+<div class="card">
+    <div class="card-header" data-background-color="green" style="display: flex">
+        <h4 class="title">Editar</h4>
+        <span class="category" style="margin-top: 4px;margin-left:10px">@Model.TituloDom</span>
+    </div>
+
+
+    <div class="card-content">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            @Html.HiddenFor(model => model.IdDomicilio)
+            @Html.HiddenFor(model => model.TituloDom)
+
+            <div id="example-tabs">
+                <h3>Datos domicilio</h3>
+                <section style="overflow-y: scroll" class="row">
+
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+                    <div class="col-lg-6">
+                        <div class="form-group label-floating">
+                            @Html.LabelFor(model => model.Calle, htmlAttributes: new { @class = "control-label" })
+
+                            @Html.EditorFor(model => model.Calle, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Calle, "", new { @class = "text-danger" })
+
+                        </div>
+
+                        <div class="form-group label-floating">
+                            @Html.LabelFor(model => model.Altura, htmlAttributes: new { @class = "control-label" })
+
+                            @Html.EditorFor(model => model.Altura, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Altura, "", new { @class = "text-danger" })
+
+                        </div>
+                       
+                        <div class="form-group label-floating">
+                            @Html.LabelFor(model => model.Departamento, htmlAttributes: new { @class = "control-label" })
+
+                            @Html.EditorFor(model => model.Departamento, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Departamento, "", new { @class = "text-danger" })
+
+                        </div>
+
+                        <div class="form-group label-floating">
+                            @Html.LabelFor(model => model.Barrio, htmlAttributes: new { @class = "control-label" })
+
+                            @Html.EditorFor(model => model.Barrio, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Barrio, "", new { @class = "text-danger" })
+
+                        </div>
+
+                        <div class="form-group label-floating">
+                            @Html.LabelFor(model => model.Piso, htmlAttributes: new { @class = "control-label" })
+
+                            @Html.EditorFor(model => model.Piso, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Piso, "", new { @class = "text-danger" })
+
+                        </div>
+                     
+                        <div class="form-group label-floating">
+                            @Html.LabelFor(model => model.CalleLateral1, htmlAttributes: new { @class = "control-label" })
+
+                            @Html.EditorFor(model => model.CalleLateral1, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.CalleLateral1, "", new { @class = "text-danger" })
+
+                        </div>
+                        <div class="form-group label-floating">
+                            @Html.LabelFor(model => model.CalleLateral2, htmlAttributes: new { @class = "control-label" })
+
+                            @Html.EditorFor(model => model.CalleLateral2, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.CalleLateral2, "", new { @class = "text-danger" })
+
+                        </div>
+                     
+                      
+                        <div class="form-group" style="margin-top: 0px">
+                            @Html.Label("Provincia", htmlAttributes: new { @class = "control-label ", @style = "margin-top:0px" })
+
+                            <div>
+                                <select class="form-control" id="lineprovincia" name="IdProvincia" onchange="localidadesPorProv(this)" style="width: 90%;">
+                                    <option value="" selected disabled>Seleccione...</option>
+                                    @foreach (var item in ViewBag.provincias)
+                                    {
+
+                                        if (item.IdProvincia == @Model.Localidad.Provincia.IdProvincia)
+                                        {
+                                            <option value="@item.IdProvincia" selected>@item.Nombre</option> }
+                                        else
+                                        {
+
+                                            <option value="@item.IdProvincia">@item.Nombre</option>
+                                        }
+
+
+                                    }
+                                </select>
+
+                            </div>
+                        </div>
+
+                        <div class="form-group" style="margin-top: 0px">
+                            @Html.LabelFor(model => model.Localidad, htmlAttributes: new { @class = "control-label ", @style = "margin-top:0px" })
+
+                            <div>
+                                <select class="form-control" id="linelocalidad" name="IdLocalidad" style="width: 90%;">
+                                    <option value="@Model.IdLocalidad" selected>@Model.Localidad.Nombre</option> }
+                                </select>
+
+                            </div>
+
+                        </div>
+                        <div class="form-group label-floating">
+                            @Html.LabelFor(model => model.Observaciones, htmlAttributes: new { @class = "control-label" })
+
+                            @Html.EditorFor(model => model.Observaciones, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Observaciones, "", new { @class = "text-danger" })
+
+                        </div>
+                    </div>
+                </section>
+             
+
+            
+
+
+
+
+
+            </div>
+
+
+
+            <div class="row">
+
+                <div class="col-md-3">
+                    <input type="submit" value="Guardar" class="btn btn-success" />
+                </div>
+            </div>
+        }
+
+    </div>
+</div>
+
+@section Scripts
+{
+    <script>
+
+            function localidadesPorProv(prov) {
+                var options3 = {};
+                options3.url = '@Url.Action("LocalidadesProv", "Suscriptores")';
+                options3.type = "GET";
+                options3.data = { "prov": $(prov).val() };
+                options3.dataType = "json";
+                options3.success = function (loclist) {
+
+                    $.each(loclist, function () {
+                        var value = this.split("#")[0];
+
+                        var nombre = this.split("#")[1];
+                        $("#linelocalidad").html("");
+                        if (nombre == "Resistencia") {
+                            $("#linelocalidad").append($("<option selected='selected'></option>")
+                                .attr("value", value).text(nombre));
+                        } else {
+                            if (nombre == "Corrientes") {
+                                $("#linelocalidad").append($("<option selected='selected'></option>")
+                                    .attr("value", value).text(nombre));
+                            } else {
+                                $("#linelocalidad").append($("<option></option>")
+                                    .attr("value", value).text(nombre));
+                            }
+                        }
+                    });
+
+
+
+                };
+                $.ajax(options3);
+            }
+
+
+
+
+    </script>
+}
+
+
+
+
+
+

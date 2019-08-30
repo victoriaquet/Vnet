@@ -1,0 +1,58 @@
+﻿@model SNC2017.Models.Respuesta
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Respuesta</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Envio.IdEnvio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Envio.IdEnvio)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Fecha)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Fecha)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Aprobado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Aprobado)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Observaciones)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Observaciones)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Manual)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Manual)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.IdRespuesta }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

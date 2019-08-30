@@ -1,0 +1,634 @@
+﻿@using SNC2017.Models
+@model SNC2017.Models.Suscriptor
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<style>
+    #tbodyprecio tr:first-child {
+        font-weight: bold;
+        font-family: monospace;
+    }
+</style>
+<div class="card">
+    <div class="card-header" data-background-color="green" style="display: flex">
+        <h4 class="title">Detalles: @Model.Nombre, @Model.Apellido</h4>
+
+    </div>
+
+    <div class="card-content">
+
+
+        <div id="example-tabs">
+            <h3>Generales</h3>
+        <section style="overflow-y: scroll">
+            <table class="table table-condensed table-hover" style="width: 100%">
+
+                <tbody>
+                    <tr>
+                        <td class="text-left tddetails tdddetailslabel">
+                            N° Suscriptor
+                        </td>
+                        <td class="text-left  tddetails">
+                            @Model.NumeroSuscriptor
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-left tddetails tdddetailslabel">
+                            Nombre
+                        </td>
+                        <td class="text-left  tddetails">
+                            @Model.Nombre
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-left tddetails tdddetailslabel">
+                            Apellido
+                        </td>
+                        <td class="text-left tddetails">
+                            @Model.Apellido
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-left tddetails tdddetailslabel">
+                            Estado
+                        </td>
+                        <td class="text-left tddetails">
+                            @Model.EstadoSuscriptor
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-left tddetails tdddetailslabel">
+                            Fecha nacimiento
+                        </td>
+                        <td class="text-left tddetails">
+                            @if (Model.FechaNacimiento != null)
+                            {@Model.FechaNacimiento.Value.ToShortDateString()}
+                           
+
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-left tddetails tdddetailslabel">
+                            DNI
+                        </td>
+                        <td class="text-left tddetails">
+                            @Model.DNI
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-left tddetails tdddetailslabel">
+                            Sexo
+                        </td>
+                        <td class="text-left tddetails">
+                            @Model.TipoSexo
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-left tddetails tdddetailslabel">
+                            Email
+                        </td>
+                        <td class="text-left tddetails">
+                            @Model.Email
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-left tddetails tdddetailslabel">
+                            CUIT
+                        </td>
+                        <td class="text-left tddetails">
+                            @Model.CUIT
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-left tddetails tdddetailslabel">
+                            Razón social
+                        </td>
+                        <td class="text-left tddetails">
+                            @Model.RazonSocial
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-left tddetails tdddetailslabel">
+                            Tél. Fijo
+                        </td>
+                        <td class="text-left tddetails">
+                            @Model.TelefonoFijoArea @Model.TelefonoFijoNumero
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-left tddetails tdddetailslabel">
+                            Tél. Móvil
+                        </td>
+                        <td class="text-left tddetails">
+                            @Model.TelefonoMovilArea @Model.TelefonoMovilNumero
+
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-left tddetails tdddetailslabel">
+                            Localidad
+                        </td>
+                        <td class="text-left tddetails">
+                            @Model.Domicilio.Localidad.Nombre (@Model.Domicilio.Localidad.Provincia.Nombre)
+
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+          
+
+        </section>
+            <h3>Domicilio</h3>
+            <section style="overflow-y: scroll">
+                <table class="table table-condensed table-hover" style="width: 100%">
+
+                    <tbody>
+                       
+                    <tr>
+                        <td class="text-left tddetails tdddetailslabel">
+                            Localidad
+                        </td>
+                        <td class="text-left tddetails">
+                            @Model.Domicilio.Localidad.Nombre (@Model.Domicilio.Localidad.Provincia.Nombre)
+
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td class="text-left tddetails tdddetailslabel">
+                            Calle
+                        </td>
+                        <td class="text-left tddetails">
+                            @Model.Domicilio.Calle
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-left tddetails tdddetailslabel">
+                            Altura
+                        </td>
+                        <td class="text-left tddetails">
+                            @Model.Domicilio.Altura
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-left tddetails tdddetailslabel">
+                            Piso
+                        </td>
+                        <td class="text-left tddetails">
+                            @Model.Domicilio.Piso
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-left tddetails tdddetailslabel">
+                            Depto.
+                        </td>
+                        <td class="text-left tddetails">
+                            @Model.Domicilio.Departamento
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-left tddetails tdddetailslabel">
+                            Barrio
+                        </td>
+                        <td class="text-left tddetails">
+                            @Model.Domicilio.Barrio
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-left tddetails tdddetailslabel">
+                            Calle Lat. 1
+                        </td>
+                        <td class="text-left tddetails">
+                            @Model.Domicilio.CalleLateral1
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-left tddetails tdddetailslabel">
+                            Calle Lat. 2
+                        </td>
+                        <td class="text-left tddetails">
+                            @Model.Domicilio.CalleLateral2
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-left tddetails tdddetailslabel">
+                            Obs. Domicilio
+                        </td>
+                        <td class="text-left tddetails">
+                            @Model.Domicilio.Observaciones
+
+                        </td>
+                    </tr>
+
+                    </tbody>
+
+                </table>
+              
+
+            </section>
+            <h3 style="padding-right: 10px">Tarjeta/s Créd/Déb</h3>
+        <section>
+            <table class="table table-condensed table-hover" style="width: 100%">
+                <thead class="text-primary">
+                <tr class="text-center">
+                    <th class="text-center" style="font-weight: bold">
+                        <a z class="btn btn-success btn-sm sombrabtncreate" href=@Url.Action("Create","TarjetasPago", new{idsuscriptor=Model.IdSuscriptor}) style="color: white;padding-left: 8px; padding-right: 8px; padding-bottom: 5px; padding-top: 5px; margin-right: 5px">
+                            <span class="glyphicon glyphicon-plus" ></span>
+                        </a> Nro. Tarjeta
+                    </th>
+                    <th class="text-center" style="font-weight: bold">
+                        Nombre exacto
+                    </th>
+                    <th class="text-center" style="font-weight: bold">
+                        Mes vencimiento
+                    </th>
+
+                    <th class="text-center" style="font-weight: bold">
+                        Año vencimiento
+                    </th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach (var item in Model.Tarjetas.OrderByDescending(x=>x.IdTarjetaPago))
+                {
+                    <tr class="showhim" id="@("trtarjeta" + @item.IdTarjetaPago)">
+                        <td class="text-center">
+                                  
+                            <a class="dialog-window" onclick="modaltarjeta(@item.IdTarjetaPago)" style="cursor: pointer; font-weight: bold">@Html.DisplayFor(modelItem => item.Numero)</a>
+
+                            <a class="hidden" id="@item.IdTarjetaPago" href="@Url.Action("Details", "TarjetasPago", new {id = item.IdTarjetaPago})"></a>
+                        </td>
+                        <td class="text-center">
+                            @Html.DisplayFor(modelItem => item.NombreExacto)
+                        </td>
+                        <td class="text-center">
+                            @Html.DisplayFor(modelItem => item.MesVencimiento)
+                        </td>
+                        <td class="text-center">
+                            @Html.DisplayFor(modelItem => item.AñoVencimiento)
+                        </td>
+                        <td class="text-center">
+                            <div class="showme">
+                                <a href="@Url.Action("Edit", "TarjetasPago", new {id = item.IdTarjetaPago, idsuscriptor=Model.IdSuscriptor })" title="Editar tarjeta"><span class="glyphicon glyphicon-edit"></span></a>&nbsp;
+                                <a class="dialog-window" onclick="modaleliminartarjeta(@item.IdTarjetaPago)" style="cursor: pointer;font-weight: bold"><span class="glyphicon glyphicon-remove"></span></a>
+                                
+                                <a class="hidden" id="@("deltarjeta" + @item.IdTarjetaPago)" href="@Url.Action("Delete","TarjetasPago", new { id = item.IdTarjetaPago })"></a>
+                            </div>
+
+                        </td>
+
+
+                    </tr>
+                }
+                </tbody>
+            </table>
+       
+        </section>
+            <h3 style="padding-right: 10px">Cta Bancaria/s</h3>
+            <section>
+                <table class="table table-condensed table-hover" style="width: 100%">
+                    <thead class="text-primary">
+                        <tr class="text-center">
+                            <th class="text-center" style="font-weight: bold">
+                                <a z class="btn btn-success btn-sm sombrabtncreate" href=@Url.Action("Create","CuentasBancarias", new{idsuscriptor=Model.IdSuscriptor}) style="color: white;padding-left: 8px; padding-right: 8px; padding-bottom: 5px; padding-top: 5px; margin-right: 5px">
+                                    <span class="glyphicon glyphicon-plus"></span>
+                                </a> CBU
+                            </th>
+                            <th class="text-center" style="font-weight: bold">
+                                Nombre Tit.
+                            </th>
+                            <th class="text-center" style="font-weight: bold">
+                                DNI Tit.
+                            </th>
+                            <th class="text-center" style="font-weight: bold">
+                                CUIT Tit.
+                            </th>
+                            <th class="text-center" style="font-weight: bold">
+                                Alias Cta.
+                            </th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.CuentasBancarias.OrderByDescending(x=>x.IdCuentaBancaria))
+                        {
+                            <tr class="showhim" id="@("trcta" + @item.IdCuentaBancaria)">
+                                <td class="text-center">
+
+                                    <a onclick="modalcta(@item.IdCuentaBancaria)" style="cursor: pointer; font-weight: bold">@Html.DisplayFor(modelItem => item.CBU)</a>
+
+                                    <a class="hidden" id="@("detailscta" + @item.IdCuentaBancaria)" href="@Url.Action("Details", "CuentasBancarias", new {id = item.IdCuentaBancaria})"></a>
+                                </td>
+                                <td class="text-center">
+                                    @Html.DisplayFor(modelItem => item.NombreTitular)
+                                </td>
+                                <td class="text-center">
+                                    @Html.DisplayFor(modelItem => item.DNITitular)
+                                </td>
+                                <td class="text-center">
+                                    @Html.DisplayFor(modelItem => item.CUITTitular)
+                                </td>
+                                <td class="text-center">
+                                    @Html.DisplayFor(modelItem => item.AliasCuenta)
+                                </td>
+                                <td class="text-center">
+                                    <div class="showme">
+                                        <a href="@Url.Action("Edit", "CuentasBancarias", new {id = item.IdCuentaBancaria, idsuscriptor=Model.IdSuscriptor })" title="Editar cuenta"><span class="glyphicon glyphicon-edit"></span></a>&nbsp;
+                                        <a class="dialog-windowcta" onclick="modaleliminarcta(@item.IdCuentaBancaria)" style="cursor: pointer;font-weight: bold"><span class="glyphicon glyphicon-remove"></span></a>
+
+                                        <a class="hidden" id="@("delcta" + @item.IdCuentaBancaria)" href="@Url.Action("Delete","CuentasBancarias", new { id = item.IdCuentaBancaria })"></a>
+                                    </div>
+
+                                </td>
+
+
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+            </section>
+            <h3>Suscripciones</h3>
+            <section>
+                <table class="table table-condensed table-hover" style="width: 100%">
+                    <thead class="text-primary">
+                    <tr class="text-center">
+                        <th class="text-center" style="font-weight: bold; width: 25%">
+                            @switch (Model.TipoSuscriptor)
+                            {
+                                case TipoSuscriptor.Coorporativo:
+                                    <a data-placement="right" data-toggle="tooltip" title="" data-original-title="Agregar suscripción coorporativa" z class="btn btn-success btn-sm sombrabtncreate" href=@Url.Action("CreateCoorporativa", "Suscripciones", new {id = Model.IdSuscriptor}) style="color: white; padding-left: 8px; padding-right: 8px; padding-bottom: 5px; padding-top: 5px; margin-right: 5px">
+                                        <span class="glyphicon glyphicon-lock"></span>
+                                    </a>
+                                    break;
+
+                                case TipoSuscriptor.Normal:
+                                    <a data-placement="right" data-toggle="tooltip" title="" data-original-title="Agregar suscripción normal" z class="btn btn-success btn-sm sombrabtncreate" href=@Url.Action("Create", "Suscripciones", new {id = Model.IdSuscriptor}) style="color: white; padding-left: 8px; padding-right: 8px; padding-bottom: 5px; padding-top: 5px; margin-right: 5px">
+                                        <span class="glyphicon glyphicon-plus"></span>
+                                    </a>
+                                    break;
+                            }                                    
+                            N° Suscripción
+                        </th>
+                        <th class="text-left" style="font-weight: bold">
+                            Oferta
+                        </th>
+                        <th class="text-left" style="font-weight: bold">
+                            Precio
+                        </th>
+
+                        <th class="text-left" style="font-weight: bold">
+                            Fecha Alta
+                        </th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach (var item in Model.Suscripciones)
+                            {
+                        <tr>
+                            <td class="text-center">
+                                <a href="@Url.Action("Details", "Suscripciones", new {id = item.IdSuscripcion})" target="_blank" title="Detalles suscripción">@Html.DisplayFor(modelItem => item.NumeroSuscripcion)</a>
+
+                            </td>
+                            <td class="text-left">
+                                @Html.DisplayFor(modelItem => item.Oferta.Nombre)
+                            </td>
+                            <td class="text-left">
+                                @Html.DisplayFor(modelItem => item.Oferta.Precio)
+                            </td>
+                            <td class="text-left">
+                                @item.FechaAlta.ToString("yyyy/MM/dd HH:ss")
+                            </td>
+                        </tr>
+                    }
+                    </tbody>
+                </table>
+                @*<div style="width: 100%;display: flex">
+                    <div style="width: 30%">
+
+                        @Html.ActionLink("Ir al listado", "Index", "Suscriptores", null, new { @class = "btn btn-sm btn-default" })
+                    </div>
+
+                    <div class="text-center" style="width: 40%">
+                    </div>
+                    <div style="width: 30%"></div>
+                </div>*@
+            </section>
+
+          
+        </div>
+
+    </div>
+</div>
+<div class="navbar-xs navbar-inverse navbar-fixed-bottom" style="background: none; border: none; padding-bottom: 0px;padding-left: 260px">
+    <div class="container text-left" style="height: 40px">
+        <div class="row">
+            <div class="col-lg-4">@Html.ActionLink("Ir al listado", "Index", "Suscriptores", null, new { @class = "btn btn-sm btn-default" })</div>
+            <div class="col-lg-4">  @Html.ActionLink("Editar", "Edit", "Suscriptores", new { id = Model.IdSuscriptor }, new { @class = "btn btn-primary" })</div>
+        </div>
+        
+        
+    </div>
+</div>
+
+<div class="modal fade" id="modalDetalles" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title text-center">Detalles tarjeta</h4>
+                
+            </div>
+            <div class="modal-body">
+                <div class="te"></div>
+                <button type="button" class="btn btn-default" data-dismiss="modal" aria-hidden="true" style="width: 25%">Cerrar</button> 
+
+            </div>
+
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<div class="modal fade" id="modalEliminarTarjeta" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title text-center text-danger" style="font-weight: bold">¿Estás seguro que desea eliminar esta tarjeta?</h4>
+
+            </div>
+            <div class="modal-body">
+                <div class="te"></div>
+
+            </div>
+
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<div class="modal fade" id="modalDetallesCta" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title text-center">Detalles Cta.</h4>
+
+            </div>
+            <div class="modal-body">
+                <div class="te"></div>
+                <button type="button" class="btn btn-default" data-dismiss="modal" aria-hidden="true" style="width: 25%">Cerrar</button>
+
+            </div>
+
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<div class="modal fade" id="modalEliminarCta" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title text-center text-danger" style="font-weight: bold">¿Estás seguro que desea eliminar esta cuenta bancaria?</h4>
+
+            </div>
+            <div class="modal-body">
+                <div class="te"></div>
+
+            </div>
+
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+@section scripts{<script>
+   
+
+                        function modaltarjeta(e) {
+
+
+                                    var url = $("#"+e).attr('href');
+                                    if (url.indexOf('#') == 0) {
+                                 $('#modalDetalles').modal('show');
+                                    } else {
+                                 $.get(url,
+                                     function(data) {
+                                         $('#modalDetalles .te').html(data);
+                                         $('#modalDetalles').modal();
+                                        }).success(function() { $('input:text:visible:first').focus(); });
+                                    }
+                                };
+
+                                function modaleliminartarjeta(e) {
+
+
+                                    var url = $("#deltarjeta"+e).attr('href');
+                                    if (url.indexOf('#') == 0) {
+                                $('#modalEliminarTarjeta').modal('show');
+                                    } else {
+                                $.get(url,
+                                    function(data) {
+                                        $('#modalEliminarTarjeta .te').html(data);
+                                        $('#modalEliminarTarjeta').modal();
+                                        }).success(function() { $('input:text:visible:first').focus(); });
+                                    }
+                                };
+
+                                function eliminartarjeta(e) {
+
+
+                                    var options = {};
+                                    options.url = '@Url.Action("EliminarTarjeta", "TarjetasPago")';
+                                    options.type = "POST";
+                                    options.data = { "id": e };
+                            options.dataType = "json";
+                            options.success = function(data) {
+                                if (data) {
+                                    toastr.success("Tarjeta eliminada exitosamente");
+                                    $('#trtarjeta' + e).remove();
+                                    $('#modalEliminarTarjeta .close').click();
+                                }
+
+                            };
+                            $.ajax(options);
+                        };
+                   
+                        function modalcta(e) {
+                            
+                             
+                            var url = $("#detailscta"+e).attr('href');
+                            if (url.indexOf('#') == 0) {
+                                $('#modalDetallesCta').modal('show');
+                            } else {
+                                $.get(url,
+                                    function(data) {
+                                        $('#modalDetallesCta .te').html(data);
+                                        $('#modalDetallesCta').modal();
+                                    }).success(function() { $('input:text:visible:first').focus(); });
+                            }
+                        };
+                        function modaleliminarcta(e) {
+                            
+                            var url = $("#delcta"+e).attr('href');
+                            if (url.indexOf('#') == 0) {
+                                $('#modalEliminarCta').modal('show');
+                            } else {
+                                $.get(url,
+                                    function(data) {
+                                        $('#modalEliminarCta .te').html(data);
+                                        $('#modalEliminarCta').modal();
+                                    }).success(function() { $('input:text:visible:first').focus(); });
+                            }
+                        };
+
+                        function eliminarcta(e) {
+                            
+                             
+                            var options = {};
+                            options.url = '@Url.Action("EliminarCta", "CuentasBancarias")';
+                            options.type = "POST";
+                            options.data = { "id": e };
+                            options.dataType = "json";
+                            options.success = function(data) {
+                                if (data) {
+                                    toastr.success("Cta eliminada exitosamente");
+                                    $('#trcta' + e).remove();
+                                    $('#modalEliminarCta .close').click();
+                                }
+
+                            };
+                            $.ajax(options);
+                        };
+                   
+  
+
+                 </script>}

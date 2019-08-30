@@ -127,3 +127,5 @@ C:\Users\Victoria\source\repos\Vnet\Vnet\obj\Debug\Vnet.Migrations.solucionadolo
 C:\Users\Victoria\source\repos\Vnet\Vnet\obj\Debug\Vnet.Migrations.Mucho.resources
 C:\Users\Victoria\source\repos\Vnet\Vnet\obj\Debug\Vnet.Migrations.comercio.resources
 C:\Users\Victoria\source\repos\Vnet\Vnet\obj\Debug\Vnet.Migrations.seedingComercios.resources
+C:\Users\Victoria\source\repos\Vnet\Vnet\obj\Debug\Vnet.Migrations.AddNombreArchivoHoraSubidaVnetRegistro.resources
+C:\Users\Victoria\source\repos\Vnet\Vnet\obj\Debug\Vnet.Migrations.comercioRequired.resources

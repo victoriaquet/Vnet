@@ -1,0 +1,117 @@
+﻿@using Vnet.Models
+@model IEnumerable<Vnet.Models.Suscriptor>
+
+@{
+    ViewBag.Title = "Index";
+}
+<style>
+    #tablenormal tbody tr.selected {
+        background-color: papayawhip
+    }
+
+    #tablecorporativo tbody tr.selected {
+        background-color: papayawhip
+    }
+    /*FIX FOR DATATABLES INSIDE STEPS*/
+    #tablenormal_paginate .pagination {
+        display: inline-flex !important;
+        list-style: none !important;
+    }
+
+    #tablenormal_wrapper {
+        padding-top: 5px
+    }
+
+    #tablecorporativo_paginate .pagination {
+        display: inline-flex !important;
+        list-style: none !important;
+    }
+
+    #tablecorporativo_wrapper {
+        padding-top: 5px
+    }
+</style>
+<div class="card">
+    <div class="card-header" data-background-color="green" style="display: flex">
+        <h4 class="title">Suscriptores</h4>
+    </div>
+
+    <div class="card-content">
+
+
+        <div id="example-tabs">
+            <button onclick="agregarRegistro()" style="font-weight: bolder" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-plus"></span> &nbsp;Nuevo Suscriptor</button> &nbsp;
+            <button onclick="verRegistro()" style="font-weight: bolder" class="btn btn-info btn-sm"><span class="glyphicon glyphicon-align-justify"></span> &nbsp;Detalles</button> &nbsp;
+            <button onclick="eliminarRegistro()" style="font-weight: bolder" class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-remove"></span> &nbsp;Eliminar</button> &nbsp;
+
+
+            <h3>Normal</h3>
+            <section>
+                <table id="tablenormal" class="table" style="width: 100%">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+
+                            <th>
+                                N° Suscriptor
+                            </th>
+                            <th>
+                                Nombre
+                            </th>
+                            <th>
+                                DNI
+                            </th>
+                            <th>
+                               Celular
+                            </th>
+
+                        </tr>
+                    </thead>
+
+                </table>
+
+            </section>
+            <h3>Corporativo</h3>
+            <section>
+                <table id="tablecorporativo" class="table" style="width: 100%">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+
+                            <th>
+                                N° Suscriptor
+                            </th>
+                            <th>
+                                Nombre
+                            </th>
+                            <th>
+                                DNI
+                            </th>
+                            <th>
+                                Celular
+                            </th>
+
+                        </tr>
+                    </thead>
+
+                </table>
+
+
+
+
+            </section>
+
+        </div>
+
+
+
+
+
+
+    </div>
+</div>
+@section Scripts{
+    <script src="~/Scripts/Suscriptores/Index.js"></script>
+}
+
+Action("Delete", "Suscriptores", new {id = item.IdSuscriptor })" title="Eliminar suscriptor"><span class="glyphicon glyphicon-remove"></span></a>

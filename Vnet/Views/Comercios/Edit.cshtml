@@ -1,0 +1,125 @@
+﻿@model SNC2017.Models.Comercio
+
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+
+<style>
+    /*fin estilos genearales*/
+    td .form-group {
+        margin-top: 0px !important
+    }
+
+    td {
+        padding: 0px !important
+    }
+
+    .form-group {
+        display: flex;
+        margin-top: 0px
+    }
+
+    .padedit {
+        padding-top: 15px !important
+    }
+</style>
+<div class="card">
+    <div class="card-header" data-background-color="green" style="display: flex">
+        <h4 class="title">Editar Comercio: @Model.Nombre</h4>
+    </div>
+
+    <div class="card-content">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+
+            <div id="example-tabs">
+                <h3>Datos Generales</h3>
+                <section style="overflow-y: scroll">
+                    @Html.HiddenFor(model => model.IdComercio)
+
+                    <div class="form-group">
+                        @Html.Label("Nombre (*)", htmlAttributes: new { @class = "col-md-2 padedit" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Nombre, new { htmlAttributes = new { @class = "form-control", @required = "required" } })
+                            @Html.ValidationMessageFor(model => model.Nombre, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.Label("Email (*)", htmlAttributes: new { @class = "col-md-2 padedit" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @required = "required", @type = "email" } })
+                            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    
+                    <div class="form-group">
+                        @Html.Label("Adhesión (*)", htmlAttributes: new { @class = "col-md-2 padedit" })
+                        <div class="col-md-10">
+                            <select class="form-control" name="AdhesionActiva">
+                                @if (Model.AdhesionActiva)
+                                {
+                                    <option value=true selected="selected">Activo</option>
+                                    <option value=false>Inactivo</option>
+                                }
+                                else
+                                {
+                                    <option value=true>Activo</option>
+                                    <option value=false selected="selected">Inactivo</option>}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-2"></div> 
+                        <div class="col-md-10">
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                        </div>
+                    </div>
+
+
+
+                    <div style="width: 100%;display: flex">
+                        <div class="text-right" style="width: 30%">
+                            <input type="submit" value="Guardar" class="btn btn-success" />
+
+                        </div>
+
+                        <div style="width: 40%">
+                        </div>
+                        <div style="width: 30%"></div>
+                    </div>
+
+                </section>
+
+
+            </div>
+
+
+
+            <div style="width: 100%;display: flex">
+                <div style="width: 30%">
+
+                    @Html.ActionLink("Ir al listado", "Index", null, new { @class = "btn btn-sm btn-default" })
+                </div>
+
+                <div class="text-center" style="width: 40%">
+                    @*<input type="submit" value="Guardar" class="btn btn-success" />*@
+                </div>
+                <div style="width: 30%"></div>
+            </div>
+        }
+
+    </div>
+</div>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+}
+

@@ -1,0 +1,272 @@
+﻿@model SNC2017.ViewModels.SuscripcionVM
+
+@{
+    ViewBag.Title = "Editar datos facturación";
+}
+
+
+<div class="card">
+    <div class="card-header" data-background-color="green" style="display: flex">
+        <h4 class="title">Datos facturación</h4>
+        <span class="category" style="margin-top: 4px;margin-left:10px">Editar</span>
+    </div>
+
+
+    <div class="card-content">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            @Html.HiddenFor(model => model.IdDatosFacturacion)
+
+            <div id="example-tabs">
+                <h3>Datos Personales</h3>
+                <section style="overflow-y: scroll" class="row">
+
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+                    <div class="col-lg-6">
+                        <div class="form-group label-floating">
+                            @Html.Label("Nombre", htmlAttributes: new { @class = "control-label" })
+
+
+                            @Html.EditorFor(model => model.NombreFacturacion, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.NombreFacturacion, "", new { @class = "text-danger" })
+
+                        </div>
+
+                        <div class="form-group label-floating">
+                            @Html.Label("Apellido", htmlAttributes: new { @class = "control-label" })
+
+
+                            @Html.EditorFor(model => model.ApellidoFacturacion, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.ApellidoFacturacion, "", new { @class = "text-danger" })
+
+                        </div>
+                      
+                        <div class="form-group label-floating">
+                            @Html.Label("DNI", htmlAttributes: new { @class = "control-label" })
+
+
+                            @Html.EditorFor(model => model.DNIFacturacion, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.DNIFacturacion, "", new { @class = "text-danger" })
+
+                        </div>
+
+                      
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group label-floating">
+                            @Html.Label("CUIT", htmlAttributes: new { @class = "control-label" })
+
+
+                            @Html.EditorFor(model => model.CUITFacturacion, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.CUITFacturacion, "", new { @class = "text-danger" })
+
+                        </div>
+                        <div class="form-group label-floating">
+                            @Html.Label("Razón social", htmlAttributes: new { @class = "control-label" })
+
+                            @Html.EditorFor(model => model.RazonSocialFacturacion, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.RazonSocialFacturacion, "", new { @class = "text-danger" })
+
+                        </div>
+                        <div class="form-group label-floating">
+                            @Html.Label("Tipo IVA", htmlAttributes: new { @class = "control-label" })
+
+                            @Html.EnumDropDownListFor(model => model.TipoIva, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.TipoIva, "", new { @class = "text-danger" })
+
+                        </div>
+                    </div>
+                </section>
+                <h3>Domicilio</h3>
+
+                <section style="overflow-y: scroll">
+
+                    <div class="row">
+                        <div class="col-lg-6">
+
+                            <div class="form-group label-floating">
+                                @Html.Label("Calle", htmlAttributes: new { @class = "control-label " })
+
+
+                                @Html.EditorFor(model => model.CalleFacturacion, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.CalleFacturacion, "", new { @class = "text-danger" })
+
+                            </div>
+
+                            <div class="form-group label-floating">
+                                @Html.Label("Altura", htmlAttributes: new { @class = "control-label " })
+
+
+                                @Html.EditorFor(model => model.AlturaFacturacion, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.AlturaFacturacion, "", new { @class = "text-danger" })
+
+                            </div>
+
+                            <div class="form-group label-floating">
+                                @Html.Label("Departamento", htmlAttributes: new { @class = "control-label " })
+
+
+                                @Html.EditorFor(model => model.DepartamentoFacturacion, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.DepartamentoFacturacion, "", new { @class = "text-danger" })
+
+                            </div>
+
+                            <div class="form-group label-floating">
+                                @Html.Label("Piso", htmlAttributes: new { @class = "control-label " })
+
+
+                                @Html.EditorFor(model => model.PisoFacturacion, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.PisoFacturacion, "", new { @class = "text-danger" })
+
+                            </div>
+
+                            <div class="form-group label-floating">
+                                @Html.LabelFor(model => model.BarrioFacturacion, htmlAttributes: new { @class = "control-label " })
+
+                                @Html.EditorFor(model => model.BarrioFacturacion, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.BarrioFacturacion, "", new { @class = "text-danger" })
+
+                            </div>
+
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group label-floating">
+                                @Html.Label("Calle Lat. 1", htmlAttributes: new { @class = "control-label " })
+
+
+                                @Html.EditorFor(model => model.CalleLateral1Facturacion, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.CalleLateral1Facturacion, "", new { @class = "text-danger" })
+
+                            </div>
+                            <div class="form-group label-floating">
+                                @Html.Label("Calle Lat. 2", htmlAttributes: new { @class = "control-label " })
+
+                                @Html.EditorFor(model => model.CalleLateral2Facturacion, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.CalleLateral2Facturacion, "", new { @class = "text-danger" })
+
+                            </div>
+
+                           
+                            <div class="form-group" style="margin-top: 0px">
+                                @Html.Label("Provincia", htmlAttributes: new { @class = "control-label ", @style = "margin-top:0px" })
+
+                                <div>
+                                    <select class="form-control" id="lineprovincia" name="IdProvinciaFacturacion" onchange="localidadesPorProv(this)" style="width: 90%;">
+                                        <option value="" selected disabled>Seleccione...</option>
+                                        @foreach (var item in ViewBag.provincias)
+                                        {
+
+                                            if (item.IdProvincia == @Model.IdProvinciaFacturacion)
+                                            {
+                                                <option value="@item.IdProvincia" selected>@item.Nombre</option> }
+                                            else
+                                            {
+
+                                                <option value="@item.IdProvincia">@item.Nombre</option>
+                                            }
+
+
+                                        }
+                                    </select>
+
+                                </div>
+                            </div>
+
+                            <div class="form-group" style="margin-top: 0px">
+                                @Html.Label("Localidad", htmlAttributes: new { @class = "control-label ", @style = "margin-top:0px" })
+
+                                <div>
+                                    <select class="form-control" id="linelocalidad" name="IdLocalidadFacturacion" style="width: 90%;">
+                                        <option value="@Model.IdLocalidadFacturacion" selected>@Model.LocalidadFacturacion.Nombre</option> }
+                                    </select>
+
+                                </div>
+
+                            </div>
+
+
+
+
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="form-group label-floating" style="margin-top: 0">
+                                <label for="ObservacionesDomicilioFacturacion" style="margin-top: 0; margin-bottom: 0">Observaciones</label>
+                                <textarea class="form-control" id="ObservacionesDomicilioFacturacion" name="ObservacionesDomicilioFacturacion" style="max-width: 100%!important">@Model.ObservacionesDomicilioFacturacion</textarea>
+                                @Html.ValidationMessageFor(model => model.ObservacionesDomicilioFacturacion, "", new { @class = "text-danger" })
+
+                            </div>
+                        </div>
+                    </div>
+
+                </section>
+            </div>
+
+
+
+            <div class="row">
+                <div class="col-md-3">
+
+                    @Html.ActionLink("Volver", "Index", null, new { @class = "btn btn-default" })
+                </div>
+
+                <div class="col-md-3">
+                    <input type="submit" value="Guardar" class="btn btn-success" />
+                </div>
+            </div>
+        }
+
+    </div>
+</div>
+
+@section Scripts
+{
+    <script>
+
+            function localidadesPorProv(prov) {
+                var options3 = {};
+                options3.url = '@Url.Action("LocalidadesProv", "Suscriptores")';
+                options3.type = "GET";
+                options3.data = { "prov": $(prov).val() };
+                options3.dataType = "json";
+                options3.success = function (loclist) {
+
+                    $.each(loclist, function () {
+                        var value = this.split("#")[0];
+
+                        var nombre = this.split("#")[1];
+                        $("#linelocalidad").html("");
+                        if (nombre == "Resistencia") {
+                            $("#linelocalidad").append($("<option selected='selected'></option>")
+                                .attr("value", value).text(nombre));
+                        } else {
+                            if (nombre == "Corrientes") {
+                                $("#linelocalidad").append($("<option selected='selected'></option>")
+                                    .attr("value", value).text(nombre));
+                            } else {
+                                $("#linelocalidad").append($("<option></option>")
+                                    .attr("value", value).text(nombre));
+                            }
+                        }
+                    });
+
+
+
+                };
+                $.ajax(options3);
+            }
+
+
+
+
+    </script>
+}
+
+
+

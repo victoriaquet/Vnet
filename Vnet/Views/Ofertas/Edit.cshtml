@@ -1,0 +1,265 @@
+﻿@using SNC2017.Models
+@model SNC2017.Models.Oferta
+
+@{
+    ViewBag.Title = "Editar Oferta";
+}
+
+<style>
+    /*fin estilos genearales*/
+    td .form-group {
+        margin-top: 0px !important
+    }
+
+    td {
+        padding: 0px !important
+    }
+    .form-group{ display: flex;margin-top: 0px}
+    .padedit{padding-top:15px!important}
+
+</style>
+<div class="card">
+    <div class="card-header" data-background-color="green" style="display: flex">
+        <h4 class="title">Editar Oferta: @Model.Nombre</h4>
+    </div>
+
+    <div class="card-content">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+
+            <div id="example-tabs">
+                <h3>Datos Generales</h3>
+                <section style="overflow-y: scroll">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.HiddenFor(model => model.IdOferta)
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.EstadoOferta, htmlAttributes: new { @class = "col-md-2 padedit" })
+                        <div class="col-md-10">
+                            <select class="form-control" id="IdEstadoOferta" name="IdEstadoOferta" style="width: auto;font-weight: bold" >
+                                <option value="@Model.EstadoOferta.IdEstadoOferta">@Model.EstadoOferta.Descripcion</option>
+                                @foreach (var item in ViewBag.VbEstadosOfertas)
+                                {
+                                    if (item.IdEstadoOferta != Model.IdEstadoOferta)
+                                    {
+                                        <option value="@item.IdEstadoOferta">@item.Descripcion</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+                    </div>
+                   
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.TipoOferta, "Tipo", htmlAttributes: new { @class = "col-md-2 padedit" })
+                    
+                        <div class="col-md-10">
+                            <select class="form-control" id="TipoOferta" name="TipoOFerta" style="width: auto;font-weight: bold" >
+                              @if (Model.TipoOferta == TipoOferta.Estandar)
+                              {
+                                <option value="1" selected="selected">Estándar</option>
+                                  <option value="2">Coorporativa</option>
+                              }
+                              else
+                              {
+                                <option value="1">Estándar</option>
+                                <option value="2" selected="selected">Coorporativa</option> 
+                              }
+
+                            </select>
+                  
+                        </div>
+                    </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Editorial, "Editorial", htmlAttributes: new { @class = "col-md-2 padedit" })
+                    
+                            <div class="col-md-10">
+                                <select class="form-control" id="Editorial" name="Editorial" style="width: auto;font-weight: bold" >
+                                    @if (Model.Editorial == Editorial.Chaco)
+                                    {
+                                        <option value="1" selected="selected">Chaco</option>
+                                        <option value="2">Corrientes</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="1">Chaco</option>
+                                        <option value="2" selected="selected">Corrientes</option> 
+                                    }
+                                </select>
+                  
+                            </div>
+            
+                       
+
+                        </div>
+
+              
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.FechaInicio, htmlAttributes: new { @class = "col-md-2" })
+                        <div class="col-md-10">
+                            @Html.DisplayFor(model => model.FechaInicio, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.FechaInicio, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Precio, htmlAttributes: new { @class = "col-md-2" })
+                        <div class="col-md-10">
+                            @Html.DisplayFor(model => model.Precio, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Precio, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Codigo, htmlAttributes: new { @class = "col-md-2 padedit" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Codigo, new { htmlAttributes = new { @class = "form-control", @required="required" } })
+                            @Html.ValidationMessageFor(model => model.Codigo, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Nombre, htmlAttributes: new { @class = "col-md-2 padedit" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Nombre, new { htmlAttributes = new { @class = "form-control", @required = "required" } })
+                            @Html.ValidationMessageFor(model => model.Nombre, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.CodigoProductoServinor, htmlAttributes: new { @class = "col-md-2 padedit" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.CodigoProductoServinor, new { htmlAttributes = new { @class = "form-control", @required="required" } })
+                            @Html.ValidationMessageFor(model => model.CodigoProductoServinor, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.NombreProductoServinor, htmlAttributes: new { @class = "col-md-2 padedit" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.NombreProductoServinor, new { htmlAttributes = new { @class = "form-control", @required = "required" } })
+                            @Html.ValidationMessageFor(model => model.NombreProductoServinor, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.Label("Cantidad días (sin domingo)", htmlAttributes: new { @class = "col-md-2 padedit" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.CantDias, new { htmlAttributes = new { @class = "form-control", @required = "required" } })
+                            @Html.ValidationMessageFor(model => model.CantDias, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Descripcion, htmlAttributes: new { @class = "col-md-2 padedit" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Descripcion, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Descripcion, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.CantTarjetasAdicionales, htmlAttributes: new { @class = "col-md-2 padedit" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.CantTarjetasAdicionales, new { htmlAttributes = new { @class = "form-control", @required = "required" } })
+                            @Html.ValidationMessageFor(model => model.CantTarjetasAdicionales, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+
+                  
+
+                    
+
+                </section>
+
+
+
+                <h3>Productos</h3>
+                <section>
+                    <table class="table table-condensed" style="width: 100%">
+                        <thead class="text-primary">
+                            <tr class="text-center">
+                                <th class="text-left" style="width: 25%;font-weight: bold">
+                                    Producto
+                                </th>
+                                <th class="text-left" style="width: 35%;font-weight: bold">
+                                    Descripción
+                                </th>
+                                <th class="text-center" style="width: 15%;font-weight: bold">
+                                    Código
+                                </th>
+                                <th class="text-center" style="width: 15%;font-weight: bold">
+                                    Precio
+                                </th>
+                                <th class="text-center" style="width: 10%;font-weight: bold"></th>
+                            </tr>
+                        </thead>
+                        <tbody id="last">
+                        <tr style="background: aliceblue">
+                            <td>
+                                <select class="form-control" id="linedescription" style="width: 90%;font-weight: bold">
+                                    <option value="" selected disabled>Seleccione producto...</option>
+                                    @foreach (var item in ViewBag.Products)
+                                    {
+
+                                        <option value="@item.IdProducto*@item.Codigo*@item.Nombre*@item.Descripcion*@item.Monto">@item.Nombre</option>
+
+                                    }
+                                </select>
+                            </td>
+                            <td id="tddescripcion" class="text-left" style="font-weight: bold">-</td>
+                            <td id="tdcodigo" class="text-center" style="font-weight: bold">-</td>
+                            <td id="tdprecio" class="text-center" style="font-weight: bold">-</td>
+                            <td class="text-center">
+                                <button type="button" id="add" class="btn btn-success btn-sm" value="Agregar" />
+                                <span class="glyphicon glyphicon-plus"></span>
+                            </td>
+                        </tr>
+                            @foreach (var item in Model.ProductoOfertas)
+                            {
+                                <tr>
+                                    <td class="text-left">
+                                        @item.Producto.Nombre<input class="hidden idproducts" id="idproducts" name="idproducts" value="@item.IdProducto">
+                                    </td>
+                                    <td class="text-left">
+                                        @item.Producto.Descripcion
+                                    </td>
+                                    <td class="text-center">
+                                        @item.Producto.Codigo
+                                    </td>
+                                    <td class="text-center">
+                                        $ @item.Producto.Monto
+                                    </td>
+                                    <td class="text-center">
+                                        <a><button type="button" class="btn btn-danger btn-xs" onclick="eliminar(this)"><span class="glyphicon glyphicon-remove"></span></button></a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                  
+                </section>
+
+            </div>
+
+
+
+            <div style="width: 100%;display: flex">
+                <div style="width: 30%">
+
+                    @Html.ActionLink("Ir al listado", "Index", null, new { @class = "btn btn-sm btn-default" })
+                </div>
+
+                <div class="text-center" style="width: 40%">
+                    <input type="submit" value="Guardar" class="btn btn-success" />
+                </div>
+                <div style="width: 30%"></div>
+            </div>
+        }
+
+    </div>
+</div>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script src="~/Scripts/Ofertas/Create.js"></script>
+}

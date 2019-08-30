@@ -1,0 +1,78 @@
+﻿@model SNC2017.Models.CuentaBancaria
+
+@{
+    ViewBag.Title = "Details";
+}
+
+@{Layout = null;}
+<style>
+    .divtarjeta {
+        margin-left: 35px
+    }
+</style>
+<div class="col-lg-12 col-lg-offset-3">
+    <div style="display: flex">
+        @Html.Label("CBU", htmlAttributes: new { @class = "labeldetails" })
+        <div class="divdetails divtarjeta">@Model.CBU</div>
+    </div>
+    <div style="display: flex">
+        @Html.LabelFor(model => model.NombreTitular, htmlAttributes: new { @class = "labeldetails " })
+        <div class="divdetails divtarjeta">@Model.NombreTitular</div>
+    </div>
+    <div style="display: flex">
+        @Html.LabelFor(model => model.DNITitular, htmlAttributes: new { @class = "labeldetails" })
+        <div class=" divdetails divtarjeta">@Model.DNITitular</div>
+    </div>
+    <div style="display: flex">
+        @Html.LabelFor(model => model.CUITTitular, htmlAttributes: new { @class = "labeldetails " })
+        <div class=" divdetails divtarjeta">@Model.CUITTitular</div>
+    </div>
+    <div style="display: flex">
+        @Html.LabelFor(model => model.AliasCuenta, htmlAttributes: new { @class = "labeldetails" })
+        <div class=" divdetails divtarjeta">@Model.AliasCuenta</div>
+    </div>
+    <div style="display: flex">
+        @Html.LabelFor(model => model.DomicilioTitular.Calle, htmlAttributes: new { @class = "labeldetails " })
+        <div class=" divdetails divtarjeta">@Model.DomicilioTitular.Calle</div>
+    </div>
+
+    <div style="display: flex">
+        @Html.LabelFor(model => model.DomicilioTitular.Altura, htmlAttributes: new { @class = "labeldetails " })
+        <div class=" divdetails divtarjeta">@Model.DomicilioTitular.Altura</div>
+    </div>
+    <div style="display: flex">
+        @Html.LabelFor(model => model.DomicilioTitular.Piso, htmlAttributes: new { @class = "labeldetails " })
+        <div class=" divdetails divtarjeta">@Model.DomicilioTitular.Piso</div>
+    </div>
+    <div style="display: flex">
+        @Html.LabelFor(model => model.DomicilioTitular.Departamento, htmlAttributes: new { @class = "labeldetails " })
+        <div class=" divdetails divtarjeta">@Model.DomicilioTitular.Departamento</div>
+    </div>
+    <div style="display: flex">
+        @Html.LabelFor(model => model.DomicilioTitular.CalleLateral1, htmlAttributes: new { @class = "labeldetails " })
+        <div class=" divdetails divtarjeta">@Model.DomicilioTitular.CalleLateral1</div>
+    </div>
+    <div style="display: flex">
+        @Html.LabelFor(model => model.DomicilioTitular.CalleLateral2, htmlAttributes: new { @class = "labeldetails " })
+        <div class=" divdetails divtarjeta">@Model.DomicilioTitular.CalleLateral2</div>
+    </div>
+    <div style="display: flex">
+        @Html.LabelFor(model => model.DomicilioTitular.Barrio, htmlAttributes: new { @class = "labeldetails " })
+        <div class=" divdetails divtarjeta">@Model.DomicilioTitular.Barrio</div>
+    </div>
+    <div style="display: flex">
+        @Html.Label("Provincia", htmlAttributes: new { @class = "labeldetails " })
+        <div class=" divdetails divtarjeta">@Model.DomicilioTitular.Localidad.Provincia.Nombre</div>
+    </div>
+    <div style="display: flex">
+        @Html.Label("Localidad", htmlAttributes: new { @class = "labeldetails " })
+        <div class=" divdetails divtarjeta">@Model.DomicilioTitular.Localidad.Nombre</div>
+    </div>
+
+</div>
+
+
+<div class="text-center" style="width: 100%">
+    <button type="button" class="btn btn-default" data-dismiss="modal" aria-hidden="true" style="width: 25%">Cancelar</button>
+    <input onclick="eliminarcta(@Model.IdCuentaBancaria)" value="Eliminar" class="btn btn-danger" style="width: 25%" />
+</div>

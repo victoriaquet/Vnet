@@ -1,0 +1,303 @@
+﻿@model SNC2017.ViewModels.SuscriptorVM
+
+@{
+    ViewBag.Title = "Nuevo suscriptor";
+}
+
+
+<div class="card">
+    <div class="card-header" data-background-color="green" style="display: flex">
+        <h4 class="title">Suscriptor</h4>
+        <span class="category" style="margin-top: 4px;margin-left:10px">Nuevo</span>
+    </div>
+
+
+    <div class="card-content">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+
+            <div id="example-tabs">
+                <h3>Datos Personales</h3>
+                <section style="overflow-y: scroll" class="row">
+
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+                    <div class="col-lg-6">
+                        <div class="form-group is-empty" style="margin-top: 0px">
+                            @Html.Label("Tipo (*)", htmlAttributes: new { @class = "control-label", @style = "margin-top:0px" })
+                            <div>
+                                <select class="form-control" id="TipoSuscriptor" name="TipoSuscriptor" style="width: 90%;">
+                                    <option value="1" selected>Normal</option>
+                                    <option value="2">Coorporativo</option>
+                                   
+                                    
+                                </select>
+                                
+                            </div>
+                            @Html.ValidationMessageFor(model => model.TipoSuscriptor, "", new { @class = "text-danger" })
+
+                        </div>
+                        <div class="form-group label-floating is-empty">
+                            @Html.LabelFor(model => model.Nombre, htmlAttributes: new {@class = "control-label"})
+
+                            @Html.EditorFor(model => model.Nombre, new {htmlAttributes = new {@class = "form-control"}})
+                            @Html.ValidationMessageFor(model => model.Nombre, "", new {@class = "text-danger"})
+
+                        </div>
+
+                        <div class="form-group label-floating is-empty">
+                            @Html.LabelFor(model => model.Apellido, htmlAttributes: new {@class = "control-label"})
+
+                            @Html.EditorFor(model => model.Apellido, new {htmlAttributes = new {@class = "form-control"}})
+                            @Html.ValidationMessageFor(model => model.Apellido, "", new {@class = "text-danger"})
+
+                        </div>
+
+                        <div class="form-group label-floating is-empty">
+                            @Html.Label("Fecha Nacimiento (*)", new {@class = "control-label"})
+                            <input class="form-control" required type="text" name="FechaNacimiento" onfocus="(this.type = 'date')" onfocusout="(this.type='text')"/>
+                            @Html.ValidationMessageFor(model => model.FechaNacimiento, "", new {@class = "material-input"})
+
+                        </div>
+                        <div class="form-group label-floating is-empty">
+                            @Html.LabelFor(model => model.DNI, htmlAttributes: new {@class = "control-label"})
+
+                            @Html.EditorFor(model => model.DNI, new {htmlAttributes = new {@class = "form-control"}})
+                            @Html.ValidationMessageFor(model => model.DNI, "", new {@class = "text-danger"})
+
+                        </div>
+
+                        <div class="form-group is-empty" style="margin-top: 0px">
+                            @Html.LabelFor(model => model.TipoSexo, htmlAttributes: new {@class = "control-label", @style = "margin-top:0px"})
+                            <div>
+                                <select class="form-control" id="TipoSexo" name="TipoSexo" style="width: 90%;">
+                                    <option value="1" selected>Masculino</option>
+                                    <option value="2">Femenino</option>
+                                    <option value="3">Otro</option>
+
+                                </select>
+
+                            </div>
+                            @Html.ValidationMessageFor(model => model.TipoSexo, "", new {@class = "text-danger"})
+
+                        </div>
+                        <div class="form-group label-floating is-empty">
+                            @Html.LabelFor(model => model.Email, htmlAttributes: new {@class = "control-label"})
+
+                            @Html.EditorFor(model => model.Email, new {htmlAttributes = new {@class = "form-control"}})
+                            @Html.ValidationMessageFor(model => model.Email, "", new {@class = "text-danger"})
+
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group label-floating is-empty">
+                            @Html.LabelFor(model => model.CUIT, htmlAttributes: new { @class = "control-label" })
+
+                            @Html.EditorFor(model => model.CUIT, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.CUIT, "", new { @class = "text-danger" })
+
+                        </div>
+
+                        <div class="form-group label-floating is-empty">
+                            @Html.LabelFor(model => model.RazonSocial, htmlAttributes: new { @class = "control-label" })
+
+                            @Html.EditorFor(model => model.RazonSocial, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.RazonSocial, "", new { @class = "text-danger" })
+
+                        </div>
+                        <label class="labeltelefono labeltelefonos">Teléfono Fijo</label>
+                        <br />
+                        <div style="display: inline-flex">
+                            <div class="form-group label-floating is-empty" style="width: 30%; margin-top: 0px">
+                                @Html.Label("Área", htmlAttributes: new { @class = "control-label " })
+
+                                @Html.EditorFor(model => model.TelefonoFijoArea, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.TelefonoFijoArea, "", new { @class = "text-danger" })
+
+                            </div>
+                            &nbsp;
+                            <div class="form-group label-floating is-empty" style="margin-top: 0px">
+                                @Html.Label("Número", htmlAttributes: new { @class = "control-label " })
+
+                                @Html.EditorFor(model => model.TelefonoFijoNumero, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.TelefonoFijoNumero, "", new { @class = "text-danger" })
+
+                            </div>
+                        </div>
+                        <br />
+                        <label class="labeltelefono labeltelefonos">Teléfono Móvil (*)</label>
+                        <br />
+                        <div style="display: inline-flex">
+                            <div class="form-group label-floating is-empty" style="width: 30%; margin-top: 0px">
+                                @Html.Label("Área (*)", htmlAttributes: new { @class = "control-label " })
+
+                                @Html.EditorFor(model => model.TelefonoMovilArea, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.TelefonoMovilArea, "", new { @class = "text-danger" })
+
+                            </div>
+
+                            &nbsp;
+                            <div class="form-group label-floating is-empty" style="margin-top: 0px">
+                                @Html.Label("Número (*)", htmlAttributes: new { @class = "control-label " })
+
+                                @Html.EditorFor(model => model.TelefonoMovilNumero, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.TelefonoMovilNumero, "", new { @class = "text-danger" })
+
+                            </div>
+
+                        </div>
+                    </div>
+                </section>
+                <h3>Domicilio</h3>
+
+                <section style="overflow-y: scroll">
+
+                    <div class="row">
+                        <div class="col-lg-6">
+
+                            <div class="form-group label-floating is-empty">
+                                @Html.LabelFor(model => model.CalleSuscriptor, htmlAttributes: new { @class = "control-label " })
+
+                                @Html.EditorFor(model => model.CalleSuscriptor, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.CalleSuscriptor, "", new { @class = "text-danger" })
+
+                            </div>
+
+                            <div class="form-group label-floating is-empty">
+                                @Html.LabelFor(model => model.AlturaSuscriptor, htmlAttributes: new { @class = "control-label " })
+
+                                @Html.EditorFor(model => model.AlturaSuscriptor, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.AlturaSuscriptor, "", new { @class = "text-danger" })
+
+                            </div>
+
+                            <div class="form-group label-floating is-empty">
+                                @Html.LabelFor(model => model.PisoSuscriptor, htmlAttributes: new { @class = "control-label " })
+
+                                @Html.EditorFor(model => model.PisoSuscriptor, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.PisoSuscriptor, "", new { @class = "text-danger" })
+
+                            </div>
+
+                            <div class="form-group label-floating is-empty">
+                                @Html.LabelFor(model => model.DepartamentoSuscriptor, htmlAttributes: new { @class = "control-label " })
+
+                                @Html.EditorFor(model => model.DepartamentoSuscriptor, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.DepartamentoSuscriptor, "", new { @class = "text-danger" })
+
+                            </div>
+
+                            <div class="form-group label-floating is-empty">
+                                @Html.LabelFor(model => model.CalleLateral1Suscriptor, htmlAttributes: new { @class = "control-label " })
+
+                                @Html.EditorFor(model => model.CalleLateral1Suscriptor, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.CalleLateral1Suscriptor, "", new { @class = "text-danger" })
+
+                            </div>
+
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group label-floating is-empty">
+                                @Html.LabelFor(model => model.CalleLateral2Suscriptor, htmlAttributes: new { @class = "control-label " })
+
+                                @Html.EditorFor(model => model.CalleLateral2Suscriptor, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.CalleLateral2Suscriptor, "", new { @class = "text-danger" })
+
+                            </div>
+
+                            <div class="form-group label-floating is-empty">
+                                @Html.LabelFor(model => model.BarrioSuscriptor, htmlAttributes: new { @class = "control-label " })
+
+                                @Html.EditorFor(model => model.BarrioSuscriptor, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.BarrioSuscriptor, "", new { @class = "text-danger" })
+
+                            </div>
+                            <div class="form-group is-empty" style="margin-top: 0px">
+                                @Html.LabelFor(model => model.Provincia, htmlAttributes: new { @class = "control-label ", @style = "margin-top:0px" })
+
+                                <div>
+                                    <select class="form-control" required id="lineprovincia" name="IdProvincia" onchange="localidadesPorProv(this)" style="width: 90%;">
+                                        <option value="" selected disabled>Seleccione...</option>
+                                        @foreach (var item in ViewBag.provincias)
+                                        {
+
+                                            <option value="@item.IdProvincia">@item.Nombre</option>
+
+                                        }
+                                    </select>
+
+                                </div>
+                            </div>
+
+                            <div class="form-group is-empty" style="margin-top: 0px">
+                                @Html.LabelFor(model => model.Localidad, htmlAttributes: new { @class = "control-label ", @style = "margin-top:0px" })
+
+                                <div>
+                                    <select class="form-control" required id="linelocalidad" name="IdLocalidad" style="width: 90%;">
+                                        <option value="" selected disabled>Seleccione una provincia</option>
+                                    </select>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="form-group label-floating" style="margin-top: 0">
+                                <label for="ObservacionesDomicilioSuscriptor" style="margin-top: 0; margin-bottom: 0">Observaciones</label>
+                                <textarea class="form-control" id="ObservacionesDomicilioSuscriptor" name="ObservacionesDomicilioSuscriptor" style="max-width: 100% !important"></textarea>
+                                @Html.ValidationMessageFor(model => model.ObservacionesDomicilioSuscriptor, "", new { @class = "text-danger" })
+
+                            </div>
+                        </div>
+                    </div>
+
+                </section>
+
+
+
+                @*<h3>Facturación</h3>
+                    <section>
+                       </section>*@
+
+
+
+
+
+            </div>
+
+
+
+            <div class="row">
+                <div class="col-md-3">
+
+                    @Html.ActionLink("Volver", "Index", null, new { @class = "btn btn-default" })
+                </div>
+
+                <div class="col-md-3">
+                    <input type="submit" value="Guardar" class="btn btn-success" />
+                </div>
+                
+            </div>
+        }
+
+    </div>
+</div>
+
+@Html.Hidden("localidadesProv", Url.Action("LocalidadesProv", "Suscriptores"))
+@section Scripts
+{
+    <script src="~/Scripts/localidadesPorProv.js"></script>
+    <script>
+     
+
+    </script>
+}
+
+
+

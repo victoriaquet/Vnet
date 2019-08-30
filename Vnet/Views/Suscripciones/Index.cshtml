@@ -1,0 +1,112 @@
+﻿@model IEnumerable<SNC2017.Models.Suscripcion>
+
+@{
+    ViewBag.Title = "Index";
+}
+<style>
+    #suscConCanillita tbody tr.selected {
+        background-color: papayawhip
+    }
+    #suscSinCanillita tbody tr.selected {
+        background-color: papayawhip
+    }
+    /*FIX FOR DATATABLES INSIDE STEPS*/
+    #suscConCanillita_paginate .pagination {
+        display: inline-flex !important;
+        list-style: none !important;
+    }
+    #suscConCanillita_wrapper {
+        padding-top: 5px
+    }
+
+    #suscSinCanillita_paginate .pagination {
+        display: inline-flex !important;
+        list-style: none !important;
+    }
+    #suscSinCanillita_wrapper {
+        padding-top: 5px
+    }
+</style>
+<div class="card">
+    <div class="card-header" data-background-color="green" style="display: flex">
+        <h4 class="title">Suscripciones: TODAS</h4>
+    </div>
+
+    <div class="card-content">
+     
+
+        <div id="example-tabs">
+            <input type="hidden"id="tiposuscripcion" value="0"/>
+            <button onclick="agregarRegistro()" style="font-weight: bolder" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-plus"></span> &nbsp;Nueva Suscripción</button> &nbsp;
+            <button onclick="verRegistro()" style="font-weight: bolder" class="btn btn-info btn-sm"><span class="glyphicon glyphicon-align-justify"></span> &nbsp;Detalles</button> &nbsp;
+            <button onclick="cambiarEstadoSuscripcion()" style="font-weight: bolder" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-retweet"></span> &nbsp;Cambiar Estado</button> &nbsp;
+
+
+            <h3>Con Canillita</h3>
+            <section>
+                <table id="suscConCanillita" class="table" style="width: 100%">
+                    <thead>
+                    <tr>
+                        <th>Id</th>
+
+                        <th>
+                            Suscriptor
+                        </th>
+                        <th>
+                            Estado
+                        </th>
+                        <th>
+                            Oferta
+                        </th>
+                        <th>
+                            Fecha Alta
+                        </th>
+
+                    </tr>
+                    </thead>
+
+                </table>
+
+            </section>
+            <h3>Sin Canillita</h3>
+            <section>
+                <table id="suscSinCanillita" class="table" style="width: 100%">
+                    <thead>
+                    <tr>
+                        <th>Id</th>
+
+                        <th>
+                            Suscriptor
+                        </th>
+                        <th>
+                            Estado
+                        </th>
+                        <th>
+                            Oferta
+                        </th>
+                        <th>
+                            Fecha Alta
+                        </th>
+
+                    </tr>
+                    </thead>
+
+                </table>
+
+
+
+
+            </section>
+
+        </div>
+
+
+
+
+        
+
+    </div>
+</div>
+@section Scripts{
+    <script src="~/Scripts/Suscripciones/Index.js"></script>
+}

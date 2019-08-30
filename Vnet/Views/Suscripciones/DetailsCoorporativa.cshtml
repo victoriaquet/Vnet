@@ -1,0 +1,973 @@
+﻿@using SNC2017.Models
+@model SNC2017.Models.Suscripcion
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<style>
+    #tbodyprecio tr:first-child {
+        font-weight: bold;
+        font-family: monospace;
+    }
+</style>
+<div class="card">
+    <div class="card-header" data-background-color="green" style="display: flex">
+        <h4 class="title">Suscripción Coorporativa N° @Model.NumeroSuscripcion</h4>
+
+    </div>
+
+    <div class="card-content">
+
+
+        <div id="example-tabs">
+            <h3>Suscriptor</h3>
+            <section style="overflow-y: scroll">
+                <table class="table table-condensed table-hover" style="width: 100%">
+
+                    <tbody>
+                        <tr>
+                            <td class="text-left tddetails tdddetailstitle">
+                                DATOS PERSONALES &nbsp;<a href="@Url.Action("Edit", "Suscriptores", new {id = Model.IdSuscriptor })" title="Editar suscriptor"><span class="glyphicon glyphicon-edit"></span></a>
+
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <td class="text-left tddetails tdddetailslabel">
+                                Nombre
+                            </td>
+                            <td class="text-left  tddetails">
+                                @Model.Suscriptor.Nombre
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-left tddetails tdddetailslabel">
+                                Apellido
+                            </td>
+                            <td class="text-left tddetails">
+                                @Model.Suscriptor.Apellido
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-left tddetails tdddetailslabel">
+                                Fecha nacimiento
+                            </td>
+                            <td class="text-left tddetails">
+                                @Model.Suscriptor.FechaNacimiento.Value.ToShortDateString()
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-left tddetails tdddetailslabel">
+                                DNI
+                            </td>
+                            <td class="text-left tddetails">
+                                @Model.Suscriptor.DNI
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-left tddetails tdddetailslabel">
+                                Sexo
+                            </td>
+                            <td class="text-left tddetails">
+                                @Model.Suscriptor.TipoSexo
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-left tddetails tdddetailslabel">
+                                Email
+                            </td>
+                            <td class="text-left tddetails">
+                                @Model.Suscriptor.Email
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-left tddetails tdddetailslabel">
+                                CUIT
+                            </td>
+                            <td class="text-left tddetails">
+                                @Model.Suscriptor.CUIT
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-left tddetails tdddetailslabel">
+                                Razón social
+                            </td>
+                            <td class="text-left tddetails">
+                                @Model.Suscriptor.RazonSocial
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-left tddetails tdddetailslabel">
+                                Tél. Fijo
+                            </td>
+                            <td class="text-left tddetails">
+                                @Model.Suscriptor.TelefonoFijoArea @Model.Suscriptor.TelefonoFijoNumero
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-left tddetails tdddetailslabel">
+                                Tél. Móvil
+                            </td>
+                            <td class="text-left tddetails">
+                                @Model.Suscriptor.TelefonoMovilArea @Model.Suscriptor.TelefonoMovilNumero
+
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-left tddetails tdddetailslabel">
+                                Localidad
+                            </td>
+                            <td class="text-left tddetails">
+                                @Model.Suscriptor.Domicilio.Localidad.Nombre (@Model.Suscriptor.Domicilio.Localidad.Provincia.Nombre)
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-left tddetails tdddetailstitle">
+                                DATOS DOMICILIO &nbsp;<a href="@Url.Action("Edit", "Suscriptores", new {id = Model.IdSuscriptor })" title="Editar suscriptor"><span class="glyphicon glyphicon-edit"></span></a>
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <td class="text-left tddetails tdddetailslabel">
+                                Calle
+                            </td>
+                            <td class="text-left tddetails">
+                                @Model.Suscriptor.Domicilio.Calle
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-left tddetails tdddetailslabel">
+                                Altura
+                            </td>
+                            <td class="text-left tddetails">
+                                @Model.Suscriptor.Domicilio.Altura
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-left tddetails tdddetailslabel">
+                                Piso
+                            </td>
+                            <td class="text-left tddetails">
+                                @Model.Suscriptor.Domicilio.Piso
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-left tddetails tdddetailslabel">
+                                Depto.
+                            </td>
+                            <td class="text-left tddetails">
+                                @Model.Suscriptor.Domicilio.Departamento
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-left tddetails tdddetailslabel">
+                                Barrio
+                            </td>
+                            <td class="text-left tddetails">
+                                @Model.Suscriptor.Domicilio.Barrio
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-left tddetails tdddetailslabel">
+                                Obs. Domicilio
+                            </td>
+                            <td class="text-left tddetails">
+                                @Model.Suscriptor.Domicilio.Observaciones
+
+                            </td>
+                        </tr>
+
+                    </tbody>
+                </table>
+
+
+            </section>
+            <h3>Oferta</h3>
+            <section style="overflow-y: scroll">
+                <table class="table table-condensed table-hover" style="width: 100%">
+
+                    <tbody>
+
+                        <tr>
+                            <td class="text-left tddetails tdddetailslabel">
+                                Cód.
+                            </td>
+                            <td class="text-left tddetails">
+                                @Model.Oferta.Codigo
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-left tddetails tdddetailslabel">
+                                Estado
+                            </td>
+                            <td class="text-left tddetails">
+                                @Model.Oferta.EstadoOferta.Descripcion
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-left tddetails tdddetailslabel">
+                                Tipo
+                            </td>
+                            <td class="text-left tddetails">
+                                @Model.Oferta.TipoOferta
+
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td class="text-left tddetails tdddetailslabel">
+                                Editorial
+                            </td>
+                            <td class="text-left tddetails">
+                                @Model.Oferta.Editorial
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-left tddetails tdddetailslabel">
+                                Nombre
+                            </td>
+                            <td class="text-left tddetails">
+                                @Model.Oferta.Nombre
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-left tddetails tdddetailslabel">
+                                Precio base
+                            </td>
+                            <td class="text-left tddetails">
+                                @Model.Oferta.Precio
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-left tddetails tdddetailslabel">
+                                Precio sucripción
+                            </td>
+                            <td class="text-left tddetails">
+                                @Model.PrecioSuscripcion
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-left tddetails tdddetailslabel">
+                                Cant. Días
+                            </td>
+                            <td class="text-left tddetails">
+                                @Model.Oferta.CantDias (@if (Model.Lunes)
+                                {<text>Lun-</text>}@if (Model.Martes)
+                                {<text>Mar-</text>}@if (Model.Miercoles)
+                                {<text>Mie-</text>}@if (Model.Jueves)
+                                {<text>Jue-</text>}@if (Model.Viernes)
+                                {<text>Vie-</text>}@if (Model.Sabado)
+                                {<text>Sáb-</text>}Dom)
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-left tddetails tdddetailslabel">
+                                Tarjetas adic.
+                            </td>
+                            <td class="text-left tddetails">
+                                @Model.Oferta.CantTarjetasAdicionales
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-left tddetails tdddetailslabel">
+                                Tarjetas extras
+                            </td>
+                            <td class="text-left tddetails">
+                                @Model.CantTarjetasExtras
+
+                            </td>
+                        </tr>
+
+
+                </table>
+                @*<a z class="btn btn-success btn-sm sombrabtncreate" href=@Url.Action("", "", new {id = Model.IdSuscripcion}) style="color: white;">
+                Cambiar oferta
+            </a>*@
+            </section>
+            <h3 style="padding-right: 10px">Productos</h3>
+            <section>
+                <table class="table table-condensed table-hover" style="width: 100%">
+                    <thead class="text-primary">
+                        <tr class="text-center">
+                            <th class="text-left" style="font-weight: bold">
+                                Cód.
+                            </th>
+                            <th class="text-left" style="font-weight: bold">
+                                Nombre
+                            </th>
+                            <th class="text-left" style="font-weight: bold">
+                                Copias
+                            </th>
+                            <th class="text-left" style="font-weight: bold">
+                                Precio
+                            </th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.Oferta.ProductoOfertas)
+                        {
+                            <tr>
+                                <td class="text-left tddetails">
+                                    @Html.DisplayFor(modelItem => item.Producto.Codigo)
+                                </td>
+                                <td class="text-left tddetails">
+                                    @Html.DisplayFor(modelItem => item.Producto.Nombre)
+                                </td>
+                                <td class="text-left tddetails">
+                                    @Html.DisplayFor(modelItem => item.Copias)
+                                </td>
+                                <td class="text-left tddetails">
+                                    @Html.DisplayFor(modelItem => item.Producto.Monto)
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </section>
+            <h3 style="padding-right: 10px">Entrega</h3>
+            <section>
+                @foreach (var item in Model.DiaEntregas)
+                {
+                    <details>
+                        <summary>Domicilio - @item.NombreDia &nbsp;<a class="editdomicilio" href="@Url.Action("Edit", "Domicilios", new {id = item.Domicilio.IdDomicilio})" title="Editar domicilio de entrega"><span class="glyphicon glyphicon-edit"></span></a></summary>
+                        <table class="table table-condensed table-hover" style="width: 100%">
+                            <tr>
+                                <td class="text-left tddetails tdddetailslabel">
+                                    Localidad
+                                </td>
+                                <td class="text-left tddetails">
+                                    @item.Domicilio.Localidad.Nombre (@item.Domicilio.Localidad.Provincia.Nombre)
+
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="text-left tddetails tdddetailslabel">
+                                    Calle
+                                </td>
+                                <td class="text-left tddetails">
+                                    @item.Domicilio.Calle
+
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="text-left tddetails tdddetailslabel">
+                                    Altura
+                                </td>
+                                <td class="text-left tddetails">
+                                    @item.Domicilio.Altura
+
+
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="text-left tddetails tdddetailslabel">
+                                    Piso
+                                </td>
+                                <td class="text-left tddetails">
+                                    @item.Domicilio.Piso
+
+
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="text-left tddetails tdddetailslabel">
+                                    Depto.
+                                </td>
+                                <td class="text-left tddetails">
+                                    @item.Domicilio.Departamento
+
+
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="text-left tddetails tdddetailslabel">
+                                    Calle lat. 1
+                                </td>
+                                <td class="text-left tddetails">
+                                    @item.Domicilio.CalleLateral1
+
+
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="text-left tddetails tdddetailslabel">
+                                    Calle lat. 2
+                                </td>
+                                <td class="text-left tddetails">
+                                    @item.Domicilio.CalleLateral2
+
+
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="text-left tddetails tdddetailslabel">
+                                    Barrio
+                                </td>
+                                <td class="text-left tddetails">
+                                    @item.Domicilio.Barrio
+
+
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="text-left tddetails tdddetailslabel">
+                                    Observaciones
+                                </td>
+                                <td class="text-left tddetails">
+                                    @item.Domicilio.Observaciones
+
+
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="text-left tddetails tdddetailslabel">
+                                    Canillita
+                                </td>
+                                <td class="text-left tddetails">
+                                    @if (Model.IdCanillita != null)
+                                    {
+                                        <select class="form-control" id="@item.IdDiaEntrega" name="idcanillitapersonalizado" >
+                                            @foreach (var cani in ViewBag.canillitas)
+                                            {
+                                                if (cani.IdCanillita == item.Canillita.IdCanillita)
+                                                {
+                                                    <option value="@cani.IdCanillita" data-nombredia="@item.NombreDia" data-iddia="@item.IdDiaEntrega"data-idcanillita="@cani.IdCanillita" data-nombrecanillita="@cani.Nombre" data-apellidocanillita="@cani.Apellido" data-nrocanillita="@cani.NroCanillita" selected>@cani.Apellido @cani.Nombre N°@cani.NroCanillita</option>
+                                                }
+                                                else
+                                                {
+                                                    <option value="@cani.IdCanillita" data-nombredia="@item.NombreDia" data-iddia="@item.IdDiaEntrega" data-idcanillita="@cani.IdCanillita"data-nombrecanillita="@cani.Nombre" data-apellidocanillita="@cani.Apellido" data-nrocanillita="@cani.NroCanillita" >@cani.Apellido @cani.Nombre N°@cani.NroCanillita</option>}
+
+                                            }
+                                        </select>
+                                        <a onclick="CanillitaPersonalizado(@item.IdDiaEntrega)" class="btn btn-xs btn-success" style="margin: 0px!important">Actualizar Canillita</a>
+                                    }
+                                    else
+                                    {
+                                        <text>Se debe asignar primero el Canillita principal.</text>
+                                    }
+                                </td>
+                            </tr>
+                        </table>
+
+                    </details>
+                }
+
+
+            </section>
+            <h3>Facturación</h3>
+            <section>
+                <table class="table table-condensed table-hover" style="width: 100%">
+                    <tr>
+                        <td class="text-left tddetails tdddetailstitle">
+                            DATOS PERSONALES&nbsp;<a href="@Url.Action("Edit", "DatosFacturacion", new {id = Model.IdDatosFacturacion })" title="Editar datos facturación"><span class="glyphicon glyphicon-edit"></span></a>
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <td class="text-left tddetails tdddetailslabel">
+                            Nombre
+                        </td>
+                        <td class="text-left tddetails">
+                            @Model.DatosFacturacion.Nombre
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-left tddetails tdddetailslabel">
+                            Apellido
+                        </td>
+                        <td class="text-left tddetails">
+                            @Model.DatosFacturacion.Apellido
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-left tddetails tdddetailslabel">
+                            DNI
+                        </td>
+                        <td class="text-left tddetails">
+                            @Model.DatosFacturacion.DNI
+
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-left tddetails tdddetailslabel">
+                            CUIT
+                        </td>
+                        <td class="text-left tddetails">
+                            @Model.DatosFacturacion.CUIT
+
+
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="text-left tddetails tdddetailslabel">
+                            Razón social
+                        </td>
+                        <td class="text-left tddetails">
+                            @Model.DatosFacturacion.RazonSocial
+
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-left tddetails tdddetailstitle">
+                            DATOS DOMICILIO&nbsp;<a href="@Url.Action("Edit", "DatosFacturacion", new {id = Model.IdDatosFacturacion })" title="Editar datos facturación"><span class="glyphicon glyphicon-edit"></span></a>
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <td class="text-left tddetails tdddetailslabel">
+                            Localidad
+                        </td>
+                        <td class="text-left tddetails">
+                            @Model.DatosFacturacion.Domicilio.Localidad.Nombre (@Model.DatosFacturacion.Domicilio.Localidad.Provincia.Nombre)
+
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-left tddetails tdddetailslabel">
+                            Calle
+                        </td>
+                        <td class="text-left tddetails">
+                            @Model.DatosFacturacion.Domicilio.Calle
+
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-left tddetails tdddetailslabel">
+                            Altura
+                        </td>
+                        <td class="text-left tddetails">
+                            @Model.DatosFacturacion.Domicilio.Altura
+
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-left tddetails tdddetailslabel">
+                            Departamento
+                        </td>
+                        <td class="text-left tddetails">
+                            @Model.DatosFacturacion.Domicilio.Departamento
+
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-left tddetails tdddetailslabel">
+                            Piso
+                        </td>
+                        <td class="text-left tddetails">
+                            @Model.DatosFacturacion.Domicilio.Piso
+
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-left tddetails tdddetailslabel">
+                            Barrio
+                        </td>
+                        <td class="text-left tddetails">
+                            @Model.DatosFacturacion.Domicilio.Barrio
+
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-left tddetails tdddetailslabel">
+                            Calle lat. 1
+                        </td>
+                        <td class="text-left tddetails">
+                            @Model.DatosFacturacion.Domicilio.CalleLateral1
+
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-left tddetails tdddetailslabel">
+                            Calle lat. 2
+                        </td>
+                        <td class="text-left tddetails">
+                            @Model.DatosFacturacion.Domicilio.CalleLateral2
+
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-left tddetails tdddetailslabel">
+                            Observaciones
+                        </td>
+                        <td class="text-left tddetails">
+                            @Model.DatosFacturacion.Domicilio.Observaciones
+
+
+                        </td>
+                    </tr>
+
+
+                </table>
+            </section>
+            <h3 style="padding-right: 10px">Tarjetas Club</h3>
+            <section>
+                <table class="table table-condensed table-hover" style="width: 100%">
+                    <thead class="text-primary">
+                        <tr class="text-center">
+                            <th class="text-left" style="font-weight: bold">
+                                N°
+                            </th>
+                            <th class="text-left" style="font-weight: bold">
+                                Apellido y nombre
+                            </th> <th class="text-left" style="font-weight: bold">
+                                Sexo
+                            </th>
+
+                            <th class="text-left" style="font-weight: bold">
+                                Tipo
+                            </th>
+                            <th class="text-left" style="font-weight: bold">
+                                Estado
+                            </th>
+                            <th class="text-left" style="font-weight: bold">
+                                Precio
+                            </th>
+                            <th> </th>
+
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="showhim">
+                            <td class="text-left tddetails">
+                                @Html.DisplayFor(modelItem => modelItem.TarjetaClub.FirstOrDefault().Numero)
+                            </td>
+                            <td class="text-left tddetails">
+                                @Html.DisplayFor(modelItem => modelItem.TarjetaClub.FirstOrDefault().Apellido), @Html.DisplayFor(modelItem => modelItem.TarjetaClub.FirstOrDefault().Nombres)
+                            </td>
+                            <td class="text-left tddetails">
+                                @Html.DisplayFor(modelItem => modelItem.TarjetaClub.FirstOrDefault().TipoSexo)
+                            </td>
+                            <td class="text-left tddetails">
+                                @Html.DisplayFor(modelItem => modelItem.TarjetaClub.FirstOrDefault().TipoTarjetaClub)
+                            </td>
+                            <td class="text-left tddetails">
+                                @Html.DisplayFor(modelItem => modelItem.TarjetaClub.FirstOrDefault().EstadoTarjetaClub)
+                            </td>
+                            <td class="text-left tddetails">
+                                @Html.DisplayFor(modelItem => modelItem.TarjetaClub.FirstOrDefault().Precio)
+                            </td>
+
+                            <td class="text-left">
+                                <div class="showme">
+                                    <a data-placement="left" data-toggle="tooltip" title="" data-original-title="Detalles Tarjeta Club" href="@Url.Action("Details", "TarjetasClub", new {id = Model.TarjetaClub.FirstOrDefault().IdTarjetaClub})"><span class="glyphicon glyphicon-align-justify"></span></a>&nbsp;
+                                </div>
+
+                            </td>
+                        </tr>
+                        @foreach (var item in Model.SuscriptorSecundarios)
+                        {
+                            <tr class="showhim">
+                                <td class="text-left tddetails">
+                                    @Html.DisplayFor(modelItem => item.TarjetaClub.Numero)
+                                </td>
+                                <td class="text-left tddetails">
+                                    @Html.DisplayFor(modelItem => item.TarjetaClub.Apellido), @Html.DisplayFor(modelItem => item.TarjetaClub.Nombres)
+                                </td> 
+                                <td class="text-left tddetails">
+                                    @Html.DisplayFor(modelItem => item.TarjetaClub.TipoSexo)
+                                </td>
+                                <td class="text-left tddetails">
+                                    @Html.DisplayFor(modelItem => item.TarjetaClub.TipoTarjetaClub)
+                                </td>
+                                <td class="text-left tddetails">
+                                    @Html.DisplayFor(modelItem => item.TarjetaClub.EstadoTarjetaClub)
+                                </td>
+                                <td class="text-left tddetails">
+                                    @Html.DisplayFor(modelItem => item.TarjetaClub.Precio)
+                                </td>
+
+                                <td class="text-left">
+                                    <div class="showme">
+                                        <a data-placement="left" data-toggle="tooltip" title="" data-original-title="Días entrega individuales" class="diasecmodal" onclick="diasecmodal(this)" data-nombresec="@item.TarjetaClub.Apellido, @item.TarjetaClub.Nombres" href=@Url.Action("VerDiasEntregaSec","Suscripciones", new { id = item.IdSuscriptorSecundario })><span class="glyphicon glyphicon-calendar"></span></a>
+                                        <a href="@Url.Action("Details", "TarjetasClub", new {id = item.IdTarjetaClub})" data-placement="left" data-toggle="tooltip" title="" data-original-title="Detalles Tarjeta Club"><span class="glyphicon glyphicon-align-justify"></span></a>&nbsp;
+
+                                    </div>
+
+                                </td>
+                            </tr>
+                        }
+
+                    </tbody>
+                </table>
+
+                <div style="width: 100%">
+                    @if (Model.Oferta.CantTarjetasAdicionales + 1 + Model.CantTarjetasExtras == Model.TarjetaClub.Count((x => x.EstadoTarjetaClub != EstadoTarjetaClub.Baja)))
+                    {
+
+                        <a class="btn btn-default btn-sm sombrabtncreate" data-placement="right" data-toggle="tooltip" title="¡ Cantidad máxima de Tarjetas Club alcanzada !">Agregar Tarjeta Club</a>
+
+
+                    }
+                    else
+                    {
+                        <details open>
+                            <summary id="summaryTarjetaClubSec">
+                                @{ int a = Model.Oferta.CantTarjetasAdicionales + 1 + Model.CantTarjetasExtras - Model.TarjetaClub.Count((x => x.EstadoTarjetaClub != EstadoTarjetaClub.Baja));}
+                                Tarjetas adicionales ( @a restantes )<input id="restantes" class="hidden" value="@a" />
+                            </summary>
+
+                            <div style="width: 100%; margin: 15px">
+                                @using (Html.BeginForm("CreateCoorporativa", "TarjetasClub"))
+                                {@Html.AntiForgeryToken()
+
+                                <input value="@Model.IdSuscripcion" class="hidden" readonly name="idsuscripciontc" />
+                                <select multiple class="selectsuscriptoressecundarios" id="suscriptoressecundarios" name="suscriptoressecundarios" style="width: 90%">
+
+                                    @foreach (var item in ViewBag.Suscriptores)
+                                    {
+                                        if (item.IdSuscriptor != ViewBag.idsus & Model.SuscriptorSecundarios.ToList().Find(x => x.IdSuscriptor == item.IdSuscriptor) == null)
+                                        {
+                                            <option value="@item.IdSuscriptor">@item.Nombre, @item.Apellido</option>
+
+                                        }
+
+                                    }
+
+                                </select>
+                                <input type="submit" value="Guardar" class="btn btn-success" />
+                            }
+
+                            </div>
+
+                        </details>
+                    }
+                </div>
+            </section>
+            <h3 style="padding-right: 10px">Canillita</h3>
+            <section>
+
+
+
+                @if (Model.Canillita != null)
+                {
+                    <table class="table table-condensed table-hover" style="width: 100%">
+                        <thead class="text-primary">
+                            <tr class="text-center">
+                                <th class="text-left" style="font-weight: bold">
+                                    N°
+                                </th>
+                                <th class="text-left" style="font-weight: bold">
+                                    Apellido y nombre
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <tr class="showhim">
+                                @if (Model.Canillita != null)
+                                {
+                                    <td class="text-left tddetails">
+                                        @Model.Canillita.NroCanillita
+                                    </td>
+                                    <td class="text-left tddetails">
+                                        @Model.Canillita.Apellido @Model.Canillita.Nombre
+                                    </td>
+                                }
+
+                            </tr>
+                        </tbody>
+                    </table>
+                    <details style="cursor:pointer">
+                        <summary>Cambiar Canillita &nbsp;<span class="glyphicon glyphicon-edit"></span></summary>
+                        @using (Html.BeginForm("AsignarCanillita", "Canillitas"))
+                        {
+                            @Html.AntiForgeryToken()
+
+
+                            <div class="form-group label-floating is-empty">
+                                <input class="hidden" name="idsuscripcion" value="@Model.IdSuscripcion" />
+                                <select class="form-control" name="idcanillita">
+                                    @foreach (var item in ViewBag.canillitas)
+                                    {
+                                        if (item.IdCanillita == Model.IdCanillita)
+                                        {
+                                            <option value="@item.IdCanillita" selected>@item.Apellido @item.Nombre</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@item.IdCanillita">@item.Apellido @item.Nombre</option>}
+
+                                    }
+                                </select>
+                            </div>
+                            <div style="width: 100%;display: flex">
+                                <div style="width: 30%">
+                                    <input type="submit" value="Asignar Canillita" class="btn btn-success" />
+
+                                </div>
+
+                                <div class="text-center" style="width: 40%">
+                                </div>
+                                <div style="width: 30%"></div>
+                            </div>
+                        }
+
+                    </details>
+
+                }
+                else
+                {
+                    using (Html.BeginForm("AsignarCanillita", "Canillitas"))
+                    {
+                        @Html.AntiForgeryToken()
+
+
+                        <div class="form-group label-floating is-empty">
+                            <input class="hidden" name="idsuscripcion" value="@Model.IdSuscripcion" />
+                            <select class="form-control" name="idcanillita">
+                                @foreach (var item in ViewBag.canillitas)
+                                {
+                                    <option value="@item.IdCanillita">@item.Apellido @item.Nombre</option>
+                                }
+                            </select>
+                        </div>
+                        <div style="width: 100%;display: flex">
+                            <div style="width: 30%">
+                                <input type="submit" value="Asignar Canillita" class="btn btn-success" />
+
+                            </div>
+
+                            <div class="text-center" style="width: 40%">
+                            </div>
+                            <div style="width: 30%"></div>
+                        </div>
+                    }
+                }
+
+
+            </section>
+        </div>
+
+    </div>
+</div>
+<div class="navbar-xs navbar-inverse navbar-fixed-bottom" style="background: none; border: none; padding-bottom: 0px;padding-left: 260px">
+    <div class="container text-left" style="height: 40px">
+
+        @Html.ActionLink("Ir al listado", "ListadoCoorporativa", "Suscripciones", null, new { @class = "btn btn-sm btn-default" })
+
+    </div>
+</div>
+<div class="modal fade" id="modaldiasentregasec" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="margin-top: 50px">
+        <div class="modal-content">
+            <div class="modal-header" style="padding-top: 5px;padding-bottom: 0px">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title text-center" id="titulodiasec">Días entrega</h4>
+            </div>
+            <div class="modal-body" style="padding: 10px;padding-top: 0px">
+                <div class="te"></div>
+            </div>
+
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+@section scripts{
+    <script>
+        function CanillitaPersonalizado(iddiaentrega) {
+            var opt = $("#" + iddiaentrega).find("option:selected");
+
+            var idcanillita = opt.attr("data-idcanillita");
+            var nombrecanillita = opt.attr("data-nombrecanillita");
+            var apellidocanillita = opt.attr("data-apellidocanillita");
+            var nrocanillita = opt.attr("data-nrocanillita");
+            var nombredia = opt.attr("data-nombredia");
+            var data = JSON.stringify({ "iddiaentrega": iddiaentrega, "idcanillita": idcanillita });
+            $.ajax({
+                type: "POST",
+                data: data,
+                url: '@Url.Action("CanillitaPersonalizado","Canillitas")',
+                dataType: 'json',
+                contentType: 'application/json',
+                success: function (response) {
+                    if (response.success) {
+                        toastr.success(nombredia.toUpperCase()+": "+apellidocanillita+" "+nombrecanillita+" N°"+nrocanillita, "CANILLITA ACTUALIZADO")
+                       
+                    } else {
+                        // DoSomethingElse()
+                        toastr.error("Error, intentelo nuevamente más tarde.");
+                    }                          
+                },
+                error: function (response) {
+                    toastr.error("Error, intentelo nuevamente más tarde.");
+                }
+
+            });
+
+        }
+        function diasecmodal(e) {
+            event.preventDefault();
+            var $link = $(e); // Reference to <a/> link
+            var title = $link.text(); //this is title to fetch in htnl
+            var url = $(e).attr('href');
+            if (url.indexOf('#') == 0) {
+                $('#modaldiasentregasec').modal('show');
+            }
+            else {
+                $.get(url, function (data) {
+                    $('#titulodiasec').html($(e).attr('data-nombresec'));
+                    $('#modaldiasentregasec .te').html(data);
+                    $('#modaldiasentregasec').modal();
+                }).success(function () { $('input:text:visible:first').focus(); });
+            }
+        };
+        $(document).ready(function () {
+            $(".editdomicilio").click(function (event) {
+
+                event.preventDefault();
+                var url = $(this).attr('href');
+                window.open(url);
+            });
+
+            
+            var trestantes = $('#restantes').val();
+            $(".selectsuscriptoressecundarios").select2({
+                placeholder: 'Agregar tarjeta club...', width: 'resolve', maximumSelectionLength: trestantes, disabled: false
+        
+            });
+
+        });
+
+
+    </script>}

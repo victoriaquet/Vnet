@@ -1,0 +1,68 @@
+﻿@model SNC2017.Models.UserView
+@{
+    ViewBag.Title = "MisPermisos";
+}
+@if (User.IsInRole("Administrador") | User.IsInRole("Moderador"))
+{
+    if (TempData["vencer"] != null)
+    {
+        {
+            <input id="vencer" style="display: none" value="@TempData["vencer"]" />
+
+        }
+
+    }
+}
+<h1 class="text-center">
+    Permisos del usuario: <span style="color:royalblue">@Model.Name</span>
+</h1>
+<hr style="color:grey;border-color:grey" />
+
+
+<table class="table table-striped">
+    <thead>
+
+        <tr class="text-center" style="color: #2c3e50; background-color: lightblue">
+            <th class="text-left" width="20%" style="border-radius: 3px">
+                Permiso
+            </th>
+            <th class="text-left" style="border-radius: 3px">Descripción </th>
+
+        </tr>
+    </thead>
+    @for (int i = 0; i < Model.Roles.Count; i++)
+    {
+        <tr style="background-color: azure">
+            <td style="font-weight: bold; color: #2c3e50;font-style: italic">
+                @Html.DisplayFor(modelItem => Model.Roles[i].Name)
+            </td>
+            <td>
+                @if (Model.Roles[i].Name == "Administrador")
+                {
+                    <span>@ViewBag.dadministrador</span>
+                }
+               
+                @if (Model.Roles[i].Name == "Invitado")
+                {
+                    <span>@ViewBag.dinvitado</span>
+                }
+               
+                @if (Model.Roles[i].Name == "Moderador")
+                {
+                    <span>@ViewBag.dmoderador</span>
+                }
+                
+            </td>
+
+
+        </tr>
+    }
+
+</table>
+<p>
+
+    <a href="@Url.Action("Index", "Manage")" class="btn btn-default"><span class="glyphicon glyphicon-chevron-left"></span> Volver</a>
+
+</p>
+
+

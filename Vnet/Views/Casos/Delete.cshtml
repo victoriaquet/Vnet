@@ -1,0 +1,85 @@
+﻿@model SNC2017.Models.Caso
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Caso</h4>
+    <hr />
+    <dl class="dl-horizontal">
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EstadoCaso.Descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EstadoCaso.Descripcion)
+        </dd>
+
+     
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TipoCaso.Descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TipoCaso.Descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Observacion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Observacion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaCarga)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FechaCarga)
+        </dd>
+
+      
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaCierre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FechaCierre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaVencimiento)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FechaVencimiento)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

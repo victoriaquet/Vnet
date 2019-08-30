@@ -1,0 +1,91 @@
+﻿@model SNC2017.Models.Canillita
+
+@{
+    ViewBag.Title = "Details";
+}
+
+
+<div class="card">
+    <div class="card-header" data-background-color="green" style="display: flex">
+        <h4 class="title">Canillita: @Model.Apellido @Model.Nombre</h4>
+        
+
+    </div>
+
+    <div class="card-content">
+       
+
+            <div id="example-tabs">
+                <h3>Suscripciones asignadas</h3>
+                <section>
+                    <table class="datatablebase table table-condensed" id="table" style="width: 100%">
+                        <thead class="text-primary">
+                            <tr class="text-center">
+                                <th class="text-center">
+                                    N°
+                                </th>
+                                <th class="text-center">
+                                    Suscriptor
+                                </th>
+                                <th class="text-center">
+                                    Estado
+                                </th>
+                                <th class="text-center">
+                                    Oferta
+                                </th>
+                                <th class="text-center" style="font-weight: bold">
+                                    Fecha alta
+                                </th>
+                                @if (User.IsInRole("Administrador"))
+                                {
+                                    <th></th>
+
+                                }
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.Suscripciones)
+                            {
+                                <tr class="showhim">
+                                    <td class="text-center">
+                                        @Html.DisplayFor(modelItem => item.NumeroSuscripcion)
+                                    </td>
+                                    <td class="text-center">
+                                        @Html.DisplayFor(modelItem => item.Suscriptor.Apellido).ToString().ToUpper() @Html.DisplayFor(modelItem => item.Suscriptor.Nombre).ToString().ToUpper() (N°@Html.DisplayFor(modelItem => item.Suscriptor.NumeroSuscriptor))
+                                    </td>
+                                    <td class="text-center">
+                                        @Html.DisplayFor(modelItem => item.EstadoSuscripcionHistorial.LastOrDefault().EstadoSuscripcion)
+                                    </td>
+
+                                    <td class="text-center">
+                                        @Html.DisplayFor(modelItem => item.Oferta.Nombre) + @Html.DisplayFor(modelItem => item.Oferta.CantDias) $@Html.DisplayFor(modelItem => item.PrecioSuscripcion)
+
+                                    </td>
+                                    <td class="text-center">
+                                        @item.FechaAlta.ToString("yyyy/MM/dd HH:mm")
+                                    </td>
+                                    @if (User.IsInRole("Administrador"))
+                                    {
+                                        <td class="text-center">
+                                            <div class="showme">
+                                                <a href="@Url.Action("Details", "Suscripciones", new {id = item.IdSuscripcion})" data-placement="left" data-toggle="tooltip" title="Detalles/Editar"><span class="glyphicon glyphicon-align-justify"></span></a>&nbsp;
+                                            </div>
+                                        </td>
+                                    }
+                                   
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+
+
+
+
+                </section>
+
+            </div>
+
+
+    </div>
+</div>
+

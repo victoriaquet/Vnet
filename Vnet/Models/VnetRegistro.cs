@@ -12,7 +12,7 @@ namespace Vnet.Models
         public int Id { get; set; }
 
         [Required]
-        public int NroRegistro { get; set; }
+        public int NroRegistro { get; set; }        
 
         [Required]
         public int NroEstablecimiento { get; set; }
@@ -41,6 +41,13 @@ namespace Vnet.Models
 
         
         public int ComercioId { get; set; }
+        [Required]
         public Comercio Comercio { get; set; }
+
+        //Datos del archivo
+        [Required]
+        //[RegularExpression("^((?!SNC_Visa_)[a-zA-Z '])+$", ErrorMessage = "El nombre del archivo no coincide con el formato esperado.")]
+        public string NombreArchivo { get; set; }
+        public DateTime HoraDeSubida { get; set; }
     }
 }

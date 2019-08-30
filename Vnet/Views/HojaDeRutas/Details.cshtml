@@ -1,0 +1,86 @@
+﻿@model SNC2017.Models.HojaDeRuta
+
+@{
+    ViewBag.Title = "Details";
+}
+<style>
+    .containerdetails{ background: whitesmoke;margin-top: 10px;border-style: solid;border-radius: 10px
+    }
+    html {
+        background: whitesmoke
+    }
+    .navbartop{display: none}
+    .nomargin{margin: 0px}
+</style>
+
+<div class="container containerdetails" >
+<h2 class="text-center nomargin">Hoja de ruta - @Model.FechaEntrega.ToString("d") - @Model.FechaEntrega.ToString("ddddd").ToUpper()</h2>
+
+
+<h3 class="nomargin"><b>Vendedor:</b>  @Html.DisplayFor(model => model.Canillita.Apellido) @Html.DisplayFor(model => model.Canillita.Nombre) </h3>
+   
+<table class="table table-bordered table-condensed ">
+    <thead>
+        <tr>
+            <th>N° Orden</th>
+            <th>N° Suscriptor</th>
+            <th>Nombre</th>
+            <th>Domicilio/Barrio</th>
+            <th>Localidad</th>
+            <th class="text-center">Días Suscriptos</th>
+            <th>Observación</th>
+        </tr>
+    </thead>
+   
+    <tbody> @foreach (var item in Model.Lineas)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NumeroOrden)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NumeroSuscriptor)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NombreSuscriptor)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Domicilio)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Localidad)
+                    </td>
+                    <td class="text-center">
+                        @if (item.Lunes)
+                        {
+                            <text>Lu </text>}
+                        @if (item.Martes)
+                        {
+                            <text>Ma </text>}
+                        @if (item.Miercoles)
+                        {
+                            <text>Mi </text>}
+                        @if (item.Jueves)
+                        {
+                            <text>Ju </text>}
+                        @if (item.Viernes)
+                        {
+                            <text>Vi </text>}
+                        @if (item.Sabado)
+                        {
+                            <text>Sa </text>}
+                        @if (item.Domingo)
+                        {
+                            <text>Do</text>}
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Observacion)
+                    </td>
+
+                </tr>
+            }</tbody>
+   
+
+</table>
+
+</div>

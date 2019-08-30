@@ -1,0 +1,82 @@
+﻿@model SNC2017.Models.Comercio
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<div class="card">
+    <div class="card-header" data-background-color="green" style="display: flex">
+        <h4 class="title">Comercio</h4>
+
+    </div>
+
+    <div class="card-content">
+        <div id="example-tabs">
+            <h3>Nuevo</h3>
+            <section>
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+
+
+                    <div class="form-group label-floating">
+                        @Html.Label("Nombre (*)", htmlAttributes: new { @class = "control-label " })
+                        @Html.EditorFor(model => model.Nombre, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Nombre, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group label-floating">
+                        @Html.Label("Email (*)", htmlAttributes: new { @class = "control-label " })
+                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @type = "email" } })
+                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group is-empty" style="margin-top: 0px">
+                        @Html.Label("Adhesión (*)", htmlAttributes: new { @class = "control-label", @style = "margin-top:0px" })
+                        <div>
+                            <select class="form-control" id="AdhesionActiva" name="AdhesionActiva" style="width: 90%;">
+                                <option value="True" selected>Activa</option>
+                                <option value="False">Inactiva</option>
+                            </select>
+                                
+                        </div>
+                    </div>
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                  
+                    <div style="width: 100%;display: flex">
+                        <div style="width: 30%">
+                            <input type="submit" value="Guardar" class="btn btn-success" />
+
+                        </div>
+
+                        <div class="text-center" style="width: 40%">
+                        </div>
+                        <div style="width: 30%"></div>
+                    </div>
+                }
+
+            </section>
+
+        </div>
+
+
+
+        <div style="width: 100%;display: flex">
+            <div style="width: 30%">
+
+                @Html.ActionLink("Ir al listado", "Index", null, new { @class = "btn btn-sm btn-default" })
+            </div>
+
+            <div class="text-center" style="width: 40%">
+                @*<input type="submit" value="Guardar" class="btn btn-success" />*@
+            </div>
+            <div style="width: 30%"></div>
+        </div>
+
+
+    </div>
+</div>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

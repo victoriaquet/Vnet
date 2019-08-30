@@ -1,0 +1,121 @@
+﻿@model SNC2017.Models.Comercio
+
+
+@{
+    ViewBag.Title = "Detalles";
+}
+
+
+
+<div class="card">
+    <div class="card-header" data-background-color="green" style="display: flex">
+        <h4 class="title">Comercio: @Model.Nombre</h4>
+
+    </div>
+
+    <div class="card-content">
+
+
+        <div id="example-tabs">
+            <h3>Generales</h3>
+            <section style="overflow-y: scroll">
+
+                <table class="table table-condensed table-hover" style="width: 100%">
+
+                    <tbody>
+                        <tr>
+                            <td class="text-left tddetails tdddetailslabel">
+                                Nombre
+                            </td>
+                            <td class="text-left tddetails">
+                                @Model.Nombre
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-left tddetails tdddetailslabel">
+                                Email
+                            </td>
+                            <td class="text-left tddetails">
+                                @Model.Email
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-left tddetails tdddetailslabel">
+                                Adhesion Activa
+                            </td>
+                            <td class="text-left tddetails">
+                                @Html.DisplayFor(modelItem => Model.AdhesionActiva)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-left tddetails tdddetailslabel">
+                                Fecha adhesión
+                            </td>
+                            <td class="text-left tddetails">
+                                @Html.DisplayFor(modelItem => Model.FechaAdhesion)
+                            </td>
+                        </tr>
+
+
+                </table>
+
+
+                <div style="width: 100%;display: flex">
+                    <div style="width: 30%">
+
+                        @Html.ActionLink("Ir al listado", "Index", "Comercios", null, new { @class = "btn btn-sm btn-default" })
+                    </div>
+
+                    <div class="text-center" style="width: 40%">
+                        @*<input type="submit" value="Guardar" class="btn btn-success" />*@
+                    </div>
+                    <div style="width: 30%"></div>
+                </div>
+            </section>
+            <h3>Ventas</h3>
+            <section style="overflow-y: scroll">
+                <table class="datatablebase table table-condensed table-hover" id="table" style="width: 100%">
+                    <thead class="text-primary">
+                        <tr class="text-center">
+                            <th class="text-center" style="font-weight: bold">
+                                Nro.
+                            </th>
+                            <th class="text-center" style="font-weight: bold">
+                                Fecha
+                            </th>
+                            <th class="text-left" style="font-weight: bold">
+                                Descripción
+                            </th>
+                           
+                            <th class="text-center" style="font-weight: bold">
+                               Monto
+                            </th>
+                           
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.Ventas)
+                        {
+                            <tr class="showhim">
+                                <td class="text-center">
+                                    @Html.DisplayFor(modelItem => item.IdVenta)
+                                </td>
+                                <td class="text-center">
+                                    @item.Fecha.Value.ToString("yyyy/MM/dd HH:mm")
+                                </td>
+                                <td class="text-left">
+                                    @Html.DisplayFor(modelItem => item.Descripcion)
+                                </td>
+                                <td class="text-center">
+                                    $@Html.DisplayFor(modelItem => item.Monto)
+                                    </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </section>
+        </div>
+
+    </div>
+</div>
+

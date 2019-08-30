@@ -1,0 +1,199 @@
+﻿
+@using SNC2017.Models
+@model SNC2017.Models.ArchivoImpresionTC
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<style>
+    #tbodyprecio tr:first-child {
+        font-weight: bold;
+        font-family: monospace;
+    }
+</style>
+<div class="card">
+    <div class="card-header" data-background-color="green" style="display: flex">
+        <h4 class="title">Archivo Tarjetas Club </h4>
+
+    </div>
+
+    <div class="card-content">
+
+        @Html.HiddenFor(model => model.IdArchivoImpresionTC)
+        <div id="example-tabs">
+            <h3>Detalles</h3>
+            <section style="overflow-y: scroll">
+                <table class="table table-condensed table-hover" style="width: 100%">
+
+                    <tbody>
+                    <tr>
+                        <td class="text-left tddetails tdddetailslabel">
+                            Nombre archivo
+                        </td>
+                        <td class="text-left tddetails">
+                            @Model.NombreArchivo
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="text-left tddetails tdddetailslabel">
+                                Fecha creación
+                            </td>
+                            <td class="text-left  tddetails">
+                                @Model.FechaCreacion
+
+                            </td>
+                        </tr>
+                       
+                        <tr>
+                            <td class="text-left tddetails tdddetailslabel">
+                                Responsable
+                            </td>
+                            <td class="text-left tddetails">
+                                @Model.Responsable
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-left tddetails tdddetailslabel">
+                                Observación
+                            </td>
+                            <td class="text-left tddetails">
+                                
+                                <span id="spanobs">@Model.Observacion</span> <a onclick="editobs()" title="Editar observación" data-placement="top" data-toggle="tooltip"><span class="glyphicon glyphicon-edit"></span></a>
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-left tddetails tdddetailslabel">
+                                Cant. Tarjetas
+                            </td>
+                            <td class="text-left tddetails">
+                                @Model.TCporArchivo.Count()
+                            </td>
+                        </tr>
+                       
+                     
+
+                    </tbody>
+                </table>
+               
+                 <a z class="btn btn-info sombrabtncreate" href=@Url.Action("DescargarArchivoTC", "ArchivoImpresionTCs", new { id = Model.IdArchivoImpresionTC})>
+                              Descarga archivo
+                          </a> 
+                
+
+            </section>
+            <h3 style="padding-right: 10px">Tarjetas Club</h3>
+            <section>
+                <table class="table table-condensed table-hover" style="width: 100%">
+                    <thead class="text-primary">
+                    <tr class="text-center">
+                        <th class="text-left" style="font-weight: bold">
+                            N°
+                        </th>
+                        <th class="text-left" style="font-weight: bold">
+                            Apellido y nombre
+                        </th>
+
+                        <th class="text-left" style="font-weight: bold">
+                            Tipo
+                        </th>
+                        <th class="text-left" style="font-weight: bold">
+                            Estado
+                        </th>
+                       
+                        <th> </th>
+
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach (var item in Model.TCporArchivo)
+                    {
+                        <tr class="showhim">
+                            <td class="text-left tddetails">
+                                @Html.DisplayFor(modelItem => item.TarjetaClub.Numero)
+                            </td>
+                            <td class="text-left tddetails">
+                                @Html.DisplayFor(modelItem => item.TarjetaClub.Apellido), @Html.DisplayFor(modelItem => item.TarjetaClub.Nombres)
+                            </td>
+                            <td class="text-left tddetails">
+                                @Html.DisplayFor(modelItem => item.TarjetaClub.TipoTarjetaClub)
+                            </td>
+                            <td class="text-left tddetails">
+                                @Html.DisplayFor(modelItem => item.TarjetaClub.EstadoTarjetaClub)
+                            </td>
+                            <td class="text-left tddetails">
+                                <div>
+                                    @if (item.TarjetaClub.EstadoTarjetaClub != EstadoTarjetaClub.ListaParaImprimir)
+                                    {                                    <input onclick="return false;" style="display: inline-flex;opacity: 0.6" type="checkbox" data-placement="left" data-toggle="tooltip" title="No se encuentra en estado P/Imprimir">
+                                    }
+                                    else {                                     <input class="checktcimp" value="@item.IdTarjetaClub" style="display: inline-flex" type="checkbox" name="idtcimp">
+                                    }
+                                    &nbsp;
+                                    <a class="dialog-window" href=@Url.Action("Details", "TarjetasClub", new { id = item.IdTarjetaClub }) title="Detalles Tarjeta Club" data-placement="left" data-toggle="tooltip"><span class="glyphicon glyphicon-align-justify"></span></a>
+                                </div>
+                            </td> 
+
+                            
+                        </tr>
+                    }
+
+                    </tbody>
+                </table>
+                
+                
+                    @if (Model.TCporArchivo.Count() == Model.TCporArchivo.Count(x => x.TarjetaClub.EstadoTarjetaClub == EstadoTarjetaClub.Impresa))
+                    {   <a class="btn btn-default"data-placement="right" data-toggle="tooltip" title="¡ Todas las tarjetas de este archivo ya están Impresas !" >Impresa</a>
+                    }
+                    else
+                    { <div class="btn-group">
+                               <a class="btn btn-info" id="imptc" onclick="imprimirtc()">Impresa</a>
+                               <a class="btn btn-info dropdown-toggle dropcheckbutton" data-toggle="dropdown" href="#" aria-expanded="false" >
+                                   <span class="caret"></span>
+                               </a>
+                               <div class="dropdown-menu dropcheckmenu" x-placement="bottom-start">
+                                   <li class="dropdown-item dropcheck" id="allchecktc" onclick="allcheck('checktcimp')">Seleccionar todas</li>
+                                   <li class="dropdown-item dropcheck" id="nochecktc" onclick="nocheck('checktcimp')">Anular selección</li>
+                       
+                               </div>
+                           </div> }
+                    
+               
+            </section>
+
+        </div>
+
+    </div>
+</div>
+<div class="navbar-xs navbar-inverse navbar-fixed-bottom" style="background: none; border: none; padding-bottom: 0px;padding-left: 260px">
+    
+    <div class="container text-left" style="height: 50px">
+
+        @Html.ActionLink("Volver", "Index", "TarjetasClub", null, new { @class = "btn btn-sm btn-default" })
+
+    </div>
+</div>
+<div class="modal fade" id="modalDetalles" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="width: max-content;margin-top: 10px!important">
+        <div class="modal-content">
+            <div class="modal-body" style="padding-top: 10px; padding-right: 10px; padding-bottom: 10px; padding-left: 10px;">
+                <div class="te"></div>
+
+            </div>
+
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+@section scripts{
+<script src="~/Scripts/TarjetaClub/Index.js"></script>
+
+    <script>
+       
+
+
+
+    </script>}

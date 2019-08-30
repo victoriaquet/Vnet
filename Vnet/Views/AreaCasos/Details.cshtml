@@ -1,0 +1,51 @@
+﻿@model SNC2017.Models.AreaCaso
+
+@{
+    ViewBag.Title = "Detalles";
+}
+
+<div class="card">
+    <div class="card-header" data-background-color="green" style="display: flex">
+        <h4 class="title">Detalles</h4>
+
+    </div>
+
+    <div class="card-content">
+
+
+        <div id="example-tabs">
+            <h3>Generales</h3>
+            <section style="overflow-y: scroll">
+
+                <table class="table table-condensed table-hover" style="width: 100%">
+
+                    <tbody>
+
+                        <tr>
+                            <td class="text-left tddetails tdddetailslabel">
+                                @Html.DisplayNameFor(model => model.Descripcion)
+                            </td>
+                            <td class="text-left tddetails">
+                                @Html.DisplayFor(model => model.Descripcion)
+                            </td>
+                        </tr>
+
+                </table>
+
+
+                <div style="width: 100%;display: flex">
+                    <div style="width: 30%">
+
+                        @Html.ActionLink("Volver", "ConfiguracionCasos", "Casos", null, new { @class = "btn btn-sm btn-default" })
+                    </div>
+
+                    <div class="text-center" style="width: 40%">
+                    
+                    </div>
+                    <div style="width: 30%"></div>
+                </div>
+            </section>
+        </div>
+
+    </div>
+</div>

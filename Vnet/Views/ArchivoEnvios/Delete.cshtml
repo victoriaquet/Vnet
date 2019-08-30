@@ -1,0 +1,80 @@
+﻿@model SNC2017.Models.ArchivoEnvio
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>ArchivoEnvio</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.numero)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.numero)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Fecha)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Fecha)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaCreacion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FechaCreacion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaRespuesta)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FechaRespuesta)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Archivo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Archivo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CantidadRegistros)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CantidadRegistros)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ImporteTotal)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ImporteTotal)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

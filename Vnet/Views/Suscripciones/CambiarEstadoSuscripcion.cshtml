@@ -1,0 +1,122 @@
+﻿@using SNC2017.Helpers
+@using SNC2017.Models
+@model SNC2017.Models.Suscripcion
+
+@{
+    ViewBag.Title = "Cambiar estado suscripción";
+}
+
+
+<div class="card">
+    <div class="card-header" data-background-color="green" style="display: flex">
+        <h4 class="title">Cambiar estado suscripción:</h4>
+        <span class="category" style="margin-top: 4px;margin-left:10px">Nº @Model.NumeroSuscripcion - @Model.Suscriptor.Nombre,@Model.Suscriptor.Apellido</span>
+    </div>
+
+
+    <div class="card-content">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            @Html.HiddenFor(model => model.IdSuscripcion)
+
+            <div id="example-tabs">
+                <h3>Historial Estados</h3>
+
+                <section style="overflow-y: scroll">
+
+                    <div class="col-md-12">
+                        <table class="table table-condensed table-hover" style="width: 100%">
+                            <thead class="text-primary">
+                                <tr class="text-center">
+                                    <th class="text-left tddetails">
+                                        Estado
+                                    </th>
+                                    <th class="text-left  tddetails">
+                                        Desde
+
+                                    </th>
+                                    <th class="text-left  tddetails">
+                                        Motivo
+
+                                    </th>
+                                    <th>
+                                        Responsable
+                                    </th>
+                                </tr>
+                            </thead>
+
+                            <tbody class="resaltar">
+
+                                @{
+                                    foreach (var item in Model.EstadoSuscripcionHistorial.OrderByDescending(f => f.FechaModificacion))
+                                    {
+                                        <tr>
+                                            <td>@item.EstadoSuscripcion</td>
+                                            <td>@if (item.FechaModificacion != null)
+                                                {
+                                                    @item.FechaModificacion.Value.ToString("yyyy-MM-dd HH:mm")
+                                                }
+                                            </td>
+                                            <td>@item.MotivoEstadoSuscripcion.GetDisplayName()</td>
+                                            <td>@item.Responsable</td>
+                                        </tr>
+                                    }
+                                }
+
+
+                            </tbody>
+                        </table>
+
+                    </div>
+                </section>
+                <h3>Nuevo Estado</h3>
+                <section style="overflow-y: scroll" class="row">
+
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+                    <div class="col-lg-6">
+                        <div class="form-group" style="margin-top: 0px">
+                            @Html.Label("Estado nuevo", htmlAttributes: new { @class = "control-label" })
+                            @Html.DropDownList("Estado", EnumHelper.GetSelectList(typeof(EstadoSuscripcion)), "Seleccione un estado...", new { @class = "form-control", @required="required" })
+
+                        </div>
+
+                        <div class="form-group">
+                            @Html.Label("Fecha", htmlAttributes: new { @class = "control-label", @style = "margin-top: 0px" })
+                            <input type="date" class="form-control" name="Fecha" value="@DateTime.Now.GetDateTimeFormats()[7]" />
+                        </div>
+
+                        <div class="form-group" style="margin-top: 0px">
+                            @Html.Label("Motivo", htmlAttributes: new { @class = "control-label", @style = "margin-top: 0px" })
+                            @Html.DropDownList("Motivo", EnumHelper.GetSelectList(typeof(MotivoEstadoSuscripcion)), "Seleccione un motivo...", new { @class = "form-control", @required="required" })
+
+                        </div>
+                        <div class="form-group label-floating">
+                            @Html.Label("Observaciones", htmlAttributes: new {@class = "control-label"})
+                            <input type="text" value="" name="Observaciones" class="form-control"/>
+                        </div>
+
+                        <input type="" value="@User.Identity.Name" name="Responsable" hidden/>
+
+                    </div>
+
+                </section>
+                
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+
+                    @Html.ActionLink("Volver", "Index", null, new { @class = "btn btn-default" })
+                </div>
+
+                <div class="col-md-3">
+                    <input type="submit" value="Guardar" class="btn btn-success" />
+                </div>
+            </div>
+        }
+
+    </div>
+</div>

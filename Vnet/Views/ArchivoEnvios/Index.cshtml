@@ -1,0 +1,69 @@
+﻿@model IEnumerable<SNC2017.Models.ArchivoEnvio>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.numero)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Fecha)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FechaCreacion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FechaRespuesta)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Archivo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CantidadRegistros)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ImporteTotal)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.numero)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Fecha)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FechaCreacion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FechaRespuesta)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Archivo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CantidadRegistros)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ImporteTotal)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.IdArchivoEnvio }) |
+            @Html.ActionLink("Details", "Details", new { id=item.IdArchivoEnvio }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.IdArchivoEnvio })
+        </td>
+    </tr>
+}
+
+</table>

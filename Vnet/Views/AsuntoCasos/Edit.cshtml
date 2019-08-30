@@ -1,0 +1,73 @@
+﻿@model SNC2017.Models.AsuntoCaso
+
+@{
+    ViewBag.Title = "Editar";
+}
+
+<div class="card">
+    <div class="card-header" data-background-color="green" style="display: flex">
+        <h4 class="title">Editar Área</h4>
+    </div>
+
+    <div class="card-content">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+
+            <div id="example-tabs">
+                <h3>Asunto</h3>
+                <section style="overflow-y: scroll">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.HiddenFor(model => model.IdAsuntoCaso)
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Descripcion, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Descripcion, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Descripcion, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.IdAreaCaso, "IdAreaCaso", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.DropDownList("IdAreaCaso", null, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.IdAreaCaso, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+
+                    <div style="width: 100%;display: flex">
+                        <div class="text-right" style="width: 30%">
+                            <input type="submit" value="Guardar" class="btn btn-success" />
+
+                        </div>
+
+                        <div style="width: 40%">
+                        </div>
+                        <div style="width: 30%"></div>
+                    </div>
+
+                </section>
+
+
+            </div>
+
+
+
+            <div style="width: 100%;display: flex">
+                <div style="width: 30%">
+
+                    @Html.ActionLink("Volver", "Index", "AsuntoCasos", null, new { @class = "btn btn-sm btn-default" })
+                </div>
+
+                <div class="text-center" style="width: 40%">
+                    @*<input type="submit" value="Guardar" class="btn btn-success" />*@
+                </div>
+                <div style="width: 30%"></div>
+            </div>
+        }
+
+    </div>
+</div>

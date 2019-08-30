@@ -1,0 +1,100 @@
+﻿@model SNC2017.Models.Canillita
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<div class="card">
+    <div class="card-header" data-background-color="green" style="display: flex">
+        <h4 class="title">Canillita</h4>
+
+    </div>
+
+    <div class="card-content">
+        <div id="example-tabs">
+            <h3>Nuevo</h3>
+            <section>
+
+
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+
+
+                    <div class="form-group label-floating">
+                        @Html.LabelFor(model => model.NroCanillita, htmlAttributes: new { @class = "control-label " })
+                        @Html.EditorFor(model => model.NroCanillita, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.NroCanillita, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group label-floating">
+                        @Html.LabelFor(model => model.Nombre, htmlAttributes: new { @class = "control-label " })
+                        @Html.EditorFor(model => model.Nombre, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Nombre, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group label-floating">
+                        @Html.LabelFor(model => model.Apellido, htmlAttributes: new { @class = "control-label " })
+                        @Html.EditorFor(model => model.Apellido, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Apellido, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group label-floating">
+                        @Html.LabelFor(model => model.NroTel, htmlAttributes: new { @class = "control-label " })
+                        @Html.EditorFor(model => model.NroTel, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.NroTel, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group" style="margin-top: 0px">
+                        @Html.Label("Distribuidor", htmlAttributes: new { @class = "control-label", @style = "margin-top: 0px" })
+
+                        <div>
+                            <select class="form-control" id="IdDistribuidor" name="IdDistribuidor" style="width: 90%;">
+                                @foreach (var d in ViewBag.Distribuidores)
+                                {
+                                    <option value="@d.IdDistribuidor">@d.Nombre</option>
+                                }
+                              
+
+                            </select>
+
+
+
+                        </div>
+
+                    </div>
+                   
+                    <div style="width: 100%;display: flex">
+                        <div style="width: 30%">
+                            <input type="submit" value="Guardar" class="btn btn-success" />
+
+                        </div>
+
+                        <div class="text-center" style="width: 40%">
+                        </div>
+                        <div style="width: 30%"></div>
+                    </div>
+                }
+
+            </section>
+
+        </div>
+
+
+
+        <div style="width: 100%;display: flex">
+            <div style="width: 30%">
+
+                @Html.ActionLink("Ir al listado", "Index", null, new { @class = "btn btn-sm btn-default" })
+            </div>
+
+            <div class="text-center" style="width: 40%">
+                @*<input type="submit" value="Guardar" class="btn btn-success" />*@
+            </div>
+            <div style="width: 30%"></div>
+        </div>
+
+
+    </div>
+</div>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
